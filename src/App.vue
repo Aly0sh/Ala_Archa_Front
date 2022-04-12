@@ -2,7 +2,7 @@
   <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
-    <router-link to="/sign-in" v-if="!this.$store.getters.getSignInFlag">Sign in</router-link> |
+    <router-link to="/sign-in"  v-if="!this.$store.getters.getSignInFlag">Sign in</router-link> |
     <div v-if="this.$store.getters.getSignInFlag">
       <a @click="signOut">Sign out</a>
     </div>
