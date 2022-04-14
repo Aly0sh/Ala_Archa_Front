@@ -5,9 +5,8 @@
         <input v-model="email" placeholder="Enter email" />
         <input v-model="phone" type="phone" placeholder="Enter phonenumber" />
         <input v-model="password" type="password" placeholder="Enter password" />
-        <input type="submit" value="Sign up"/>
+        <input type="submit" value="Sign up" @click.prevent="signup"/>
   </form>
-  <p>{{firstName}} {{lastName}} {{email}} {{phone}} {{password}}</p>
 </template>
 
 <script>
@@ -37,7 +36,6 @@ export default {
           if (resp.status == 200) {
             this.$router.push("/sign-in");
           }
-
           console.log(this.$store.state);
         })
         .catch((error) => {
