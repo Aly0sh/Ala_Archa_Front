@@ -3,6 +3,7 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
     <router-link to="/sign-in" v-if="!this.$store.getters.getSignInFlag">Sign in</router-link> |
+    <router-link to="/sign-up" v-if="!this.$store.getters.getSignInFlag">Sign up</router-link> |
     <div v-if="this.$store.getters.getSignInFlag">
       <a @click="signOut">Sign out</a>
     </div>
@@ -11,7 +12,6 @@
 </template>
 
 <script>
-import axios from "axios"
 export default {
   methods: {
     signOut() {
@@ -26,16 +26,16 @@ export default {
     },
   },
   watch: {
-    $route() {
-      if (
-        this.$route.path != "/" &&
-        this.$route.path != "/sign-in" &&
-        !this.$store.getters.getSignInFlag &&
-        !Object.values(this.$store.getters.getError).length
-      ) {
-        this.$router.push("/sign-in");
-      }
-    },
+    // $route() {
+    //   if (
+    //     this.$route.path != "/" &&
+    //     this.$route.path != "/sign-in" &&
+    //     !this.$store.getters.getSignInFlag &&
+    //     !Object.values(this.$store.getters.getError).length
+    //   ) {
+    //     this.$router.push("/sign-in");
+    //   } 
+    // },
   },
 };
 </script>
