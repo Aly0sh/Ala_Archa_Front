@@ -1,7 +1,7 @@
 <template>
     <form>
-        <input v-model="email" placeholder="enter email" />
-        <input type="password" v-model="password" placeholder="enter password" />
+        <input v-model.trim="email" placeholder="enter email" />
+        <input type="password" v-model.trim="password" placeholder="enter password" />
         <!-- <a href="/restore-password">Forget password?</a> -->
         <input type="submit" v-on:click.prevent="signin" value="Sign in"/>
         <div v-if="signInErrorFlag">{{ signInErrorMessage }}</div>

@@ -1,56 +1,86 @@
 <template>
     <form>
-        <input v-model="firstName" placeholder="Enter first name" />
-        <input v-model="lastName" placeholder="Enter last name" />
-        <input v-model="email" placeholder="Enter email" />
-        <input v-model="phone" type="phone" placeholder="Enter phonenumber" />
-        <input v-model="password" type="password" placeholder="Enter password" />
+        <input v-model.trim="user.firstName" placeholder="Enter first name" />
+        <input v-model.trim="user.lastName" placeholder="Enter last name" />
+        <input v-model.trim="user.email" placeholder="Enter email" />
+        <input v-model.trim="user.phone" type="phone" placeholder="Enter phonenumber" />
+        <input v-model.trim="user.password" type="password" placeholder="Enter password" />
         <input type="submit" value="Sign up" @click.prevent="signup"/>
   </form>
 </template>
 
 <script>
 import axios from "axios";
+import useVuelidate from '@vuelidate/core';
+import { required, email, minLength, numeric } from '@vuelidate/validators';
 
 export default {
-    data(){
+  setup () {
+    return { v$: useVuelidate() }
+  },
+  data(){
       return{
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        password: ''
+        user: {
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          password: ''
+        }
       }
     },
-    methods: {
+  
+  validations: {
+    user: {
+      firstName: {
+        required
+      },
+      lastName: {
+        required
+      },
+      email: {
+        email, required
+      },
+      phone: {
+        required, numeric
+      },
+      password: {
+        required, minLength: minLength(8)
+      }
+    }
+  },
+
+  methods: {
     signup() {
-      console.log("inside sign up");
-      let firstName = this.firstName;
-      let lastName = this.lastName;
-      let email = this.email;
-      let phone = this.phone;
-      let password = this.password;
-      axios
-        .post("http://localhost:8083/user/sign-up", { firstName, lastName, email, phone, password })
-        .then((resp) => {
-          if (resp.status == 200) {
-            this.$router.push("/sign-in");
-          }
-          console.log(this.$store.state);
-        })
-        .catch((error) => {
-          if (!error.response) {
-            this.$router.push("/error");
-            this.$store.commit("setError", error);
-          } else if (error.response.data.details === undefined) {
-            this.$router.push("/error");
-            this.$store.commit("setError", error);
-          } else {
-            this.signInErrorFlag = true;
-            this.signInErrorMessage = error.response.data.details;
-            console.log(error.response.data);
-          }
-        });
+      this.v$.user.$touch();
+      if (!this.v$.user.$error) {
+        console.log("Валидация прошла успешно")
+        console.log("inside sign up");
+        let user = this.user
+        axios
+          .post("http://localhost:8083/user/sign-up", { user })
+          .then((resp) => {
+            if (resp.status == 200) {
+              this.$router.push("/sign-in");
+            }
+            console.log(this.$store.state);
+          })
+          .catch((error) => {
+            if (!error.response) {
+              this.$router.push("/error");
+              this.$store.commit("setError", error);
+            } else if (error.response.data.details === undefined) {
+              this.$router.push("/error");
+              this.$store.commit("setError", error);
+            } else {
+              this.signInErrorFlag = true;
+              this.signInErrorMessage = error.response.data.details;
+              console.log(error.response.data);
+            }
+          });
+      } else{
+        console.log("Валидация не удалась")
+      }
     },
   },
 };
