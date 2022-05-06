@@ -2,7 +2,7 @@
     <div class="container">
 		<div class="services-head">
 			<img class="services-head-img" :src="getImgUrl(currentServicesSlide)" alt="">
-			<h1 class="services-head-title">Открой для<br>себя <span>Ала-арчу</span></h1>
+			<h1 class="services-head-title" style="line-height: normal">Открой для<br>себя <span>Ала-арчу</span></h1>
 			<img :src="getImgUrl(slidesHead[3])" @click="clickToHead(slidesHead[3], 3)" class="services-head-f" alt="">
 			<img :src="getImgUrl(slidesHead[1])" @click="clickToHead(slidesHead[1], 1)" class="services-head-s" alt="">
 			<img :src="getImgUrl(slidesHead[2])" @click="clickToHead(slidesHead[2], 2)" class="services-head-t" alt="">

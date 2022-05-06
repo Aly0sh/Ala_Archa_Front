@@ -1291,7 +1291,8 @@ html{
     font-family: 'Roboto', sans-serif;
     font-size: 5vw;
     position: absolute;
-    top: 20%;
+    text-align: left;
+    top: 25%;
     left: 0;
     color: #7EB685;
 }

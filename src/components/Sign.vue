@@ -84,10 +84,12 @@
         left: 0;
         min-height: 100%;
         width: 100%;
+        z-index: 3;
         background: rgba(0, 0, 0, 0.39);
     }
  
     .sign {
+        z-index: 3;
         position: absolute;
         top: 40%;
         left: 50%;

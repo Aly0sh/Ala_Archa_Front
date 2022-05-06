@@ -12,7 +12,7 @@ h6{
     background-color: #7EB685;
     height: 100%;
     color: #FFFFFF;
-    z-index: 1;
+    z-index: 2;
     vertical-align: middle;
 }
 
@@ -75,6 +75,215 @@ h6{
     background-color: #7EB685;
 
 }
+
+/* DROPDOWN */
+.dropbtn {
+    /* color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer; */
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    justify-content: center;
+}
+  
+  /* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    position: absolute;
+    background-color: #7eb685;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    top: 40px;
+    right: -40px;
+}
+  
+  /* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+  
+  /* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
+  
+  /* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+  
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-color: #7eb685;
+}
+
+.dropdown-about-us{
+    position: absolute;
+    left: -20px;
+    top: 40px;
+    background-color: #7EB685;
+    border-radius: 10px;
+}
+
+.dropdown-about-us hr{
+    color: #FFFFFF;
+    border: none;
+    background-color: #ffffff;
+    height: 1px;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.arrow{
+    height: 1.5vw; 
+    margin-left: 5px;
+}
+
+.arrow-active{
+    transform: rotate(-180deg);
+    transition: all 0.3s ease;
+}
+
+.arrow-not-active{
+    transform: rotate(0);
+    transition: all 0.3s ease;
+}
+
+.burger-line{
+    height: 1.5px;
+    width: 100%;
+    border: none;
+    background-color: #4A8251;
+}
+
+.burger{
+    position: relative;
+    width: calc(10px + 3vw);
+    height: calc(9px + 2vw);
+    margin-top: 60%;
+    z-index: 2;
+}
+
+.f-burg-line{
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: all 0.3s ease;
+}
+
+.s-burg-line{
+    position: absolute;
+    left: 0;
+    top: calc(50% - 0.5px);
+    transition: all 0.3s ease;
+}
+
+.t-burg-line{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transition: all 0.3s ease;
+}
+
+.f-burg-line-active{
+    position: absolute;
+    transform: rotate(45deg);
+    left: 0;
+    top: calc(50% - 0.5px);
+    transition: all 0.3s ease;
+}
+
+.s-burg-line-active{
+    position: absolute;
+    left: 50%;
+    top: calc(50% - 0.5px);
+    width: 0;    
+    transition: all 0.3s ease;
+}
+
+.t-burg-line-active{
+    position: absolute;
+    left: 0;
+    transform: rotate(-45deg);
+    bottom: calc(50% - 0.5px);
+    transition: all 0.3s ease;
+}
+
+
+.menu{
+    position: relative;
+}
+
+.burger-menu{
+    background-color: #7EB685;
+    top: 0;
+    left: 0;
+    height: 0;
+    z-index: 2;
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+    transition: all 1s ease;
+}
+
+
+.burger-menu-active{
+    background-color: #7EB685;
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    overflow: auto;
+    left: 0;
+    overflow: auto;
+    height: 100%;
+    width: 100%;
+    transition: all 1s ease;
+}
+
+.burger-menu-items{
+    position: relative;
+    top: 20%;
+    left: 5%;
+    overflow: hidden;
+    width: 80%;
+    height: 0;
+    transition: all 1s ease;
+    transition-delay: 1s;
+}
+
+.burger-menu-items-active{
+    position: relative;
+    top: 20%;
+    left: 5%;
+    overflow: hidden;
+    width: 80%;
+    height: auto;
+    transition: all 1s ease;
+    transition-delay: 1s;
+    transition-delay: 1s;
+}
+
+
+/* .green span
+{
+    font-size: 18px;
+    line-height: 20px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    color:inherit;
+    text-align: center;
+    text-decoration: none;
+} */
+
 
 
 footer{
@@ -140,16 +349,23 @@ footer .social img{
 }
 
 
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) { 
     .navbar .menu{
+        width: 5%;
         float: left;
-        margin: 5% 33% 0 7%;
+        margin: 2% 33% 2% 7%;
+    }
+    .navbar .menu img{
+        width: 100%;
+        height: 100%;
     }
     .navbar .logo{
         text-align: center;
         width: 10%;
-        padding: 2% 0;
+        height: 10%;
+        padding: 3% 0 2%;
     }
     .navbar ul, .navbar .authorize{
         display: none;
@@ -165,11 +381,12 @@ footer .social img{
 @media only screen and (min-width: 600px) {
     .navbar .menu{
         float: left;
-        margin: 3% 36% 0 7%;
+        margin: 1% 36% 5% 7%;
     }
     .navbar .logo{
         width: 8%;
-        padding: 1% 0;
+        height: 8%;
+        padding: 1.5% 0 1%;
     }
     .navbar ul, .navbar .authorize{
         display: none;
@@ -208,6 +425,7 @@ footer .social img{
     }
     .navbar .logo{
         width: 6.5%;
+        height: unset;
     }
     footer{
         font-size: calc(0.4em + 1vw);
@@ -243,7 +461,7 @@ footer .social img{
         height: 3vw;
     }
     .navbar .logo{
-        width: 5%;
+        width: 4%;
     }
     .navbar{
         margin-bottom: 1.5vw;

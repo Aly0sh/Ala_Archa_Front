@@ -3,7 +3,7 @@
 		<h1 class="history-title">История Ала Арчи</h1>
 		<div class="head-block">
 			<div class="head-content">
-				<h3 class="head-content-title">Природный парк Ала-Арча был основан в 1976 г.</h3>
+				<h3 style="color: #000000;" class="head-content-title">Природный парк Ала-Арча был основан в 1976 г.</h3>
 				<p class="head-content-text">Свое название парк получил за наличие арчи, придающей парку пестроту. Расположение парка было выбрано благодаря экологическому разнообразию, а также близкому расположению к городу Бишкек.</p>
 			</div>
 			<img src="../assets/img/park/ala-archa-history-1.png" class="head-img">

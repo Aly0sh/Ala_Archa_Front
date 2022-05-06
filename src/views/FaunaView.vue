@@ -1,17 +1,20 @@
 <template>
-  <div class="container">
-		<div class="fauna"></div>
-		<div class="fauna_frame">
-			<div class="text">
-				<h1>Фауна Ала-Арчи</h1>
-				<p> Еще одной достопримечательностью заповедника является многообразный мир фауны. Здесь обитают
-					дикобразы и лисы, волки и косули. Можно увидеть зайца и горностая, куницу, кабана и сурков. </p>
-			</div>
-			<div class="img">
-				<img src="../assets/img/fauna/fauna.jpg" alt="">
+  <div class="fauna">
+		<div class="container">
+			<div class="fauna_frame">
+				<div class="text">
+					<h1>Фауна Ала-Арчи</h1>
+					<p> Еще одной достопримечательностью заповедника является многообразный мир фауны. Здесь обитают
+						дикобразы и лисы, волки и косули. Можно увидеть зайца и горностая, куницу, кабана и сурков. </p>
+				</div>
+				<div class="img">
+					<img src="../assets/img/fauna/fauna.jpg" alt="">
+				</div>
 			</div>
 		</div>
+	</div>
 
+	<div class="container">
 		<div class="fauna_text">
 			<p>Многие виды зверей и птиц, встречающиеся тут, занесены в Красную книгу. Те, кому сильно повезет, могут
 				повстречать снежного барса и туркестанскую рысь. Охота здесь строго запрещена!</p>
@@ -147,7 +150,6 @@
 			</div>
 		</div>
 	</div>
-
 
     <footer class="green">
 		<div class="container">

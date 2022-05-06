@@ -28,19 +28,19 @@
             </div><!--
 -----------><div class="car-item">
                 <img src="../assets/img/auto/gruz.png" alt="">
-                <h5 class="car-item-text">Грузовая машина<br><br><span class="car-item-text">500 C</span><img src="../assets/img/icons/info-circle.svg" class="circle-info"/></h5>
+                <h5 class="car-item-text">Грузовая машина<br><br><span class="car-item-text">500 C</span><img src="../assets/img/icons/info-circle.svg" class="circle-info" :title="'До 6 тонн'"/></h5>
             </div><!--
 -----------><div class="car-item">
                 <img src="../assets/img/auto/gruz.png" alt="">
-                <h5 class="car-item-text">Грузовая машина<br><br><span class="car-item-text">700 C</span><img src="../assets/img/icons/info-circle.svg" class="circle-info" /></h5>
+                <h5 class="car-item-text">Грузовая машина<br><br><span class="car-item-text">700 C</span><img src="../assets/img/icons/info-circle.svg" class="circle-info" :title="'От 6 до 10 тонн'"/></h5>
             </div><!--
 -----------><div class="car-item">
                 <img src="../assets/img/auto/gruz.png" alt="">
-                <h5 class="car-item-text">Грузовая машина<br><br><span class="car-item-text">1200 C</span><img src="../assets/img/icons/info-circle.svg" class="circle-info" /></h5>
+                <h5 class="car-item-text">Грузовая машина<br><br><span class="car-item-text">1200 C</span><img src="../assets/img/icons/info-circle.svg" class="circle-info" :title="'От 10 до 20 тонн'"/></h5>
             </div><!--
 -----------><div class="car-item">
                 <img src="../assets/img/auto/gruz.png" alt="">
-                <h5 class="car-item-text">Грузовая машина<br><br><span class="car-item-text">1500 C</span><img src="../assets/img/icons/info-circle.svg" class="circle-info" /></h5>
+                <h5 class="car-item-text">Грузовая машина<br><br><span class="car-item-text">1500 C</span><img src="../assets/img/icons/info-circle.svg" class="circle-info" :title="'Свыше 20 тонн'"/></h5>
             </div>
         </div>
 
