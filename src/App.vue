@@ -1,9 +1,16 @@
 <template>
   <nav>
-
     <div :class="burger? 'burger-menu-active':'burger-menu'">
-      <div :class="burger ? 'burger-menu-items-active':'burger-menu-items'">
-        <router-link @click="burger = !burger" to="/">Главная</router-link>
+      <div class="burger-menu-items">
+        <router-link @click="burger = !burger" to="/">Главная</router-link> <br/>
+        <a @click="dropdown = !dropdown" class="mini-about-us">О нас <img :class="dropdown?'mini-arrow-active':'mini-arrow'" src="./assets/img/icons/arrow-up.png" alt=""></a> <br/>
+        <router-link class="sub-about-mob" v-show="dropdown" @click="burger = !burger" to="/flora">Флора</router-link> <br/>
+        <router-link class="sub-about-mob" v-show="dropdown" @click="burger = !burger" to="/fauna">Фауна</router-link> <br/>
+        <router-link class="sub-about-mob" v-show="dropdown" @click="burger = !burger" to="/about-us">История</router-link> <br/>
+        <router-link @click="burger = !burger" to="/services">Услуги</router-link> <br/>
+        <router-link @click="burger = !burger" to="/entry">Въезд</router-link>
+        <br class="ultra-br">
+        <a class="auth-mob" @click="showModal(); burger = !burger;">Авторизация</a>
       </div>
     </div>
     
@@ -13,7 +20,7 @@
         left: 0;
         min-height: 100%;
         width: 100%;
-        "/>
+        " />
     <div class="navbar">
         <div class="menu">
             <div class="burger" @click="burger = !burger">

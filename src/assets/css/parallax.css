@@ -4,7 +4,8 @@
 
 .parallax{
     position: relative;
-    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
     overflow: hidden;
     height: auto;
 }
@@ -98,7 +99,7 @@
     position: absolute;
     width: 80%;
     right: -30%;
-    bottom: 30%;
+    bottom: 25%;
     transition: all 3s ease;
 }
 

@@ -27,6 +27,14 @@
 	</div> -->
 
 	<div class="room">
+
+		<div class="modal-shad">
+			<div class="book-window">
+				<h2>Бронирование</h2>
+				<h3>Выберите даты</h3>
+			</div>
+		</div>
+
 		<div class="topchan-body">
 			<img class="topchan-body-img" src="../assets/img/objects/object3.png" alt="">
 			<div class="topchan-body-content">
@@ -167,9 +175,15 @@
 </template>
 
 <script>
-export default {
 
+
+export default {
+    data() {
+        return {
+        }
+    },        
 }
+
 </script>
 
 <style src="../assets/css/styles.css"></style>

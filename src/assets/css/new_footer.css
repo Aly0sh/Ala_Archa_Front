@@ -56,6 +56,12 @@ h6{
     align-items: center;
 }
 
+.navbar .authorize:hover{
+    background-color: inherit;
+    border:#7EB685 solid 2px;
+    color:#7EB685;
+}
+
 .navbar ul li:last-child{
     border-right: none;
 }
@@ -226,9 +232,9 @@ h6{
     background-color: #7EB685;
     top: 0;
     left: 0;
-    height: 100%;
+    height: 0;
     z-index: 2;
-    width: 0;
+    width: 100%;
     overflow: hidden;
     position: absolute;
     transition: all 1s ease;
@@ -251,9 +257,23 @@ h6{
 .burger-menu-items{
     position: relative;
     top: 20%;
-    left: 10%;
+    left: 5%;
+    overflow: hidden;
     width: 80%;
+    height: 0;
     transition: all 1s ease;
+    transition-delay: 1s;
+}
+
+.burger-menu-items-active{
+    position: relative;
+    top: 20%;
+    left: 5%;
+    overflow: hidden;
+    width: 80%;
+    height: auto;
+    transition: all 1s ease;
+    transition-delay: 1s;
     transition-delay: 1s;
 }
 
@@ -334,42 +354,7 @@ footer .social img{
     background-color: #7EB685;
 }
 
-.mini-arrow{
-    height: 20px;
-    position: absolute;
-    left: 35vw;
-    top: calc(50% - 10px);
-    transform: rotate(180deg);
-    transition: all 0.4s ease;
-}
 
-.mini-arrow-active{
-    height: 20px;
-    position: absolute;
-    left: 35vw;
-    top: calc(50% - 10px);
-    transition: all 0.4s ease;
-}
-
-.mini-about-us {
-    position: relative;
-}
-
-.sub-about-mob{
-    margin-left: 3vw;
-}
-
-.auth-mob{
-    padding: 5px 10px;
-    background-color: #ffffff;
-    color: #7EB685;
-    margin-left: -10px;
-    border-radius: 5px;
-}
-
-.ultra-br{
-    margin: 40px 0;
-}
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) { 
