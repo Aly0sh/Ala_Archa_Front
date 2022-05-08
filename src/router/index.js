@@ -76,6 +76,36 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/super-admin/CreateHotel.vue"),
   },
+  {
+    path: "/create-menu",
+    name: "create-menu",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/super-admin/CreateMenu.vue"),
+  },
+  {
+    path: "/create-object",
+    name: "create-object",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/super-admin/CreateObject.vue"),
+  },
+  {
+    path: "/create-flora-fauna",
+    name: "create-flora-fauna",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/super-admin/CreateFloraFauna.vue"),
+  },
+  {
+    path: "/create-room-type",
+    name: "create-room-type",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/super-admin/CreateRoomType.vue"),
+  },
+  {
+    path: "/create-menu-section",
+    name: "create-menu-section",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/super-admin/CreateMenuSection.vue"),
+  },
 ];
 
 const router = createRouter({

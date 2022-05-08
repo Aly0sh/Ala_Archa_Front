@@ -1,27 +1,35 @@
 <template>
   <div class="super">
-    <div class="form-fauna-flora">
-        <h1 style="text-align: center;">Добавление Гостиницы</h1>
+        <div class="form-fauna-flora">
+        <h1 style="text-align: center;">Добавление типа комнат</h1>
 
         <div class="formbox">
             <form>
-    
-              <label for="name">Введите Зону:</label>
-              <br>
-              <input v-model="hotel.areaId" type="number" id="name" name="name" placeholder="Введите название Зоны:"><br>
-              <br>
-              <br>
+
               <label for="name">Введите название Гостиницы:</label>
               <br>
-              <input v-model="hotel.hotelName" type="text" id="name" name="hotel" placeholder="Введите название Гостиницы:"><br> 
+              <input v-model="roomType.hotelName" type="text" id="name" name="name" placeholder="Введите название Гостиницы:"><br>
+    
+              <br>
 
+              <label for="name">Введите название типа:</label>
+              <br>
+              <input v-model="roomType.roomTypeName" type="text" id="name" name="type" placeholder="Введите название типа:"><br>
+
+              <br>
+
+              <label for="name">Введите цену:</label>
+              <br>
+              <input v-model="roomType.price" type="text" id="name" name="price" placeholder="Введите цену:"><br>
+        
             </form>
         </div>
     
         <br>
+        
         <div class="photo-upload">
-            <form>
-                <input @change="handleImage" type="file" id="img" name="img" accept="image/*" hidden>
+            <form action="/action_page.php">
+                <input type="file" id="img" name="img" accept="image/*" hidden>
                 <label for="img">Прикрепить фотографию:</label>
             </form>
         </div>
@@ -30,14 +38,14 @@
         <br>
 
         <div class="getImage">
-            <img :src="hotel.imgName" alt="aa">
+            <img :src="roomType.imgName" alt="aa">
         </div>
         
-        <div class="wrapper">
-            <button id="wrapper" @click="createHotel">Добавить</button>
+        <div class="wrapper" style="margin: 0;">
+            <button id="wrapper">Добавить</button>
         </div>
     </div>
-    </div>
+  </div>
 </template>
 
 <script>
@@ -45,12 +53,12 @@ import axios from 'axios';
 export default {
     data(){
       return{
-        hotel: {
+        roomType: {
             hotelName: '',
-            areaId: '',
+            roomTypeName: '',
+            price: '',
             imgName: ''
         },
-        areas: [],
       }
     },
 

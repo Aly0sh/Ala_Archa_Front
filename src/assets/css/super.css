@@ -1,4 +1,4 @@
-h1
+.super h1
 {
     font-family: 'Inter';
     font-style: normal;
@@ -6,20 +6,28 @@ h1
     font-size: 24px;
     line-height: 12px;
 }
+.super br{
+    margin: 1% 0;
+    width: 100%;
+    float: left;
+}
+.super label
+{
+    font-family: 'Inter';
+    font-size: 20px;
+}
 
-label
+.super button
 {
     font-family: 'Inter';
 }
 
-button
-{
-    font-family: 'Inter';
+.super .getImage{
+    width: 100%;
 }
 
-input::text
-{
-    height: 40px;
+.super .getImage img{
+    width: 50%;
 }
 
 .reserve span
@@ -31,7 +39,7 @@ input::text
     line-height: 19px;
 }
 
-#select
+.super #select
 {
     font-family: 'Inter';
     font-style: normal;
@@ -39,9 +47,10 @@ input::text
     font-size: 16px;
 }
 
-input[type="text"]
+.super input[type="text"]
 { 
-    padding: 7px 1px; line-height: 28px; 
+    padding: 7px 1px; 
+    line-height: 28px;
 }
 
 .reserve
@@ -67,7 +76,7 @@ input[type="text"]
     float: left;
 }
 
-input::placeholder {
+.super input::placeholder {
     font-size: calc(6px + 0.5vw);
     line-height: 3;
 }
@@ -127,15 +136,20 @@ input::placeholder {
 
 .form-fauna-flora
 {
+    margin-top: 5%;
     margin-left: auto;
     margin-right: auto;
-    width: 600px
+    width: 35%;
+}
+
+.form-fauna-flora .formbox{
+    margin: 5% 0 0;
 }
 
 .form-fauna-flora .formbox #name
 {
     width: 100%;
-    height: 20px;
+    height: 3vw;
 }
 
 .form-fauna-flora .formbox #desc
