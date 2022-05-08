@@ -213,6 +213,5 @@ export default {
 }
 </script>
 
-<style src="../assets/css/styles2.css"></style>
-<style src="../assets/css/fauna_flora.css"></style>
-<style src="../assets/css/gallery.css"></style>
+
+<style src="../assets/css/all.css"/>

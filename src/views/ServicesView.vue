@@ -10,7 +10,7 @@
 		</div>
 
 		<div class="hotels-title">
-				Гостинницы
+				Гостиницы
 		</div>
 		<div class="hotels">
 			<div class="services-card">
@@ -175,4 +175,5 @@ export default {
 }
 </script>
 
-<style src="../assets/css/styles.css"></style>
+
+<style src="../assets/css/all.css"/>

@@ -4,6 +4,7 @@ export default createStore({
   state() {
     return {
       credentials: {
+        id: sessionStorage.getItem('id') || '',
         userEmail: sessionStorage.getItem('email') || 'please log in',
         token: sessionStorage.getItem('token') || '',
       },
@@ -17,6 +18,7 @@ export default createStore({
       state.credentials.email = payload.email
       state.credentials.token = payload.token
       state.signInFlag = payload.signInFlag
+      state.credentials.id = payload.id
     },
     setError(state, payload) {
       state.error = payload
@@ -31,5 +33,6 @@ export default createStore({
     getToken: state => state.credentials.token,
     getSignInFlag: state => state.signInFlag,
     getError: state => state.error,
+    getId: state => state.credentials.id
   }
 })

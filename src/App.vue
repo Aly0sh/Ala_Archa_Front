@@ -10,7 +10,8 @@
         <router-link @click="burger = !burger" to="/services">Услуги</router-link> <br/>
         <router-link @click="burger = !burger" to="/entry">Въезд</router-link>
         <br class="ultra-br">
-        <a class="auth-mob" @click="showModal(); burger = !burger;">Авторизация</a>
+        <a v-if="!this.$store.getters.getSignInFlag" class="auth-mob" @click="showModal(); burger = !burger;">Авторизация</a>
+        <a v-if="this.$store.getters.getSignInFlag" class="auth-mob" @click="signOut(); burger = !burger;">Выйти</a>
       </div>
     </div>
     
@@ -46,7 +47,8 @@
             <li><router-link to="/services">Услуги</router-link></li>
             <li><router-link to="/entry">Въезд</router-link></li>
         </ul>
-        <a class="green authorize font" @click="showModal">Авторизация</a>
+        <a v-if="!this.$store.getters.getSignInFlag" class="green authorize font" @click="showModal">Авторизация</a>
+        <a v-if="this.$store.getters.getSignInFlag" class="green authorize font" @click="signOut();">Выйти</a>
     </div>
   </nav>
   <router-view v-if="!burger"/>

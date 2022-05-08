@@ -5,7 +5,7 @@
             <option v-for="index in users" :key="index" :value="index.email"> {{index.lastName + ' ' + index.firstName}} </option>
         </select>
         <input type="submit" value="Add area" @click.prevent="createArea"/>
-  </form>\
+  </form>
 </template>
 
 <script>

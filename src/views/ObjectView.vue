@@ -1,6 +1,6 @@
 <template>
 	<br>
-	<div class="container1">
+	<div class="container">
 		<div class="topchan-head">
 			<h2 class="topchan-head-title">Топчаны</h2>
 			<div class="clear"></div>
@@ -156,4 +156,4 @@ export default {
 }
 </script>
 
-<style src="../assets/css/styles.css"></style>
+<style src="../assets/css/all.css"/>

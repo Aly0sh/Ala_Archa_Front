@@ -60,6 +60,11 @@ h6{
     border-right: none;
 }
 
+.navbar ul li:hover a{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 .navbar ul li a:active{
     text-decoration-line: underline;
 }
@@ -68,6 +73,12 @@ h6{
     border-radius: 45px;
     float: right;
     margin-top: 1%;
+}
+
+.navbar .authorize:hover{
+    background-color: inherit;
+    border:#7EB685 solid 2px;
+    color:#7EB685;
 }
 
 .navbar_mobile{
@@ -129,6 +140,7 @@ h6{
     position: absolute;
     left: -20px;
     top: 40px;
+    z-index: 2;
     background-color: #7EB685;
     border-radius: 10px;
 }
@@ -298,6 +310,9 @@ footer .row ul li{
 
 footer .row ul li a{
     text-decoration: none; 
+}
+footer .row ul li a:hover{
+    text-decoration: underline; 
 }
 footer .row{
     text-align: center;

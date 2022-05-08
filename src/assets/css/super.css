@@ -1,0 +1,189 @@
+h1
+{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 12px;
+}
+
+label
+{
+    font-family: 'Inter';
+}
+
+button
+{
+    font-family: 'Inter';
+}
+
+input::text
+{
+    height: 40px;
+}
+
+.reserve span
+{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+}
+
+#select
+{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+input[type="text"]
+{ 
+    padding: 7px 1px; line-height: 28px; 
+}
+
+.reserve
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+}
+
+.reserve h1
+{
+    text-align: center;
+}
+
+.reserve .calendar .calendar-main
+{
+    height: 300px;
+    background-color: rgba(0,0,0,0.2);
+}
+
+.reserve .time-reserve span
+{
+    float: left;
+}
+
+input::placeholder {
+    font-size: calc(6px + 0.5vw);
+    line-height: 3;
+}
+
+.wrapper{
+    text-align: center;
+}
+
+.wrapper #wrapper {
+    height: 40px;
+    width: 200px;
+    margin-top: 6%;
+    justify-content: center;
+    cursor: pointer;
+    font-size: calc(7px + 0.6vw);
+    border-radius: 8px;
+    background-color: #7EB685;
+    color: white;
+    border: none;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+}
+
+.wrapper #wrapper:hover
+{
+    background-color: #f1f1f1;
+    color: #7EB685;
+    border: rgba(1,0,0,0.2) solid 1px;
+}
+
+.photo-upload input[type=file]::-webkit-file-upload-button
+{
+    border: 2px solid #6c5ce7;
+    padding: .2em .4em;
+    border-radius: .2em;
+    background-color: #a29bfe;
+    transition: 1s;
+}
+
+.photo-upload
+{
+    margin-top: 15px;
+}
+
+.photo-upload label
+{
+    background-color: #7EB685;
+    color: white;
+    padding: 0.5rem;
+    font-family: sans-serif;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.form-fauna-flora
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px
+}
+
+.form-fauna-flora .formbox #name
+{
+    width: 100%;
+    height: 20px;
+}
+
+.form-fauna-flora .formbox #desc
+{
+    width: 100%;
+    height: 200px;
+}
+
+.form-fauna-flora .type
+{
+    justify-content: center;
+    width: 300px;
+    margin-top: 3.5%;
+    position: relative;
+}
+
+.form-fauna-flora .type #select
+{
+    width: 208px;
+    height: 30px;
+    border: rgba(1,0,0,1.2) solid 1px;
+    border-radius: 8px;
+}
+
+.reserve .calendar .calendar-main
+{
+    margin-top: 3.5%;
+}
+
+.reserve .type
+{
+    margin-top: 3.5%;
+    margin-left: 40px;
+}
+
+.reserve .type #select
+{
+    width: 85%;
+    height: 30px;
+    border: rgba(1,0,0,1.2) solid 1px;
+    border-radius: 8px;
+}
+
+.reserve .time-reserve .type #select
+{
+    width: 60px;
+    height: auto;
+    float: right;
+    border: rgba(1,0,0,1.2) solid 1px;
+    border-radius: 8px;
+}

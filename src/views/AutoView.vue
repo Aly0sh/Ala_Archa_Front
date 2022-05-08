@@ -158,4 +158,4 @@ export default {
 }
 </script>
 
-<style src="../assets/css/styles.css"></style>
+<style src="../assets/css/all.css"/>

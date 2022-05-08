@@ -70,6 +70,12 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
+  {
+    path: "/create-hotel",
+    name: "create-hotel",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/super-admin/CreateHotel.vue"),
+  },
 ];
 
 const router = createRouter({
