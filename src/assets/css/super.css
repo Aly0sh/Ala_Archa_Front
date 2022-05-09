@@ -248,3 +248,92 @@
 .clear{
     clear: both;
 }
+
+
+/* ================== */
+.super-admin{
+    color:rgb(58, 58, 58);
+    margin: 2% 0;
+}
+
+.super-admin h2{
+    text-align: center;
+    font-size: calc(0.6em + 1vw);
+    line-height: 110%;
+}
+
+.super-admin .column{
+    margin: 3% 0;
+    width: 40%;
+    float: left;
+}
+
+.super-admin a{
+    color: rgb(58, 58, 58);
+}
+
+.super-admin .column h2{
+    text-align: start;
+}
+
+.super-admin .column .item{
+    background: #c8e0cb;
+    border-radius: 10px;
+    width: 60%;
+    padding: 0.1% 0;
+    margin: 3% 0;
+    border: #c8e0cb solid 3px;
+}
+
+.super-admin .column .item:hover{
+    background-color:#f4f9f4;
+    color:#75a47b
+}
+
+.super-admin .column .item:hover p{
+    cursor: pointer;
+}
+
+.super-admin .column .item p{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: calc(0.2em + 1vw);
+}
+
+.super-admin table{
+    margin: 2% 0 0;
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+    border: rgb(58, 58, 58) solid 1px;
+}
+
+.super-admin td, .super-admin th{
+    padding: 0.5%;
+    border: rgb(58, 58, 58) solid 1px;
+}
+
+.super-admin th.edit,
+.super-admin th.delete{
+    width: 18%;
+}
+
+.super-admin th:nth-child(1){
+    width: 5%;
+}
+
+.super-admin td.edit{
+    background-color: rgb(248, 203, 118);
+    font-weight: bolder;
+}
+
+.super-admin td.delete{
+    background-color: rgb(235, 121, 127);
+    font-weight: bolder;
+}
+
+.super-admin td.edit a:hover,
+.super-admin td.delete a:hover{
+    text-decoration: underline;
+}

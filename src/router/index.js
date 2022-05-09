@@ -63,6 +63,12 @@ const routes = [
       import("../views/AboutView.vue"),
   },
   {
+    path: "/cart",
+    name: "cart",
+    component: () =>
+      import("../views/CartView.vue"),
+  },
+  {
     path: "/super-admin/create-area",
     name: "create-area",
     component: CreateArea
@@ -120,6 +126,54 @@ const routes = [
     name: "create-hotel-halls",
     component: () =>
       import("../views/super-admin/CreateHotelHalls.vue"),
+  },
+  {
+    path: "/super-admin/show-superadmin-menu",
+    name: "show-superadmin-menu",
+    component: () =>
+      import("../views/super-admin/ShowSuperadminMenu.vue"),
+  },
+  {
+    path: "/super-admin/show-zones",
+    name: "show-zones",
+    component: () =>
+      import("../views/super-admin/ShowZones.vue"),
+  },
+  {
+    path: "/super-admin/show-flora-fauna",
+    name: "show-flora-fauna",
+    component: () =>
+      import("../views/super-admin/ShowFloraFauna.vue"),
+  },
+  {
+    path: "/super-admin/show-hotels",
+    name: "show-hotels",
+    component: () =>
+      import("../views/super-admin/ShowHotels.vue"),
+  },
+  {
+    path: "/super-admin/show-menu",
+    name: "show-menu",
+    component: () =>
+      import("../views/super-admin/ShowMenu.vue"),
+  },
+  {
+    path: "/super-admin/show-menu-sections",
+    name: "show-menu-sections",
+    component: () =>
+      import("../views/super-admin/ShowMenuSections.vue"),
+  },
+  {
+    path: "/super-admin/show-room-types",
+    name: "show-room-types",
+    component: () =>
+      import("../views/super-admin/ShowRoomTypes.vue"),
+  },
+  {
+    path: "/super-admin/show-object-types",
+    name: "show-object-types",
+    component: () =>
+      import("../views/super-admin/ShowObjectTypes.vue"),
   },
 ];
 
