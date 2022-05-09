@@ -7,23 +7,20 @@
     
               <label for="name">Введите название:</label>
               <br>
-              <input v-model="menuSection.menuSectionName" type="text" id="name" name="firstname" placeholder="Введите название:"><br>
+              <input v-model="menuSection.name" type="text" id="name" name="firstname" placeholder="Введите название:"><br>
     
             </form>
         </div>
 
+        <label for="select">Выбрать объект:</label>
         <div class="type">
-            <select id="select">
-                <option value="0">Выбрать объект: </option>
-                <option value="1">Стандарт 1</option>
-                <option value="2">Стандарт 2</option>
-                <option value="3">Стандарт 3</option>
-                <option value="4">Стандарт 4</option>
+            <select v-model="menuSection.objectTypeId" id="select">
+                <option v-for="(i, index) in objects" :key="index" :value="i.id"> {{ i.name }} </option>
             </select>
         </div>
         
         <div class="wrapper" style="margin: 0;">
-            <button id="wrapper">Добавить</button>
+            <button id="wrapper" @click="create">Добавить</button>
         </div>
     </div>
   </div>
@@ -35,21 +32,52 @@ export default {
     data(){
       return{
         menuSection: {
-            menuSectionName: '',
+            name: '',
+            objectTypeId: null
         },
+        objects: []
       }
     },
-  mounted(){
-    console.log("Getting users")
-    axios
-      .get("http://localhost:8083/user/get-admins")
-      .then(response => {(this.areas = response.data.value);
-      console.log(response.data)})
-      .catch(error => {
-        console.log(error);
-        this.errored = true;
-      });
-      console.log(this.users);
+    methods: {
+      create(){
+            axios
+            .post("http://localhost:8083/menu/section/create",
+              this.menu, 
+              {
+                headers:{
+                  Authorization:this.$store.getters.getToken,
+                }
+              })
+            .then((resp) => {
+                if (resp.status == 200) {
+                // this.$router.push("/");
+                }
+                console.log(this.$store.state);
+            })
+            .catch((error) => {
+                if (!error.response) {
+                this.$router.push("/error");
+                this.$store.commit("setError", error);
+                } else if (error.response.data.details === undefined) {
+                this.$router.push("/error");
+                this.$store.commit("setError", error);
+                } else {
+                this.signInErrorFlag = true;
+                this.signInErrorMessage = error.response.data.details;
+                console.log(error.response.data);
+                }
+            });
+      }
+    },
+    mounted(){
+      axios
+        .get("http://localhost:8083/object/get-all")
+        .then(response => {(this.objects = response.data.value);
+        console.log(response.data)})
+        .catch(error => {
+          console.log(error);
+          this.errored = true;
+        });
     }
 }
 </script>

@@ -2508,12 +2508,12 @@ html{
 }
 
 .sign .signUpButton{
-    padding: 2% 0;
+    padding: 2% 4%;
     background: #EE5B46;
     border-radius: 10px;
     border: none;
     color: #FFFFFF;
-    width: 40%;
+    min-width: 40%;
     display: block;
     margin: 0 auto;
 }
@@ -2542,6 +2542,7 @@ html{
     box-sizing: border-box;
     border-radius: 10px;
     padding: 15px;
+    margin: 5px 0;
 }
 
 
@@ -2588,6 +2589,7 @@ html{
         font-size: 12px;
         padding: 4px;
         line-height: 2px;
+        border-radius: 7px;
     }
     
     .sign .signFont{
@@ -2596,8 +2598,7 @@ html{
     }
 
     .fields input{
-        margin-bottom: 0px;
-        margin-top: 0px;
+        margin: 5px 0;
     }
 
     .sign .fields{
@@ -2607,6 +2608,20 @@ html{
     .sign {
         border-radius: 10px;
     }
+
+    .sign .signUpButton{
+        font-weight: 100;
+        padding: 4%;
+    }
+
+    .sign .buttons .signInButton{
+        font-weight: 100;
+        padding: 4%;
+    }
+
+    .sign .logo img{
+        width: 15%;
+    }
 }
 
 
@@ -2614,6 +2629,11 @@ html{
 
     .sign .fields{
         width: 80%;
+    }
+
+
+    .sign .logo img{
+        width: 20%;
     }
 
 }
@@ -2652,4 +2672,9 @@ html{
     right: 5%;
     top: 30%;
     position: absolute;
+}
+
+.validation {
+    font-size: calc(10px + 0.6vw);
+    color: #f90000;
 }

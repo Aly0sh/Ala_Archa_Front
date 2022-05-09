@@ -1,24 +1,32 @@
 <template>
   <div class="super">
         <div class="form-fauna-flora">
-        <h1 style="text-align: center;">Добавление типа комнат</h1>
+        <h1 style="text-align: center;">Добавление дополнительных комнат</h1>
 
         <div class="formbox">
             <form>
 
-              <label for="name">Введите название типа комнаты:</label>
+              <label for="name">Введите название:</label>
               <br>
-              <input v-model="roomType.type" type="text" id="name" name="name" placeholder="Введите название типа комнаты:"><br>
+              <input v-model="hotelHall.name" type="text" id="name" name="name" placeholder="Введите название типа комнаты:"><br>
     
               <br>
 
               <label for="price">Введите цену:</label>
               <br>
-              <input v-model="roomType.price" style="width: 100%" type="text" id="price" name="type" placeholder="Введите цену за день:"><br>
+              <input v-model="hotelHall.price" style="width: 100%" type="text" id="price" name="type" placeholder="Введите цену за день:"><br>
+
+              <label for="priceper">Введите цену за последующие часы:</label>
+              <br>
+              <input v-model="hotelHall.priceForNextHours" style="width: 100%" type="text" id="priceper" name="type" placeholder="Введите цену за последующие часы:"><br>
+
+              <label for="seats">Введите количество мест:</label>
+              <br>
+              <input v-model="hotelHall.numberOfSeats" style="width: 100%" type="text" id="seats" name="type" placeholder="Введите количество мест:"><br>
 
               <label for="select">Выберите отель:</label>
               <div class="type">
-                  <select id="select" v-model="roomType.hotelId">
+                  <select id="select" v-model="hotelHall.hotelId">
                       <option v-for="(i, index) in hotels" :key="index" :value="i.id"> {{ i.hotelName }} </option>
                   </select>
               </div><br>
@@ -28,7 +36,7 @@
         <br>
         <br>
         <div class="getImagesGrid">
-            <img v-for="(i, index) in roomType.roomTypeImageModels" :key="index" :src="i" alt="aa">
+            <img v-for="(i, index) in hotelHall.hotelHall_imgModels" :key="index" :src="i" alt="aa">
         </div>
         <br>
         
@@ -53,11 +61,13 @@ import axios from 'axios';
 export default {
     data(){
       return{
-        roomType: {
-            type: '',
+        hotelHall: {
+            name: '',
             price: null,
+            priceForNextHours: null,
+            numberOfSeats: null,
             hotelId: null,
-            roomTypeImageModels: []
+            hotelHall_imgModels: []
         },
         hotels: []
       }
@@ -73,7 +83,7 @@ export default {
           const reader = new FileReader();
 
           reader.onload = (e) => {
-              this.roomType.roomTypeImageModels.push(e.target.result);
+              this.hotelHall.hotelHall_imgModels.push(e.target.result);
           };
 
         reader.readAsDataURL(fileObject);
@@ -81,8 +91,8 @@ export default {
 
       create(){
             axios
-            .post("http://localhost:8083/room/type/create",
-              this.roomType, 
+            .post("http://localhost:8083/hotelHall/create",
+              this.hotelHall, 
               {
                 headers:{
                   Authorization:this.$store.getters.getToken,

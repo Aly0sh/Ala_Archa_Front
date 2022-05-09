@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import SignIn from "../views/SignIn.vue";
 import SignUp from "../views/SignUp.vue";
-import CreateArea from "../views/CreateArea.vue"
+import CreateArea from "../views/super-admin/CreateArea.vue"
 
 const routes = [
   {
@@ -21,90 +21,105 @@ const routes = [
     component: SignUp
   },
   {
-    path: "/create-area",
-    name: "create-area",
-    component: CreateArea
-  },
-  {
     path: "/services",
     name: "services",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/ServicesView.vue"),
+      import("../views/ServicesView.vue"),
   },
   {
     path: "/entry",
     name: "entry",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AutoView.vue"),
+      import("../views/AutoView.vue"),
   },  
   {
     path: "/fauna",
     name: "fauna",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/FaunaView.vue"),
+      import("../views/FaunaView.vue"),
   },  
   {
     path: "/flora",
     name: "flora",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/FloraView.vue"),
+      import("../views/FloraView.vue"),
   },
   {
     path: "/hotel",
     name: "hotel",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/HotelView.vue"),
+      import("../views/HotelView.vue"),
   },
   {
     path: "/object",
     name: "object",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/ObjectView.vue"),
+      import("../views/ObjectView.vue"),
   },
   {
     path: "/about-us",
     name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+      import("../views/AboutView.vue"),
   },
   {
-    path: "/create-hotel",
+    path: "/super-admin/create-area",
+    name: "create-area",
+    component: CreateArea
+  },
+  {
+    path: "/super-admin/create-hotel",
     name: "create-hotel",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/super-admin/CreateHotel.vue"),
+      import("../views/super-admin/CreateHotel.vue"),
   },
   {
-    path: "/create-menu",
+    path: "/super-admin/create-menu",
     name: "create-menu",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/super-admin/CreateMenu.vue"),
+      import("../views/super-admin/CreateMenu.vue"),
   },
   {
-    path: "/create-object",
+    path: "/super-admin/create-object-type",
+    name: "create-object-type",
+    component: () =>
+      import("../views/super-admin/CreateObjectType.vue"),
+  },
+  {
+    path: "/super-admin/create-object",
     name: "create-object",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/super-admin/CreateObject.vue"),
+      import("../views/super-admin/CreateObject.vue"),
   },
   {
-    path: "/create-flora-fauna",
+    path: "/super-admin/create-flora-fauna",
     name: "create-flora-fauna",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/super-admin/CreateFloraFauna.vue"),
+      import("../views/super-admin/CreateFloraFauna.vue"),
   },
   {
-    path: "/create-room-type",
+    path: "/super-admin/create-room-type",
     name: "create-room-type",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/super-admin/CreateRoomType.vue"),
+      import("../views/super-admin/CreateRoomType.vue"),
   },
   {
-    path: "/create-menu-section",
+    path: "/super-admin/create-room",
+    name: "create-room",
+    component: () =>
+      import("../views/super-admin/CreateRoom.vue"),
+  },
+  {
+    path: "/super-admin/create-menu-section",
     name: "create-menu-section",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/super-admin/CreateMenuSection.vue"),
+      import("../views/super-admin/CreateMenuSection.vue"),
+  },
+  {
+    path: "/super-admin/create-hotel-halls",
+    name: "create-hotel-halls",
+    component: () =>
+      import("../views/super-admin/CreateHotelHalls.vue"),
   },
 ];
 

@@ -1,26 +1,21 @@
 <template>
   <div class="super">
         <div class="form-fauna-flora">
-        <h1 style="text-align: center;">Добавление объекта</h1>
+        <h1 style="text-align: center;">Добавление зоны</h1>
 
         <div class="formbox">
             <form>
     
-              <label for="name">Введите название:</label>
+              <label for="name">Введите название зоны:</label>
               <br>
-              <input v-model="object.objectName" type="text" id="name" placeholder="Введите название:"><br>
+              <input v-model="area.areaName" type="text" id="name" placeholder="Введите номер комнаты:"><br>
     
               <br>
 
-              <label for="numberOfSeats">Введите количество мест:</label>
-              <br>
-              <input v-model="object.numberOfSeats" style="width: 100%;" type="text" id="numberOfSeats" placeholder="Введите количество мест:"><br>
-
-              <br>
-              <label for="select">Выберите тип объекта:</label>
+              <label for="select">Выберите админа:</label>
               <div class="type">
-                  <select id="select" v-model="object.objectTypeId">
-                      <option v-for="(i, index) in objectTypes" :key="index" :value="i.id"> {{ i.name }} </option>
+                  <select id="select" v-model="area.email">
+                      <option v-for="(i, index) in users" :key="index" :value="i.email"> {{index.lastName + ' ' + index.firstName}} </option>
                   </select>
               </div><br>
 
@@ -42,18 +37,17 @@ import axios from 'axios';
 export default {
     data(){
       return{
-        object: {
-            name: '',
-            numberOfSeats: null,
-            objectTypeId: null
+        area: {
+            areaName: '',
+            email: ''
         },
-        objectTypes: [],
+        users: []
       }
     },
     mounted(){
     axios
-      .get("http://localhost:8083/object/type/get-all")
-      .then(response => {(this.objectTypes = response.data.value);
+      .get("http://localhost:8083/user/get-admins")
+      .then(response => {(this.users = response.data.value);
       console.log(response.data)})
       .catch(error => {
         console.log(error);
@@ -63,8 +57,8 @@ export default {
     methods: {
       create(){
             axios
-            .post("http://localhost:8083/object/create",
-              this.object, 
+            .post("http://localhost:8083/area/create",
+              this.area, 
               {
                 headers:{
                   Authorization:this.$store.getters.getToken,

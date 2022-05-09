@@ -1,29 +1,42 @@
 <template>
   <div class="super">
     <div class="form-fauna-flora">
-        <h1 style="text-align: center;">Добавление Гостиницы</h1>
+        <h1 style="text-align: center;">Добавление Типа объекта</h1>
 
         <div class="formbox">
             <form>
     
               <label for="select">Выберите зону</label>
               <div class="type">
-                  <select id="select" v-model="hotel.areaId">
+                  <select id="select" v-model="objectType.areaId">
                       <option v-for="(i, index) in areas" :key="index" :value="i.id"> {{ i.areaName }} </option>
                   </select>
               </div><br>
+              <label for="name">Введите название Типа объекта:</label>
               <br>
+              <input v-model="objectType.name" type="text" id="name" placeholder="Введите название Типа объекта:"><br> 
+              
+              <label for="price">Введите основную цену:</label>
               <br>
-              <label for="name">Введите название Гостиницы:</label>
-              <br>
-              <input v-model="hotel.hotelName" type="text" id="name" name="hotel" placeholder="Введите название Гостиницы:"><br> 
+              <input v-model="objectType.price" type="text" style="width:100%" id="price" placeholder="Введите основную цену:"><br> 
 
+              <label for="priceper">Введите цену за последующие часы:</label>
+              <br>
+              <input v-model="objectType.pricePerHour" type="text" style="width:100%" id="priceper" placeholder="Введите цену за последующие часы:"><br> 
+
+              <label for="selecttype">Выберите тип времени:</label>
+                <div class="type">
+                    <select v-model="objectType.timeType" id="selecttype">
+                        <option value="DATE">По дням</option>
+                        <option value="TIME">По часам</option>
+                    </select>
+                </div>
             </form>
         </div>
     
         <br>
         <div class="getImagesGrid">
-            <img v-for="(i, index) in hotel.imgName" :key="index" :src="i" alt="aa">
+            <img v-for="(i, index) in objectType.objectTypeImgModels" :key="index" :src="i" alt="aa">
         </div>
         <br>
         <div class="photo-upload">
@@ -37,7 +50,7 @@
         <br>
         
         <div class="wrapper">
-            <button id="wrapper" @click="createHotel">Добавить</button>
+            <button id="wrapper" @click="create">Добавить</button>
         </div>
     </div>
     </div>
@@ -48,10 +61,13 @@ import axios from 'axios';
 export default {
     data(){
       return{
-        hotel: {
-            hotelName: '',
+        objectType: {
+            name: '',
+            price: null,
+            pricePerHour: null,
+            objectTypeImgModels: [],
             areaId: '',
-            imgName: []
+            timeType: ''
         },
         areas: [],
       }
@@ -66,16 +82,16 @@ export default {
       createBase64Image(fileObject){
           const reader = new FileReader();
           reader.onload = (e) => {
-          this.hotel.imgName.push(e.target.result);    
+          this.objectType.objectTypeImgModels.push(e.target.result);    
           };
 
         reader.readAsDataURL(fileObject);
       },
 
-      createHotel(){
+      create(){
             axios
-            .post("http://localhost:8083/hotel/create",
-              this.hotel, 
+            .post("http://localhost:8083/object/type/create",
+              this.objectType, 
               {
                 headers:{
                   Authorization:this.$store.getters.getToken,

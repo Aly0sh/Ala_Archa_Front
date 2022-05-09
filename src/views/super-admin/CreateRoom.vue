@@ -1,26 +1,26 @@
 <template>
   <div class="super">
         <div class="form-fauna-flora">
-        <h1 style="text-align: center;">Добавление объекта</h1>
+        <h1 style="text-align: center;">Добавление комнаты</h1>
 
         <div class="formbox">
             <form>
     
-              <label for="name">Введите название:</label>
+              <label for="name">Введите номер комнаты:</label>
               <br>
-              <input v-model="object.objectName" type="text" id="name" placeholder="Введите название:"><br>
+              <input v-model="room.roomNumber" type="text" id="name" placeholder="Введите номер комнаты:"><br>
     
               <br>
 
               <label for="numberOfSeats">Введите количество мест:</label>
               <br>
-              <input v-model="object.numberOfSeats" style="width: 100%;" type="text" id="numberOfSeats" placeholder="Введите количество мест:"><br>
+              <input v-model="room.bedNumber" style="width: 100%;" type="text" id="numberOfSeats" placeholder="Введите количество мест:"><br>
 
               <br>
-              <label for="select">Выберите тип объекта:</label>
+              <label for="select">Выберите тип комнаты:</label>
               <div class="type">
-                  <select id="select" v-model="object.objectTypeId">
-                      <option v-for="(i, index) in objectTypes" :key="index" :value="i.id"> {{ i.name }} </option>
+                  <select id="select" v-model="room.roomTypeId">
+                      <option v-for="(i, index) in roomTypes" :key="index" :value="i.id"> {{ i.type }} </option>
                   </select>
               </div><br>
 
@@ -42,29 +42,29 @@ import axios from 'axios';
 export default {
     data(){
       return{
-        object: {
-            name: '',
-            numberOfSeats: null,
-            objectTypeId: null
+        room: {
+            roomNumber: null,
+            bedNumber: null,
+            roomTypeId: null
         },
-        objectTypes: [],
+        roomTypes: [],
       }
     },
     mounted(){
-    axios
-      .get("http://localhost:8083/object/type/get-all")
-      .then(response => {(this.objectTypes = response.data.value);
-      console.log(response.data)})
-      .catch(error => {
-        console.log(error);
-        this.errored = true;
-      });
+      axios
+        .get("http://localhost:8083/room/type/get-all")
+        .then(response => {(this.roomTypes = response.data.value);
+        console.log(response.data)})
+        .catch(error => {
+          console.log(error);
+          this.errored = true;
+        });
     },
     methods: {
       create(){
             axios
-            .post("http://localhost:8083/object/create",
-              this.object, 
+            .post("http://localhost:8083/room/create",
+              this.room, 
               {
                 headers:{
                   Authorization:this.$store.getters.getToken,

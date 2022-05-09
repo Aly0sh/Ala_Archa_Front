@@ -8,24 +8,23 @@
     
               <label for="name">Введите название:</label>
               <br>
-              <input v-model="florauna.floraunaName" type="text" id="name" name="firstname" placeholder="Введите название:"><br>
+              <input v-model="florauna.name" type="text" id="name" placeholder="Введите название:"><br>
     
               <br>
 
               <label for="desc">Введите описание:</label>
               <br>
-              <textarea v-model="florauna.floraunaDescription" id="desc" name="description" placeholder="Введите описание.."></textarea>
+              <textarea v-model="florauna.description" id="desc" placeholder="Введите описание.."></textarea>
         
             </form>
         </div>
-
+        
+        
+        <label for="select">Выберите тип:</label>
         <div class="type">
-            <select id="select">
-                <option value="0">Выбрать тип: </option>
-                <option value="1">Стандарт 1</option>
-                <option value="2">Стандарт 2</option>
-                <option value="3">Стандарт 3</option>
-                <option value="4">Стандарт 4</option>
+            <select v-model="florauna.natureType" id="select">
+                <option value="FLORA">Флора</option>
+                <option value="FAUNA">Фауна</option>
             </select>
         </div>
 
@@ -33,19 +32,21 @@
         <br>
 
         <div class="photo-upload">
-            <form action="/action_page.php">
-                <input type="file" id="img" name="img" accept="image/*" hidden>
+            <form>
+                <input type="file" @change="handleImage" id="img" name="img" accept="image/*" hidden>
                 <label for="img">Прикрепить фотографию:</label>
             </form>
         </div>
         <br>
-        <div class="getImage">
-          <img :src="florauna.imgName" alt="aa">
+        <div v-if="florauna.photo" class="getImage">
+          <img class="uploaded-image" :src="florauna.photo" alt="aa">
         </div>
         
         <div class="wrapper" style="margin: 0;">
-            <button id="wrapper">Добавить</button>
+            <button id="wrapper" @click="create">Добавить</button>
         </div>
+        <br>
+        <br>
     </div>
   </div>
 </template>
@@ -56,23 +57,56 @@ export default {
     data(){
       return{
         florauna: {
-            floraunaName: '',
-            floraunaDescription: '',
-            imgName: ''
+            name: '',
+            description: '',
+            photo: '',
+            natureType: ''
         },
       }
     },
-  mounted(){
-    console.log("Getting users")
-    axios
-      .get("http://localhost:8083/user/get-admins")
-      .then(response => {(this.areas = response.data.value);
-      console.log(response.data)})
-      .catch(error => {
-        console.log(error);
-        this.errored = true;
-      });
-      console.log(this.users);
+    methods: {
+      handleImage(e){
+          const selectedImage = e.target.files[0];
+          this.createBase64Image(selectedImage);
+      },
+
+      createBase64Image(fileObject){
+          const reader = new FileReader();
+          reader.onload = (e) => {
+          this.florauna.photo = e.target.result;    
+          };
+
+        reader.readAsDataURL(fileObject);
+      },
+      create(){
+            axios
+            .post("http://localhost:8083/nature/create",
+              this.florauna, 
+              {
+                headers:{
+                  Authorization:this.$store.getters.getToken,
+                }
+              })
+            .then((resp) => {
+                if (resp.status == 200) {
+                // this.$router.push("/");
+                }
+                console.log(this.$store.state);
+            })
+            .catch((error) => {
+                if (!error.response) {
+                this.$router.push("/error");
+                this.$store.commit("setError", error);
+                } else if (error.response.data.details === undefined) {
+                this.$router.push("/error");
+                this.$store.commit("setError", error);
+                } else {
+                this.signInErrorFlag = true;
+                this.signInErrorMessage = error.response.data.details;
+                console.log(error.response.data);
+                }
+            });
+      }
     }
 }
 </script>

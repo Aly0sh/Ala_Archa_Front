@@ -32,6 +32,7 @@
 			<div class="book-window">
 				<h2>Бронирование</h2>
 				<h3>Выберите даты</h3>
+				<Datepicker v-model="date" range inline autoApply></Datepicker>
 			</div>
 		</div>
 
@@ -175,15 +176,22 @@
 </template>
 
 <script>
-
+import Datepicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 
 export default {
+	components: {
+		Datepicker
+	},
     data() {
         return {
+			date: '',
+
         }
     },        
 }
 
 </script>
+
 
 <style src="../assets/css/all.css"/>

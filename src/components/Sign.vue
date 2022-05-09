@@ -12,9 +12,11 @@
                 <p class="center signFont title">Авторизация</p>
                 <form>
                     <div class="fields">
-                        <input v-model="email" type="email" placeholder="E-Mail" style="margin-bottom: 2vw;">
-                        <br>
+                        <input v-model="email" type="email" placeholder="E-Mail">
+                        <div v-show="v$.email.$error" class="validation">Введите адрес почты!</div>
                         <input v-model="password" type="password" placeholder="Пароль">
+                        <div v-show="v$.password.$error" class="validation">Пароль содержит минимум 8 символов!</div>
+                        <div v-show="authProblem" class="validation">Неверный адрес почты либо пароль!</div>
                         <br>
                     </div>
                     <div class="buttons">
@@ -36,15 +38,10 @@
                 <form>
                     <div class="fields">
                         <input v-model="user.firstName" placeholder="Имя">
-                        <br>
                         <input v-model="user.lastName" placeholder="Фамилию">
-                        <br>
                         <input v-model="user.email" type="email" placeholder="Электронную почту">
-                        <br>
                         <input v-model="user.phone" placeholder="Телефон">
-                        <br>
                         <input v-model="user.password" type="password" placeholder="Пароль">
-                        <br>
                         <input v-model="repeatPassword" type="password" placeholder="Повторите пароль">
                         <br><br>
                     </div>
@@ -61,9 +58,14 @@
  
 <script>
     import axios from "axios";
+    import useVuelidate from '@vuelidate/core';
+    import { required, email, minLength, numeric } from '@vuelidate/validators';
 
     export default {
         name: "Sign",
+        setup () {
+            return { v$: useVuelidate() }
+        },
         data(){
             return {
                 show: false,
@@ -79,7 +81,43 @@
                     phone: '',
                     password: ''
                 },
-                repeatPassword: ''
+                repeatPassword: '',
+                authProblem: false
+            }
+        },
+        validations: {
+            user: {
+                firstName: {
+                    required
+                },
+                lastName: {
+                    required
+                },
+                email: {
+                    email, required
+                },
+                phone: {
+                    required
+                },
+                password: {
+                    required, minLength: minLength(8)
+                }
+            },
+            email: {
+                email, required
+            },
+            password: {
+               required, minLength: minLength(8)
+            }
+        },
+        computed: {
+            firstNameErrors(){
+                const errors = [];
+                if (!this.v$.form.name.required){
+                    errors.push('Заполните имя');
+                    console.log('aaaa');
+                }
+                return errors;
             }
         },
         methods: {
@@ -89,47 +127,69 @@
             },
 
             signin() {
-                console.log("inside sign in");
-                let email = this.email;
-                let password = this.password;
-                axios
-                    .post("http://localhost:8083/user/sign-in", { email, password })
-                    .then((resp) => {
-                    if (resp.status == 200) {
-                        this.$store.commit("setCredentials", {
-                        email: resp.data.value.email,
-                        token: 'Bearer ' + resp.data.value.token,
-                        signInFlag: true,
-                        id: resp.data.value.id
-                        });
+                this.v$.email.$touch();
+                this.v$.password.$touch();
+                if (this.v$.email.$error || this.v$.password.$error){
+                    console.log('Валидация не удалась')
+                } else {
+                    console.log("inside sign in");
+                    let email = this.email;
+                    let password = this.password;
+                    axios
+                        .post("http://localhost:8083/user/sign-in", { email, password })
+                        .then((resp) => {
+                        if (resp.status == 200) {
+                            this.$store.commit("setCredentials", {
+                            email: resp.data.value.email,
+                            token: 'Bearer ' + resp.data.value.token,
+                            signInFlag: true,
+                            id: resp.data.value.id
+                            });
 
-                        this.$router.push("/");
+                            this.$router.push("/");
 
-                        sessionStorage.setItem("email", resp.data.value.email);
-                        sessionStorage.setItem("token", 'Bearer ' + resp.data.value.token);
-                        sessionStorage.setItem("signInFlag", true);
-                        sessionStorage.setItem("id", resp.data.value.id)
-                        this.show = false;
-                    }
+                            sessionStorage.setItem("email", resp.data.value.email);
+                            sessionStorage.setItem("token", 'Bearer ' + resp.data.value.token);
+                            sessionStorage.setItem("signInFlag", true);
+                            sessionStorage.setItem("id", resp.data.value.id)
+                            this.show = false;
+                            this.authProblem = false;
+                        }
 
-                    console.log(this.$store.state);
-                    })
-                    .catch((error) => {
-                    if (!error.response) {
-                        this.$router.push("/error");
-                        this.$store.commit("setError", error);
-                    } else if (error.response.data.details === undefined) {
-                        this.$router.push("/error");
-                        this.$store.commit("setError", error);
-                    } else {
-                        this.signInErrorFlag = true;
-                        this.signInErrorMessage = error.response.data.details;
-                        console.log(error.response.data);
-                    }
-                });
+                        console.log(this.$store.state);
+                        })
+                        .catch((error) => {
+                        if (!error.response) {
+                            this.$router.push("/error");
+                            this.$store.commit("setError", error);
+                        } else if (error.response.data.details === undefined) {
+                            this.$router.push("/error");
+                            this.$store.commit("setError", error);
+                        } else {
+                            this.signInErrorFlag = true;
+                            this.signInErrorMessage = error.response.data.details;
+                            console.log(error.response.data);
+                        }
+                        this.authProblem = true
+                    });
+                }
             },
             signup() {
-                if(this.repeatPassword == this.user.password){                
+                this.v$.user.$touch();
+                if(this.v$.user.firstName.$error){
+                    alert('Введите имя!');
+                } else if(this.v$.user.lastName.$error){
+                    alert('Введите фамилию!');
+                } else if(this.v$.user.email.$error){
+                    alert('Введите корректно электронную почту!');
+                } else if(this.v$.user.phone.$error){
+                    alert('Введите номер телефона!');
+                } else if(this.v$.user.password.$error){
+                    alert('Пароль должен содержать более 8 символов)!');
+                } else if(this.repeatPassword != this.user.password){
+                    alert('Повторите пароль!');
+                }
+                else {                
                     console.log("inside sign up");
                     axios
                     .post("http://localhost:8083/user/sign-up", this.user)
@@ -152,8 +212,6 @@
                         console.log(error.response.data);
                         }
                     });
-                } else {
-                    console.log('Повторите пароль')
                 }
             }
         }
