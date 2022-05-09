@@ -16,9 +16,9 @@
 			</Datepicker>
 		</div>
 		<select id="selector">
-			<option value="">Комната 1</option>
-			<option value="">Комната 2</option>
-			<option value="">Комната 3</option>
+			<option value="">Тапчан 1</option>
+			<option value="">Тапчан 2</option>
+			<option value="">Тапчан 3</option>
 		</select>
 		<span style="display: block; margin-bottom: 1vw;" class="validation">Дата 14.05.2022 занята</span>
 		<button class="datepicker-book">Забронировать</button>

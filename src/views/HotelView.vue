@@ -58,6 +58,7 @@
 	</div>
 
 	<div class="room">
+		<time-booking-object ref="timeBooking"></time-booking-object>
 		<div class="topchan-body">
 			<img class="topchan-body-img" src="../assets/img/objects/object3.png" alt="">
 			<div class="topchan-body-content">
@@ -81,8 +82,8 @@
 			<img src="../assets/img/objects/object1.png" class="topchan-slider-img" style="margin-right: 0;" alt="">
 		</div>
 		<div class="clear"></div>
-		<button class="hotel-body-content-button">ЗАБРОНИРОВАТЬ</button>
-		<button class="topchan-button">Бронировать</button>
+		<button @click="$refs.timeBooking.showModal = true" class="hotel-body-content-button">ЗАБРОНИРОВАТЬ</button>
+		<button @click="$refs.timeBooking.showModal = true" class="topchan-button">Бронировать</button>
 	</div>
 
 	<div class="room">
@@ -171,10 +172,11 @@
 
 <script>
 import DateRangeBooking from '../components/DateRangeBooking.vue'
+import TimeBookingObject from '../components/TimeBookingObject.vue'
 
 export default {
 	components:{
-    	DateRangeBooking
+    	DateRangeBooking, TimeBookingObject
 	}
 	      
 }

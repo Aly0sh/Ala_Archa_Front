@@ -1280,6 +1280,9 @@ hr {
     min-height: 0;
     line-height: 2.5vw;
     font-size: calc(5px + 1vw);
+    border: none;
+    background-color: #7EB685;
+    border-radius: 7px;
 }
 
 .hotel-body-content-button {
@@ -1915,42 +1918,6 @@ html {
     }
 
 }
-
-
-
-<<<<<<< HEAD
-=======
-.modal-shad {
-    position: fixed;
-    top: 0;
-    left: 0;
-    min-height: 100%;
-    width: 100%;
-    z-index: 3;
-    background: rgba(0, 0, 0, 0.39);
-}
-
-.book-window {
-    width: 70%;
-    background-color: #ffffff;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 10px;
-    padding: 5%;
-}
-
-
-.book-window h2 {
-    font-size: calc(10px + 2vw);
-}
-
-.book-window h3 {
-    font-size: calc(8px + 1vw);
-    margin: 3vw 0;
-}
->>>>>>> 19a4cc044acd7b6ae08e924edb63ae86b33d12d9
 
 
 /* ========================== */
@@ -2738,63 +2705,6 @@ html {
 }
 
 
-<<<<<<< HEAD
-
-.modal-shad{
-    position: fixed;
-    top: 0;
-    left: 0;
-    min-height: 100%;
-    width: 100%;
-    z-index: 3;
-    background: rgba(0, 0, 0, 0.39);
-}
-
-.book-window{
-    width: 70%;
-    background-color: #ffffff;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 10px;
-    padding: 5%;
-    text-align: center;
-}
-
-
-.book-window h2{
-    font-size: calc(10px + 2vw);
-}
-
-.book-window h3{
-    font-size: calc(8px + 1vw);
-    margin: 3vw 0;
-}
-
-@media only screen and (max-width: 450px) {
-
-    .book-window{
-        width: 80%;
-    }
-
-}
-
-@media only screen and (max-width: 400px) {
-
-    .book-window{
-        width: 90%;
-    }
-
-}
-
-@media only screen and (max-width: 350px) {
-
-    .book-window{
-        width: 95%;
-    }
-
-=======
 /* == */
 /* CART */
 
@@ -2958,5 +2868,253 @@ html {
 .payment .button:hover{
     background: inherit;
     color: #4A8251;
->>>>>>> 19a4cc044acd7b6ae08e924edb63ae86b33d12d9
+}
+
+
+.modal-shad {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-height: 100%;
+    width: 100%;
+    z-index: 3;
+    background: rgba(0, 0, 0, 0.39);
+}
+
+.book-window {
+    width: 70%;
+    background-color: #ffffff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    padding: 5%;
+}
+
+
+.book-window h2 {
+    font-size: calc(10px + 2vw);
+}
+
+.book-window h3 {
+    font-size: calc(6px + 0.8vw);
+    margin: 3vw 0;
+    font-weight: 400;
+}
+
+
+.modal-shad{
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-height: 100%;
+    width: 100%;
+    z-index: 3;
+    background: rgba(0, 0, 0, 0.39);
+}
+
+.book-window{
+    width: 40%;
+    background-color: #ffffff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    padding: 2% 0;
+    text-align: center;
+}
+
+
+
+
+.book-window h2{
+    font-size: calc(10px + 2vw);
+}
+
+.book-window h3{
+    font-size: calc(10px + 1vw);
+    margin: 1.5vw 0;
+}
+
+@media only screen and (max-width: 750px) {
+
+    .book-window{
+        width: 60%;
+    }
+
+}
+
+@media only screen and (max-width: 500px) {
+
+    .book-window{
+        width: 80%;
+    }
+
+}
+
+@media only screen and (max-width: 450px) {
+
+    .book-window{
+        width: 90%;
+    }
+
+}
+
+@media only screen and (max-width: 350px) {
+
+    .book-window{
+        width: 95%;
+    }
+}
+
+.date-picker{
+    max-width: 260px;
+    margin: 0 auto;
+}
+
+select#selector{
+    width: 260px;
+    margin: 1.5vw auto;
+    font-size: calc(0.6vw + 10px);
+}
+
+.datepicker-book{
+    width: 30%;
+    height: 3vw;
+    min-height: 28px;
+    font-size: calc(10px + 0.8vw);
+    border: none;
+    border-radius: 5px;
+    background-color: #7EB685;
+    min-width: 140px;
+}
+
+
+.datepicker-book:hover{
+    color: #ffffff;
+    background-color: #5fb06a;
+}
+
+
+
+
+.book-window-time{
+    width: 70%;
+    background-color: #ffffff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    padding: 2% 0;
+    text-align: center;
+}
+
+.book-window-time h2{
+    font-size: calc(10px + 2vw);
+}
+
+.book-window-time h3{
+    font-size: calc(10px + 1vw);
+    margin: 1.5vw 0;
+}
+
+.datePickerTime{
+    display: grid;
+    grid-template-columns: 50% 40% 10%;
+}
+
+.isBooked {
+    background-color: red;
+    color: #ffffff;
+}
+
+.time-picker{
+    display: grid;
+    grid-template-columns: 67% 3% 30%;
+    grid-template-rows: 100%;
+    align-items: center;
+    height: 15vw;
+    margin-top: 2vw;
+}
+
+.time-picker label{
+    text-align: left;
+    font-size: calc(0.6vw + 10px);
+    line-height: 14px;
+}
+
+.time-picker select{
+    height: 4vw;
+}
+
+@media only screen and (max-width: 900px) {
+    .datePickerTime{
+        display: grid;
+        grid-template-columns: 60% 35%;
+    }
+
+    .time-picker{
+        grid-template-columns: 60% 3% 37%;
+        grid-template-rows: 100%;
+    }
+}
+
+@media only screen and (max-width: 830px) {
+    .datePickerTime{
+        display: grid;
+        grid-template-columns: 65% 30%;
+    }
+
+    .time-picker{
+        grid-template-columns: 50% 3% 47%;
+        grid-template-rows: 140%;
+    }
+}
+
+@media only screen and (max-width: 730px) {
+    .datePickerTime{
+        display: grid;
+        grid-template-columns: 100%;
+    }
+
+    .time-picker{
+        grid-template-columns: 70% 3% 27%;
+        grid-template-rows: 20%;
+        width: 80%;
+        margin: 3vw auto 0 auto;
+    }
+
+    .time-picker select{
+        height: 5vw;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .book-window-time{
+        width: 85%;
+    }   
+
+    .time-picker{
+        margin: 25px auto 0 auto;
+    }
+
+    .time-picker select{
+        height: 25px;
+    }
+}
+
+@media only screen and (max-width: 370px) {
+    .time-picker{
+        grid-template-columns: 60% 3% 37%;
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 340px) {
+    .book-window-time{
+        width: 95%;
+    } 
 }

@@ -10,6 +10,9 @@
 
 		<h1 class="mobile-obj-title">Топчаны</h1>
 
+		<DateRangeBookingObject ref="objectModal"></DateRangeBookingObject>
+
+
 		<div class="topchan-body">
 			<img class="topchan-body-img" src="../assets/img/objects/object3.png" alt="">
 			<div class="topchan-body-content">
@@ -17,9 +20,10 @@
 				<p class="topchan-body-content-text">Цена: </p>
 				<p class="topchan-body-content-text">Вместимость: </p>
 				<p class="topchan-body-content-text">Доп услуги: </p>
-				<button class="topchan-body-content-button">ЗАБРОНИРОВАТЬ</button>
+				<button @click="$refs.objectModal.showModal = true" class="topchan-body-content-button">ЗАБРОНИРОВАТЬ</button>
 			</div>
 		</div>
+
 
 		<div class="topchan-slider">
 			<img src="../assets/img/objects/object1.png" class="topchan-slider-img" alt="">
@@ -27,7 +31,7 @@
 			<img src="../assets/img/objects/object1.png" class="topchan-slider-img" style="margin-right: 0;" alt="">
 		</div>
 		<div class="clear"></div>
-		<button class="topchan-button">Бронировать</button>
+		<button @click="$refs.objectModal.showModal = true" class="topchan-button">Бронировать</button>
 	</div>
 
 	<h3 class="object-menu-head">Меню услуг</h3>
@@ -151,8 +155,12 @@
 </template>
 
 <script>
-export default {
+import DateRangeBookingObject from "../components/DateRangeBookingObject.vue"
 
+export default {
+	components: {
+		DateRangeBookingObject
+	}
 }
 </script>
 
