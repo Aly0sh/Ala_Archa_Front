@@ -1303,6 +1303,9 @@ hr
     min-height: 0;
     line-height: 2.5vw;
     font-size: calc(5px + 1vw);
+    border: none;
+    background-color: #7EB685;
+    border-radius: 7px;
 }
 
 .topchan-body-content h3{
@@ -1354,6 +1357,9 @@ hr
     margin-right: auto;
     display: block;
     display: none;
+    background-color: #7EB685;
+    border: none;
+    border-radius: 3px;
 }
 
 .mobile-obj-title{
@@ -1917,36 +1923,6 @@ html{
 
 
 
-.modal-shad{
-    position: fixed;
-    top: 0;
-    left: 0;
-    min-height: 100%;
-    width: 100%;
-    z-index: 3;
-    background: rgba(0, 0, 0, 0.39);
-}
-
-.book-window{
-    width: 70%;
-    background-color: #ffffff;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 10px;
-    padding: 5%;
-}
-
-
-.book-window h2{
-    font-size: calc(10px + 2vw);
-}
-
-.book-window h3{
-    font-size: calc(8px + 1vw);
-    margin: 3vw 0;
-}
 
 
 /* ========================== */
@@ -2677,4 +2653,62 @@ html{
 .validation {
     font-size: calc(10px + 0.6vw);
     color: #f90000;
+}
+
+
+
+.modal-shad{
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-height: 100%;
+    width: 100%;
+    z-index: 3;
+    background: rgba(0, 0, 0, 0.39);
+}
+
+.book-window{
+    width: 70%;
+    background-color: #ffffff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    padding: 5%;
+    text-align: center;
+}
+
+
+.book-window h2{
+    font-size: calc(10px + 2vw);
+}
+
+.book-window h3{
+    font-size: calc(8px + 1vw);
+    margin: 3vw 0;
+}
+
+@media only screen and (max-width: 450px) {
+
+    .book-window{
+        width: 80%;
+    }
+
+}
+
+@media only screen and (max-width: 400px) {
+
+    .book-window{
+        width: 90%;
+    }
+
+}
+
+@media only screen and (max-width: 350px) {
+
+    .book-window{
+        width: 95%;
+    }
+
 }

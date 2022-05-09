@@ -28,13 +28,7 @@
 
 	<div class="room">
 
-		<div class="modal-shad">
-			<div class="book-window">
-				<h2>Бронирование</h2>
-				<h3>Выберите даты</h3>
-				<Datepicker v-model="date" range inline autoApply></Datepicker>
-			</div>
-		</div>
+		<DateRangeBooking ref="dateRange"></DateRangeBooking>
 
 		<div class="topchan-body">
 			<img class="topchan-body-img" src="../assets/img/objects/object3.png" alt="">
@@ -59,8 +53,8 @@
 			<img src="../assets/img/objects/object1.png" class="topchan-slider-img" style="margin-right: 0;" alt="">
 		</div>
 		<div class="clear"></div>
-		<button class="hotel-body-content-button">ЗАБРОНИРОВАТЬ</button>
-		<button class="topchan-button">Бронировать</button>
+		<button @click="$refs.dateRange.showModal = true" class="hotel-body-content-button">ЗАБРОНИРОВАТЬ</button>
+		<button @click="$refs.dateRange.showModal = true" class="topchan-button">Бронировать</button>
 	</div>
 
 	<div class="room">
@@ -176,19 +170,13 @@
 </template>
 
 <script>
-import Datepicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css'
+import DateRangeBooking from '../components/DateRangeBooking.vue'
 
 export default {
-	components: {
-		Datepicker
-	},
-    data() {
-        return {
-			date: '',
-
-        }
-    },        
+	components:{
+    	DateRangeBooking
+	}
+	      
 }
 
 </script>
