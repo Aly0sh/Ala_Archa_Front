@@ -29,13 +29,15 @@
                     </option>
                 </select>
 
-            </div>
-        </div>
+                
 		<select id="selector">
 			<option value="">Тапчан 1</option>
 			<option value="">Тапчан 2</option>
 			<option value="">Тапчан 3</option>
 		</select>
+
+            </div>
+        </div>
 		<span style="display: block; margin-bottom: 1vw;" class="validation">Дата 14.05.2022 занята</span>
 		<button class="datepicker-book">Забронировать</button>
 	</div>

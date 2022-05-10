@@ -2976,8 +2976,8 @@ html {
 
 select#selector{
     width: 260px;
-    margin: 1.5vw auto;
-    font-size: calc(0.6vw + 10px);
+    margin: 1.5vw 0;
+    font-size: calc(0.4vw + 10px);
 }
 
 .datepicker-book{
@@ -3034,7 +3034,7 @@ select#selector{
 .time-picker{
     display: grid;
     grid-template-columns: 67% 3% 30%;
-    grid-template-rows: 100%;
+    grid-template-rows: 10%;
     align-items: center;
     height: 15vw;
     margin-top: 2vw;
@@ -3047,7 +3047,7 @@ select#selector{
 }
 
 .time-picker select{
-    height: 4vw;
+    height: 48px;
 }
 
 @media only screen and (max-width: 900px) {

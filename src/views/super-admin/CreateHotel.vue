@@ -23,7 +23,7 @@
     
         <br>
         <div class="getImagesGrid">
-            <img v-for="(i, index) in hotel.imgName" :key="index" :src="i" alt="aa">
+            <img v-for="(i, index) in hotel.hotelImgModels" :key="index" :src="i.img" alt="aa">
         </div>
         <br>
         <div class="photo-upload">
@@ -51,7 +51,7 @@ export default {
         hotel: {
             hotelName: '',
             areaId: '',
-            imgName: []
+            hotelImgModels: []
         },
         areas: [],
       }
@@ -66,7 +66,8 @@ export default {
       createBase64Image(fileObject){
           const reader = new FileReader();
           reader.onload = (e) => {
-          this.hotel.imgName.push(e.target.result);    
+          this.hotel.hotelImgModels.push(
+            {img : e.target.result});    
           };
 
         reader.readAsDataURL(fileObject);

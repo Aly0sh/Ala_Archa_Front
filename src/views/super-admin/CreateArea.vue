@@ -15,7 +15,7 @@
               <label for="select">Выберите админа:</label>
               <div class="type">
                   <select id="select" v-model="area.email">
-                      <option v-for="(i, index) in users" :key="index" :value="i.email"> {{index.lastName + ' ' + index.firstName}} </option>
+                      <option v-for="(i, index) in users" :key="index" :value="i.email"> {{i.lastName + ' ' + i.firstName}} </option>
                   </select>
               </div><br>
 
