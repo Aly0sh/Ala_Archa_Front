@@ -86,7 +86,7 @@ export default {
     },
     mounted(){
       axios
-        .get("http://localhost:8083/menu/section/get-all")
+        .get("http://localhost:8083/menu/section/get-for-select")
         .then(response => {(this.menuSections = response.data.value);
         console.log(response.data)})
         .catch(error => {

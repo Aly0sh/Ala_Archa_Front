@@ -42,7 +42,7 @@ export default {
       create(){
             axios
             .post("http://localhost:8083/menu/section/create",
-              this.menu, 
+              this.menuSection, 
               {
                 headers:{
                   Authorization:this.$store.getters.getToken,
@@ -71,7 +71,7 @@ export default {
     },
     mounted(){
       axios
-        .get("http://localhost:8083/object/get-all")
+        .get("http://localhost:8083/object/type/get-for-select")
         .then(response => {(this.objects = response.data.value);
         console.log(response.data)})
         .catch(error => {
