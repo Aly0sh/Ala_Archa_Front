@@ -11,13 +11,13 @@
                     <th class="edit">Редактирование</th>
                     <th class="delete">Удаление</th>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Посуда</td>
-                    <td>1 шт</td>
-                    <td>200</td>
+                <tr v-for="(menuItem, i) in menuItems" :key="i">
+                    <td>{{ menuItem.id }}</td>
+                    <td>{{ menuItem.name }}</td>
+                    <td>{{ menuItem.description }}</td>
+                    <td>{{ menuItem.price }}</td>
                     <td class="edit"><a href="">Редактировать</a></td>
-                    <td class="delete"><a href="">Удалить</a></td>
+                    <td class="delete"><a @click="delete(menuItem.id)">Удалить</a></td>
                 </tr>
             </table>
         </div>
@@ -26,22 +26,27 @@
 
 <script>
 import axios from 'axios';
+
 export default {
-    mounted(){
+  data(){
+    return{
+      menuItems: []
+    }
+  },
+  mounted(){
     axios
-      .get("http://localhost:8083/user/get-admins")
-      .then(response => {(this.users = response.data.value);
+      .get("http://localhost:8083/menu/get-all")
+      .then(response => {(this.menuItems = response.data.value);
       console.log(response.data)})
       .catch(error => {
         console.log(error);
         this.errored = true;
       });
     },
-    methods: {
-      create(){
-            axios
-            .post("http://localhost:8083/area/create",
-              this.area, 
+  methods: {
+      delete(id){
+        axios
+            .delete(('http://localhost:8083/menu/delete/' + id), 
               {
                 headers:{
                   Authorization:this.$store.getters.getToken,
@@ -67,7 +72,7 @@ export default {
                 }
             });
       }
-    }
+  }
 }
 </script>
 

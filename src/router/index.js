@@ -170,10 +170,28 @@ const routes = [
       import("../views/super-admin/ShowRoomTypes.vue"),
   },
   {
+    path: "/super-admin/show-rooms",
+    name: "show-rooms",
+    component: () =>
+      import("../views/super-admin/ShowRooms.vue"),
+  },
+  {
+    path: "/super-admin/show-hotel-halls",
+    name: "show-hotel-halls",
+    component: () =>
+      import("../views/super-admin/ShowHotelHalls.vue"),
+  },
+  {
     path: "/super-admin/show-object-types",
     name: "show-object-types",
     component: () =>
       import("../views/super-admin/ShowObjectTypes.vue"),
+  },
+  {
+    path: "/super-admin/show-objects",
+    name: "show-objects",
+    component: () =>
+      import("../views/super-admin/ShowObjects.vue"),
   },
 ];
 

@@ -10,12 +10,12 @@
                     <th class="edit">Редактирование</th>
                     <th class="delete">Удаление</th>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Снежный барс</td>
-                    <td>Фауна</td>
+                <tr v-for="(nature, index) in nature" :key="index">
+                    <td>{{ nature.id }}</td>
+                    <td>{{ nature.name }}</td>
+                    <td>{{ nature.type }}</td>
                     <td class="edit"><a href="">Редактировать</a></td>
-                    <td class="delete"><a href="">Удалить</a></td>
+                    <td class="delete"><a @click="delete(nature.id)">Удалить</a></td>
                 </tr>
             </table>
         </div>
@@ -24,22 +24,28 @@
 
 <script>
 import axios from 'axios';
+
+
 export default {
-    mounted(){
+  data(){
+    return{
+      nature: []
+    }
+  },
+  mounted(){
     axios
-      .get("http://localhost:8083/user/get-admins")
-      .then(response => {(this.users = response.data.value);
+      .get("http://localhost:8083/nature/get-all")
+      .then(response => {(this.nature = response.data.value);
       console.log(response.data)})
       .catch(error => {
         console.log(error);
         this.errored = true;
       });
     },
-    methods: {
-      create(){
-            axios
-            .post("http://localhost:8083/area/create",
-              this.area, 
+  methods: {
+      delete(id){
+        axios
+            .delete(('http://localhost:8083/nature/delete/' + id), 
               {
                 headers:{
                   Authorization:this.$store.getters.getToken,
@@ -65,8 +71,9 @@ export default {
                 }
             });
       }
-    }
+  }
 }
+
 </script>
 
 <style src="../../assets/css/super.css"/>

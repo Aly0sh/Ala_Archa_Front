@@ -6,34 +6,34 @@
             </h2>
             <div class="column">
                 <h2>Выберите, что хотите сделать</h2>
-                <a><div class="item">
+                <a href="/super-admin/show-flora-fauna"><div class="item">
                     <p>Список животных и растений</p>
                 </div></a>
-                <a><div class="item">
+                <a href="/super-admin/show-hotels"><div class="item">
                     <p>Список гостиниц</p>
                 </div></a>
-                <a><div class="item">
+                <a href="/super-admin/show-room-types"><div class="item">
                     <p>Список типов комнат</p>
                 </div></a>
-                <a><div class="item">
+                <a href="/super-admin/show-rooms"><div class="item">
                     <p>Список комнат</p>
                 </div></a>
-                <a><div class="item">
+                <a href="/super-admin/show-hotel-halls"><div class="item">
                     <p>Список доп. комнат</p>
                 </div></a>
-                <a><div class="item">
+                <a href="/super-admin/show-object-types"><div class="item">
                     <p>Список типов объектов</p>
                 </div></a>
-                <a><div class="item">
+                <a href="/super-admin/show-objects"><div class="item">
                     <p>Список объектов</p>
                 </div></a>
-                <a><div class="item">
+                <a href="/super-admin/show-zones"><div class="item">
                     <p>Список зон</p>
                 </div></a>
-                <a><div class="item">
+                <a href="/super-admin/show-menu-sections"><div class="item">
                     <p>Список секций меню</p>
                 </div></a>
-                <a><div class="item">
+                <a href="/super-admin/show-menu"><div class="item">
                     <p>Список меню</p>
                 </div></a>
             </div>
@@ -42,49 +42,8 @@
 </template>
 
 <script>
-import axios from 'axios';
 export default {
-    mounted(){
-    axios
-      .get("http://localhost:8083/user/get-admins")
-      .then(response => {(this.users = response.data.value);
-      console.log(response.data)})
-      .catch(error => {
-        console.log(error);
-        this.errored = true;
-      });
-    },
-    methods: {
-      create(){
-            axios
-            .post("http://localhost:8083/area/create",
-              this.area, 
-              {
-                headers:{
-                  Authorization:this.$store.getters.getToken,
-                }
-              })
-            .then((resp) => {
-                if (resp.status == 200) {
-                // this.$router.push("/");
-                }
-                console.log(this.$store.state);
-            })
-            .catch((error) => {
-                if (!error.response) {
-                this.$router.push("/error");
-                this.$store.commit("setError", error);
-                } else if (error.response.data.details === undefined) {
-                this.$router.push("/error");
-                this.$store.commit("setError", error);
-                } else {
-                this.signInErrorFlag = true;
-                this.signInErrorMessage = error.response.data.details;
-                console.log(error.response.data);
-                }
-            });
-      }
-    }
+    
 }
 </script>
 

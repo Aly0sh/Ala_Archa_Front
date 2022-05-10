@@ -10,12 +10,12 @@
                     <th class="edit">Редактирование</th>
                     <th class="delete">Удаление</th>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Адыгине</td>
-                    <td>UserID</td>
+                <tr v-for="(area, i) in areas" :key="i">
+                    <td>{{ area.id }}</td>
+                    <td>{{ area.areaName }}</td>
+                    <td>{{ area.email }}</td>
                     <td class="edit"><a href="">Редактировать</a></td>
-                    <td class="delete"><a href="">Удалить</a></td>
+                    <td class="delete"><a @click="delete(area.id)">Удалить</a></td>
                 </tr>
             </table>
         </div>
@@ -24,22 +24,27 @@
 
 <script>
 import axios from 'axios';
+
 export default {
-    mounted(){
+  data(){
+    return{
+      areas: []
+    }
+  },
+  mounted(){
     axios
-      .get("http://localhost:8083/user/get-admins")
-      .then(response => {(this.users = response.data.value);
+      .get("http://localhost:8083/area/get-all")
+      .then(response => {(this.areas = response.data.value);
       console.log(response.data)})
       .catch(error => {
         console.log(error);
         this.errored = true;
       });
     },
-    methods: {
-      create(){
-            axios
-            .post("http://localhost:8083/area/create",
-              this.area, 
+  methods: {
+      delete(id){
+        axios
+            .delete(('http://localhost:8083/area/delete/' + id), 
               {
                 headers:{
                   Authorization:this.$store.getters.getToken,
@@ -65,7 +70,7 @@ export default {
                 }
             });
       }
-    }
+  }
 }
 </script>
 

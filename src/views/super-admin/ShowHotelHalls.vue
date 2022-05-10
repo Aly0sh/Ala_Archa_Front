@@ -1,21 +1,27 @@
 <template>
     <div class="container">
         <div class="super-admin">
-            <h2>Список гостиниц</h2>
+            <h2>Список дополнительных залов</h2>
             <table>
                 <tr>
                     <th>ID</th>
                     <th>Название</th>
-                    <th>Зона</th>
+                    <th>Цена</th>
+                    <th>Цена за след. часы</th>
+                    <th>Количество мест</th>
+                    <th>Название отеля</th>
                     <th class="edit">Редактирование</th>
                     <th class="delete">Удаление</th>
                 </tr>
-                <tr v-for="(hotel, i) in hotels" :key="i">
-                    <td>{{ hotel.id }}</td>
-                    <td>{{ hotel.hotelName }}</td>
-                    <td>{{ hotel.areaName }}</td>
+                <tr v-for="(hotelHall, i) in hotelHalls" :key="i">
+                    <td>{{ hotelHalls.id }}</td>
+                    <td>{{ hotelHalls.name }}</td>
+                    <td>{{ hotelHalls.price }}</td>
+                    <td>{{ hotelHalls.priceForNextHours }}</td>
+                    <td>{{ hotelHalls.numberOfSeats }}</td>
+                    <td>{{ hotelHalls.hotelName }}</td>
                     <td class="edit"><a href="">Редактировать</a></td>
-                    <td class="delete"><a @click="delete(hotel.id)">Удалить</a></td>
+                    <td class="delete"><a @click="delete(hotelHall.id)">Удалить</a></td>
                 </tr>
             </table>
         </div>
@@ -24,16 +30,17 @@
 
 <script>
 import axios from 'axios';
+
 export default {
-    data(){
+  data(){
     return{
-      hotels: []
+      hotelHalls: []
     }
   },
   mounted(){
     axios
-      .get("http://localhost:8083/hotel/get-all")
-      .then(response => {(this.hotels = response.data.value);
+      .get("http://localhost:8083/hotelHall/get-all")
+      .then(response => {(this.hotelHalls = response.data.value);
       console.log(response.data)})
       .catch(error => {
         console.log(error);
@@ -43,7 +50,7 @@ export default {
   methods: {
       delete(id){
         axios
-            .delete(('http://localhost:8083/hotel/delete/' + id), 
+            .delete(('http://localhost:8083/hotelHall/delete/' + id), 
               {
                 headers:{
                   Authorization:this.$store.getters.getToken,

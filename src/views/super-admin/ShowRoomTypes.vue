@@ -7,17 +7,17 @@
                     <th>ID</th>
                     <th>Тип</th>
                     <th>Цена</th>
-                    <th>Услуги</th>
+                    <th>Отель</th>
                     <th class="edit">Редактирование</th>
                     <th class="delete">Удаление</th>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Комната "Альп-Лагерь"</td>
-                    <td>неизвестно</td>
-                    <td>Две кровати, розетка</td>
+                <tr v-for="(roomType, i) in roomTypes" :key="i">
+                    <td>{{ roomType.id }}</td>
+                    <td>{{ roomType.type }}</td>
+                    <td>{{ roomType.price }}</td>
+                    <td>{{ roomType.hotelName }}</td>
                     <td class="edit"><a href="">Редактировать</a></td>
-                    <td class="delete"><a href="">Удалить</a></td>
+                    <td class="delete"><a @click="delete(roomType.id)">Удалить</a></td>
                 </tr>
             </table>
         </div>
@@ -26,22 +26,27 @@
 
 <script>
 import axios from 'axios';
+
 export default {
-    mounted(){
+  data(){
+    return{
+      roomTypes: []
+    }
+  },
+  mounted(){
     axios
-      .get("http://localhost:8083/user/get-admins")
-      .then(response => {(this.users = response.data.value);
+      .get("http://localhost:8083/room/type/get-all")
+      .then(response => {(this.roomTypes = response.data.value);
       console.log(response.data)})
       .catch(error => {
         console.log(error);
         this.errored = true;
       });
     },
-    methods: {
-      create(){
-            axios
-            .post("http://localhost:8083/area/create",
-              this.area, 
+  methods: {
+      delete(id){
+        axios
+            .delete(('http://localhost:8083/room/type/delete/' + id), 
               {
                 headers:{
                   Authorization:this.$store.getters.getToken,
@@ -67,7 +72,7 @@ export default {
                 }
             });
       }
-    }
+  }
 }
 </script>
 

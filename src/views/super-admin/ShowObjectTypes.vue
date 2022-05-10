@@ -13,15 +13,15 @@
                     <th class="edit">Редактирование</th>
                     <th class="delete">Удаление</th>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Топчан</td>
-                    <td>200</td>
-                    <td>Адыгине</td>
-                    <td>По дате</td>
-                    <td>Сутки</td>
+                <tr v-for="(objectType, i) in objectTypes" :key="i">
+                    <td>{{ objectType.id }}</td>
+                    <td>{{ objectType.name }}</td>
+                    <td>{{ objectType.price }}</td>
+                    <td>{{ objectType.areaName }}</td>
+                    <td>{{ objectType.timeType == 'DATE'?'По дате':'По времени' }}</td>
+                    <td>{{ objectType.minTime }}</td>
                     <td class="edit"><a href="">Редактировать</a></td>
-                    <td class="delete"><a href="">Удалить</a></td>
+                    <td class="delete"><a @click="delete(objectType.id)">Удалить</a></td>
                 </tr>
             </table>
         </div>
@@ -30,22 +30,27 @@
 
 <script>
 import axios from 'axios';
+
 export default {
-    mounted(){
+  data(){
+    return{
+      objectTypes: []
+    }
+  },
+  mounted(){
     axios
-      .get("http://localhost:8083/user/get-admins")
-      .then(response => {(this.users = response.data.value);
+      .get("http://localhost:8083/object/type/get-all")
+      .then(response => {(this.objectTypes = response.data.value);
       console.log(response.data)})
       .catch(error => {
         console.log(error);
         this.errored = true;
       });
     },
-    methods: {
-      create(){
-            axios
-            .post("http://localhost:8083/area/create",
-              this.area, 
+  methods: {
+      delete(id){
+        axios
+            .delete(('http://localhost:8083/object/type/delete/' + id), 
               {
                 headers:{
                   Authorization:this.$store.getters.getToken,
@@ -71,7 +76,7 @@ export default {
                 }
             });
       }
-    }
+  }
 }
 </script>
 

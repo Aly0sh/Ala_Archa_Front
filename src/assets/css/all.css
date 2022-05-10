@@ -3034,7 +3034,7 @@ select#selector{
 .time-picker{
     display: grid;
     grid-template-columns: 67% 3% 30%;
-    grid-template-rows: 10%;
+    grid-template-rows: 60px;
     align-items: center;
     height: 15vw;
     margin-top: 2vw;
@@ -3050,6 +3050,13 @@ select#selector{
     height: 48px;
 }
 
+
+select#selector1{
+    width: 150%;
+    margin: 1.5vw 0;
+    font-size: calc(0.4vw + 10px);
+}
+
 @media only screen and (max-width: 900px) {
     .datePickerTime{
         display: grid;
@@ -3058,7 +3065,7 @@ select#selector{
 
     .time-picker{
         grid-template-columns: 60% 3% 37%;
-        grid-template-rows: 100%;
+        grid-template-rows: 60px;
     }
 }
 
@@ -3070,7 +3077,7 @@ select#selector{
 
     .time-picker{
         grid-template-columns: 50% 3% 47%;
-        grid-template-rows: 140%;
+        grid-template-rows: 80px;
     }
 }
 
@@ -3089,6 +3096,14 @@ select#selector{
 
     .time-picker select{
         height: 5vw;
+    }
+
+        
+    select#selector1{
+        width: 260px;
+        margin: 1.5vw auto;
+        font-size: calc(0.4vw + 10px);
+        margin-right: -65px;
     }
 }
 
@@ -3118,3 +3133,4 @@ select#selector{
         width: 95%;
     } 
 }
+

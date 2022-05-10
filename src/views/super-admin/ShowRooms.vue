@@ -1,21 +1,23 @@
 <template>
     <div class="container">
         <div class="super-admin">
-            <h2>Список гостиниц</h2>
+            <h2>Список комнат</h2>
             <table>
                 <tr>
                     <th>ID</th>
-                    <th>Название</th>
-                    <th>Зона</th>
+                    <th>Номер</th>
+                    <th>Количество мест</th>
+                    <th>Тип комнаты</th>
                     <th class="edit">Редактирование</th>
                     <th class="delete">Удаление</th>
                 </tr>
-                <tr v-for="(hotel, i) in hotels" :key="i">
-                    <td>{{ hotel.id }}</td>
-                    <td>{{ hotel.hotelName }}</td>
-                    <td>{{ hotel.areaName }}</td>
+                <tr v-for="(room, i) in rooms" :key="i">
+                    <td>{{ room.id }}</td>
+                    <td>{{ room.roomNumber }}</td>
+                    <td>{{ room.bedNumber }}</td>
+                    <td>{{ room.roomTypeName }}</td>
                     <td class="edit"><a href="">Редактировать</a></td>
-                    <td class="delete"><a @click="delete(hotel.id)">Удалить</a></td>
+                    <td class="delete"><a @click="delete(room.id)">Удалить</a></td>
                 </tr>
             </table>
         </div>
@@ -24,16 +26,17 @@
 
 <script>
 import axios from 'axios';
+
 export default {
-    data(){
+  data(){
     return{
-      hotels: []
+      rooms: []
     }
   },
   mounted(){
     axios
-      .get("http://localhost:8083/hotel/get-all")
-      .then(response => {(this.hotels = response.data.value);
+      .get("http://localhost:8083/room/get-all")
+      .then(response => {(this.rooms = response.data.value);
       console.log(response.data)})
       .catch(error => {
         console.log(error);
@@ -43,7 +46,7 @@ export default {
   methods: {
       delete(id){
         axios
-            .delete(('http://localhost:8083/hotel/delete/' + id), 
+            .delete(('http://localhost:8083/room/delete/' + id), 
               {
                 headers:{
                   Authorization:this.$store.getters.getToken,
