@@ -8,13 +8,13 @@
     
               <label for="name">Введите название:</label>
               <br>
-              <input v-model="object.objectName" type="text" id="name" placeholder="Введите название:"><br>
+              <input v-model="object.name" type="text" id="name" placeholder="Введите название:"><br>
     
               <br>
 
               <label for="numberOfSeats">Введите количество мест:</label>
               <br>
-              <input v-model="object.numberOfSeats" style="width: 100%;" type="text" id="numberOfSeats" placeholder="Введите количество мест:"><br>
+              <input v-model="object.numberOfSeats" style="width: 100%;" type="number" min=0 id="numberOfSeats" placeholder="Введите количество мест:"><br>
 
               <br>
               <label for="select">Выберите тип объекта:</label>
@@ -52,7 +52,7 @@ export default {
     },
     mounted(){
     axios
-      .get("http://localhost:8083/object/type/get-all")
+      .get("http://localhost:8083/object/type/get-for-select")
       .then(response => {(this.objectTypes = response.data.value);
       console.log(response.data)})
       .catch(error => {
