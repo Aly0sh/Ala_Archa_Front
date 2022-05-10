@@ -18,11 +18,11 @@
               
               <label for="price">Введите основную цену:</label>
               <br>
-              <input v-model="objectType.price" type="text" style="width:100%" id="price" placeholder="Введите основную цену:"><br> 
+              <input v-model="objectType.price" type="number" step="any" min=0 style="width:100%" id="price" placeholder="Введите основную цену:"><br> 
 
               <label for="priceper">Введите цену за последующие часы:</label>
               <br>
-              <input v-model="objectType.pricePerHour" type="text" style="width:100%" id="priceper" placeholder="Введите цену за последующие часы:"><br> 
+              <input v-model="objectType.pricePerHour" type="number" step="any" min=0 style="width:100%" id="priceper" placeholder="Введите цену за последующие часы:"><br> 
 
               <label for="selecttype">Выберите тип времени:</label>
                 <div class="type">
@@ -36,7 +36,7 @@
     
         <br>
         <div class="getImagesGrid">
-            <img v-for="(i, index) in objectType.objectTypeImgModels" :key="index" :src="i" alt="aa">
+            <img v-for="(i, index) in objectType.objectTypeImgModels" :key="index" :src="i.img" alt="aa">
         </div>
         <br>
         <div class="photo-upload">
@@ -82,7 +82,9 @@ export default {
       createBase64Image(fileObject){
           const reader = new FileReader();
           reader.onload = (e) => {
-          this.objectType.objectTypeImgModels.push(e.target.result);    
+          this.objectType.objectTypeImgModels.push(
+            {img : e.target.result}
+          );    
           };
 
         reader.readAsDataURL(fileObject);
@@ -122,7 +124,7 @@ export default {
 
   mounted(){
     axios
-      .get("http://localhost:8083/area/get-all")
+      .get("http://localhost:8083/area/get-for-select")
       .then(response => {(this.areas = response.data.value);
       console.log(response.data)})
       .catch(error => {
