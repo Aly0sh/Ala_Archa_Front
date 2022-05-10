@@ -52,7 +52,7 @@ export default {
     },
     mounted(){
       axios
-        .get("http://localhost:8083/room/type/get-all")
+        .get("http://localhost:8083/room/type/get-for-select")
         .then(response => {(this.roomTypes = response.data.value);
         console.log(response.data)})
         .catch(error => {
