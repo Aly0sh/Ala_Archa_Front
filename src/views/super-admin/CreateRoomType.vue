@@ -14,7 +14,7 @@
 
               <label for="price">Введите цену:</label>
               <br>
-              <input v-model="roomType.price" style="width: 100%" type="text" id="price" name="type" placeholder="Введите цену за день:"><br>
+              <input v-model="roomType.price" style="width: 100%" type="number" id="price" name="type" placeholder="Введите цену за день:"><br>
 
               <label for="select">Выберите отель:</label>
               <div class="type">
@@ -28,7 +28,7 @@
         <br>
         <br>
         <div class="getImagesGrid">
-            <img v-for="(i, index) in roomType.roomTypeImageModels" :key="index" :src="i" alt="aa">
+            <img v-for="(i, index) in roomType.roomTypeImageModels" :key="index" :src="i.img" alt="aa">
         </div>
         <br>
         
@@ -55,7 +55,7 @@ export default {
       return{
         roomType: {
             type: '',
-            price: null,
+            price: 0,
             hotelId: null,
             roomTypeImageModels: []
         },
@@ -73,7 +73,11 @@ export default {
           const reader = new FileReader();
 
           reader.onload = (e) => {
-              this.roomType.roomTypeImageModels.push(e.target.result);
+              this.roomType.roomTypeImageModels.push(
+                {
+                  img : e.target.result
+                }
+              );
           };
 
         reader.readAsDataURL(fileObject);
@@ -108,18 +112,18 @@ export default {
                 }
             });
       },
-      
-      mounted(){
-        axios
-          .get("http://localhost:8083/hotel/get-all")
-          .then(response => {(this.hotels = response.data.value);
-          console.log(response.data)})
-          .catch(error => {
-            console.log(error);
-            this.errored = true;
-          });
-      },
   },
+  
+  mounted(){
+      axios
+        .get("http://localhost:8083/hotel/get-for-select")
+        .then(response => {(this.hotels = response.data.value);
+        console.log(response.data)})
+        .catch(error => {
+        console.log(error);
+        this.errored = true;
+        });
+    },
 }
 </script>
 

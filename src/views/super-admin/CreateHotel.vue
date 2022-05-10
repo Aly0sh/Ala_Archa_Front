@@ -107,7 +107,7 @@ export default {
 
   mounted(){
     axios
-      .get("http://localhost:8083/area/get-all")
+      .get("http://localhost:8083/area/get-for-select")
       .then(response => {(this.areas = response.data.value);
       console.log(response.data)})
       .catch(error => {
