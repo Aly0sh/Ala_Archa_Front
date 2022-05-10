@@ -36,7 +36,7 @@
         <br>
         <br>
         <div class="getImagesGrid">
-            <img v-for="(i, index) in hotelHall.hotelHall_imgModels" :key="index" :src="i" alt="aa">
+            <img v-for="(i, index) in hotelHall.hotelHall_imgModels" :key="index" :src="i.img" alt="aa">
         </div>
         <br>
         
@@ -83,7 +83,9 @@ export default {
           const reader = new FileReader();
 
           reader.onload = (e) => {
-              this.hotelHall.hotelHall_imgModels.push(e.target.result);
+              this.hotelHall.hotelHall_imgModels.push(
+                {img : e.target.result}
+              );
           };
 
         reader.readAsDataURL(fileObject);
@@ -118,18 +120,17 @@ export default {
                 }
             });
       },
-      
-      mounted(){
-        axios
-          .get("http://localhost:8083/hotel/get-all")
-          .then(response => {(this.hotels = response.data.value);
-          console.log(response.data)})
-          .catch(error => {
-            console.log(error);
-            this.errored = true;
-          });
-      },
   },
+  mounted(){
+    axios
+      .get("http://localhost:8083/hotel/get-for-select")
+      .then(response => {(this.hotels = response.data.value);
+        console.log(response.data)})
+      .catch(error => {
+        console.log(error);
+        this.errored = true;
+        });
+      },
 }
 </script>
 
