@@ -22,127 +22,13 @@
 
 		<div class="content">
 			<div class="grid">
-				<div class="card effect blue">
-					<img src="../assets/img/fauna/bars.jpg" alt="img12" />
+				<div class="card effect blue" v-for="(nature, i) in natures" :key="i">
+					<img :src="nature.img" alt="img12" />
 					<div class="card_caption">
 						<div>
-							<h3><span>Снежный</span> Барс</h3>
-							<p> крупное хищное млекопитающее семейства кошачьих, обитающее
-								в горах Центральной Азии. Ирбис отличается тонким, длинным,
-								гибким телом, относительно короткими лапами, небольшой головой
-								и очень длинным хвостом.
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="card effect blue">
-					<img src="../assets/img/fauna/arhar.jpg" alt="img12" />
-					<div class="card_caption">
-						<div>
-							<h3>Архар</h3>
-							<p> парнокопытное млекопитающее из семейства полорогих, обитающее в горных районах Средней и
-								Центральной Азии,
-								в том числе и на юге Сибири.
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="card effect blue">
-					<img src="../assets/img/fauna/gornostay.png" alt="img12" />
-					<div class="card_caption">
-						<div>
-							<h3>Горностай</h3>
-							<p> хищное млекопитающее семейства куньих. Небольшой зверёк
-								типичного куньего облика с длинным телом на коротких ногах,
-								длинной шеей и треугольной головой с небольшими
-								округлыми ушами.
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="card effect blue">
-					<img src="../assets/img/fauna/rys.png" alt="img12" />
-					<div class="card_caption">
-						<div>
-							<h3><span>Туркестанская</span> Рысь</h3>
-							<p> подвид обыкновенной рыси, родом из Средней Азии.
-								Плотоядный хищник семейство кошачьих широко распространен с Запада в Центральной Азии,
-								из Южной Азии в Китай и Монголию.
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="card effect blue">
-					<img src="../assets/img/fauna/kosulya.png" alt="img12" />
-					<div class="card_caption">
-						<div>
-							<h3><span>Сибирская</span> Косуля</h3>
-							<p> парнокопытное животное семейства оленевых,
-								родственное европейской косуле.
-								Сибирская косуля отличается от европейской косули в первую очередь заметно
-								большими размерами тела и рогов.
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="card effect blue">
-					<img src="../assets/img/fauna/babochka.png" alt="img12" />
-					<div class="card_caption">
-						<div>
-							<h3><span>Бабочка</span>-Парусник</h3>
-							<p> Парусники — дневные бабочки, многие из которых активны не просто днем, а только при
-								ярком солнечном свете. Они встречаются в Европе, Азии, Северной Африке и Северной
-								Америке. Всего их более 570 видов, они обладают разнообразными рисунками на крыльях,
-								крупными размерами и яркой окраской.
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="card effect blue">
-					<img src="../assets/img/fauna/habib.png" alt="img12" />
-					<div class="card_caption">
-						<div>
-							<h3><span>Золотой</span> Орёл</h3>
-							<p> Одна из наиболее известных хищных птиц семейства ястребиных, самый крупный орёл.
-								Распространён в Северном полушарии, где обитает преимущественно в горах, в меньшей
-								степени на равнинных открытых и полуоткрытых ландшафтах. Избегает жилых районов,
-								чувствителен к беспокойству со стороны человека.
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="card effect blue">
-					<img src="../assets/img/fauna/kozerog.png" alt="img12" />
-					<div class="card_caption">
-						<div>
-							<h3>Козерог</h3>
-							<p> парнокопытное млекопитающее из семейства полорогих, обитающее в горных районах Средней и
-								Центральной Азии,
-								в том числе и на юге Сибири.
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="card effect blue">
-					<img src="../assets/img/fauna/kaban.png" alt="img12" />
-					<div class="card_caption">
-						<div>
-							<h3>Кабан</h3>
-							<p> парнокопытное млекопитающее из рода кабанов семейства свиных. Является предком домашней
-								свиньи. Отличается от домашней свиньи, которая несомненно произошла от кабана, обладает
-								более коротким и плотным телом, более толстыми и высокими ногами.
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="card effect blue">
-					<img src="../assets/img/fauna/dikobraz.png" alt="img12" />
-					<div class="card_caption">
-						<div>
-							<h3>Дикобраз</h3>
-							<p> Дикобраз редкий в Кыргызстане, исчезающий зверь. Если раньше его в большом количестве
-								можно было наблюдать практически на всей территории Кыргызстана. То сегодня встречи с
-								этим животным крайне редки и малочисленны.
+							<h3>{{ nature.name }}</h3>
+							<p>
+								{{ nature.description }}
 							</p>
 						</div>
 					</div>
@@ -208,7 +94,24 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
+	data(){
+		return{
+			natures: []
+		}
+	},
+	mounted(){
+    axios
+      .get("http://localhost:8083/nature/get-all")
+      .then(response => {(this.natures = response.data.value);
+      console.log(response.data)})
+      .catch(error => {
+        console.log(error);
+        this.errored = true;
+      });
+    },
 
 }
 </script>

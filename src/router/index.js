@@ -45,13 +45,13 @@ const routes = [
       import("../views/FloraView.vue"),
   },
   {
-    path: "/hotel",
+    path: "/hotel/:id",
     name: "hotel",
     component: () =>
       import("../views/HotelView.vue"),
   },
   {
-    path: "/object",
+    path: "/object/:id",
     name: "object",
     component: () =>
       import("../views/ObjectView.vue"),

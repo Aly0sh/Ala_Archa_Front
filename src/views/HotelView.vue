@@ -175,8 +175,16 @@ import DateRangeBooking from '../components/DateRangeBooking.vue'
 import TimeBookingObject from '../components/TimeBookingObject.vue'
 
 export default {
+	data(){
+		return{
+			hotelId: null
+		}
+	},
 	components:{
     	DateRangeBooking, TimeBookingObject
+	},
+	created() {
+		this.hotelId = this.$route.params.id;
 	}
 	      
 }

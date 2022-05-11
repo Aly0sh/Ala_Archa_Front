@@ -28,122 +28,13 @@
 
 		<div class="content">
 			<div class="grid">
-				<div class="card effect blue">
+				<div class="card effect blue" v-for="(nature, i) in natures" :key="i">
 					<img src="../assets/img/flora/pihta.png" alt="img12" />
 					<div class="card_caption">
 						<div>
 							<h3><span>Семёновские</span> Пихты</h3>
 							<p> Произрастает в горах Средней Азии по теневым склонам в ущельях. В горы поднимается на
 								1350 до 2800 м над уровнем моря.
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="card effect blue">
-					<img src="../assets/img/flora/edelveys.png" alt="img12" />
-					<div class="card_caption">
-						<div>
-							<h3><span>Цветы</span> Эдельвейс</h3>
-							<p> Эдельвейсы — однолетние или многолетние травянистые растения высотой 12—25 см, которые
-								растут на высоких горах. Узкие листья снизу ворсистые, что предохраняет растения от
-								излишнего испарения влаги; сверху листья серебристые.
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="card effect blue">
-					<img src="../assets/img/flora/tulpany.png" alt="img12" />
-					<div class="card_caption">
-						<div>
-							<h3><span>Тюльпаны</span> Колпаковского</h3>
-							<p> Произрастает в горах Средней Азии по теневым склонам в ущельях. В горы поднимается на
-								1350 до 2800 м над уровнем моря.
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="card effect blue">
-					<img src="../assets/img/flora/eli.png" alt="img12" />
-					<div class="card_caption">
-						<div>
-							<h3><span>Тянь-Шаньские</span> Ели</h3>
-							<p> Основная и естественная область распространения находится в Центральной Азии, в горных
-								системах Тянь-Шаня и Джунгарского Алатау на территории Кыргызстана и Казахстана
-								(Восточный Тянь-Шань, Терскей-Алатау, отроги горы Баскаркара). Произрастает на высотах
-								1300—3600 м над уровнем моря.
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="card effect blue">
-					<img src="../assets/img/flora/mojj.png" alt="img12" />
-					<div class="card_caption">
-						<div>
-							<h3><span>Кустарник</span> можжевельника</h3>
-							<p> широко распространенный кустарник с лечебными свойствами.
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="card effect blue">
-					<img src="../assets/img/flora/list.png" alt="img12" />
-					<div class="card_caption">
-						<div>
-							<h3>Лиственница</h3>
-							<p> Благодаря довольно редким и тонким иголкам Лиственницу часто принимают за высохшую ель.
-								В лиственничной роще всегда светло и ясно.
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="card effect blue">
-					<img src="../assets/img/flora/sosna.png" alt="img12" />
-					<div class="card_caption">
-						<div>
-							<h3>Сосна</h3>
-							<p> Основная и естественная область распространения находится в Центральной Азии, в горных
-								системах Тянь-Шаня и Джунгарского Алатау на территории Кыргызстана и Казахстана
-								(Восточный Тянь-Шань, Терскей-Алатау, отроги горы Баскаркара). Произрастает на высотах
-								1300—3600 м над уровнем моря.
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="card effect blue">
-					<img src="../assets/img/flora/berezy.png" alt="img12" />
-					<div class="card_caption">
-						<div>
-							<h3>Берёзы</h3>
-							<p> Основная и естественная область распространения находится в Центральной Азии, в горных
-								системах Тянь-Шаня и Джунгарского Алатау на территории Кыргызстана и Казахстана
-								(Восточный Тянь-Шань, Терскей-Алатау, отроги горы Баскаркара). Произрастает на высотах
-								1300—3600 м над уровнем моря.
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="card effect blue">
-					<img src="../assets/img/flora/iva.png" alt="img12" />
-					<div class="card_caption">
-						<div>
-							<h3>Ива</h3>
-							<p> Основная и естественная область распространения находится в Центральной Азии, в горных
-								системах Тянь-Шаня и Джунгарского Алатау на территории Кыргызстана и Казахстана
-								(Восточный Тянь-Шань, Терскей-Алатау, отроги горы Баскаркара). Произрастает на высотах
-								1300—3600 м над уровнем моря.
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="card effect blue">
-					<img src="../assets/img/flora/topol.png" alt="img12" />
-					<div class="card_caption">
-						<div>
-							<h3>Тополь</h3>
-							<p> Основная и естественная область распространения находится в Центральной Азии, в горных
-								системах Тянь-Шаня и Джунгарского Алатау на территории Кыргызстана и Казахстана
-								(Восточный Тянь-Шань, Терскей-Алатау, отроги горы Баскаркара). Произрастает на высотах
-								1300—3600 м над уровнем моря.
 							</p>
 						</div>
 					</div>
@@ -210,7 +101,24 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
+	data(){
+		return{
+			natures: []
+		}
+	},
+	mounted(){
+    axios
+      .get("http://localhost:8083/nature/get-all")
+      .then(response => {(this.natures = response.data.value);
+      console.log(response.data)})
+      .catch(error => {
+        console.log(error);
+        this.errored = true;
+      });
+    },
 
 }
 </script>

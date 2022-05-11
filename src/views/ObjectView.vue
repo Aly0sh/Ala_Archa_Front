@@ -158,8 +158,16 @@
 import DateRangeBookingObject from "../components/DateRangeBookingObject.vue"
 
 export default {
+	data(){
+		return{
+			objectId: null
+		}
+	},
 	components: {
 		DateRangeBookingObject
+	},
+	created() {
+		this.objectId = this.$route.params.id;
 	}
 }
 </script>
