@@ -34,7 +34,7 @@ export default {
   },
   mounted(){
     axios
-      .get("http://localhost:8083/nature/get-all")
+      .get("http://localhost:8083/nature/get-for-list")
       .then(response => {(this.nature = response.data.value);
       console.log(response.data)})
       .catch(error => {

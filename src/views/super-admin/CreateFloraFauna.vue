@@ -5,7 +5,6 @@
 
         <div class="formbox">
             <form>
-    
               <label for="name">Введите название:</label>
               <br>
               <input v-model="florauna.name" type="text" id="name" placeholder="Введите название:"><br>
@@ -21,12 +20,11 @@
         
         
         <label for="select">Выберите тип:</label>
-        <div class="type">
-            <select v-model="florauna.natureType" id="select">
-                <option value="FLORA">Флора</option>
-                <option value="FAUNA">Фауна</option>
-            </select>
-        </div>
+              <div class="type">
+                  <select id="select" v-model="florauna.natureTypeId">
+                      <option v-for="(natureType, index) in natureTypes" :key="index" :value="natureType.id"> {{ natureType.type }} </option>
+                  </select>
+              </div><br>
 
         <br>
         <br>
@@ -39,7 +37,7 @@
         </div>
         <br>
         <div v-if="florauna.photo" class="getImage">
-          <img class="uploaded-image" :src="florauna.photo" alt="aa">
+          <img class="uploaded-image" :src="florauna.img" alt="aa">
         </div>
         
         <div class="wrapper" style="margin: 0;">
@@ -59,9 +57,10 @@ export default {
         florauna: {
             name: '',
             description: '',
-            photo: '',
-            natureType: ''
+            img: '',
+            natureTypeId: ''
         },
+        natureTypes: [],
       }
     },
     methods: {
@@ -73,7 +72,7 @@ export default {
       createBase64Image(fileObject){
           const reader = new FileReader();
           reader.onload = (e) => {
-          this.florauna.photo = e.target.result;    
+          this.florauna.img = e.target.result;    
           };
 
         reader.readAsDataURL(fileObject);
@@ -107,6 +106,17 @@ export default {
                 }
             });
       }
+    },
+
+    mounted(){
+    axios
+      .get("http://localhost:8083/nature/type/get-for-select")
+      .then(response => {(this.natureTypes = response.data.value);
+      console.log(response.data)})
+      .catch(error => {
+        console.log(error);
+        this.errored = true;
+      });
     }
 }
 </script>
