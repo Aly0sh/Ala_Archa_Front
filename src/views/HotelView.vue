@@ -1,7 +1,7 @@
 <template>
     <div class="hotel-block">
-		<img class="hotel-img" src="../assets/img/hotel/hotel-img.png" alt="">
-		<h1 class="hotel-name">Гостиница Ала Арча</h1>
+		<img class="hotel-img" :src="hotel.imgUrl" alt="">
+		<h1 class="hotel-name">{{ hotel.hotelName }}</h1>
 	</div>
 
 	<DateRangeBooking ref="dateRange"></DateRangeBooking>
@@ -28,15 +28,15 @@
 		</div>
 	</div> -->
 
-	<div class="room">
+	<div class="room" v-for="(roomType, i) in hotel.roomTypeModels" :key="i">
 		<div class="topchan-body">
 			<img class="topchan-body-img" src="../assets/img/objects/object3.png" alt="">
 			<div class="topchan-body-content">
-				<h3>Номер стандарт</h3>
-				<p class="topchan-body-content-text">Зона: </p>
-				<p class="topchan-body-content-text">Цена: </p>
-				<p class="topchan-body-content-text">Вместимость: </p>
-				<p class="topchan-body-content-text">Доп услуги: </p>
+				<h3>{{ roomType.type }}</h3>
+				<p class="topchan-body-content-text">Зона: {{hotel.areaName}}</p>
+				<p class="topchan-body-content-text">Цена: {{roomType.price}} сом</p>
+				<!-- <p class="topchan-body-content-text">Вместимость: </p>
+				<p class="topchan-body-content-text">Доп услуги: </p> -->
 			</div>
 		</div>
 
@@ -56,62 +56,6 @@
 		<button @click="$refs.dateRange.showModal = true" class="topchan-button">Бронировать</button>
 	</div>
 
-	<div class="room">
-		<time-booking-object ref="timeBooking"></time-booking-object>
-		<div class="topchan-body">
-			<img class="topchan-body-img" src="../assets/img/objects/object3.png" alt="">
-			<div class="topchan-body-content">
-				<h3>Номер стандарт</h3>
-				<p class="topchan-body-content-text">Зона: </p>
-				<p class="topchan-body-content-text">Цена: </p>
-				<p class="topchan-body-content-text">Вместимость: </p>
-				<p class="topchan-body-content-text">Доп услуги: </p>
-			</div>
-		</div>
-
-		<div class="room-slider">
-			<img src="../assets/img/objects/object1.png" class="room-slider-img" alt="">
-			<img src="../assets/img/objects/object1.png" class="room-slider-img" alt="">
-			<img src="../assets/img/objects/object1.png" class="room-slider-img" alt="">
-			<img src="../assets/img/objects/object1.png" class="room-slider-img" style="margin-right: 0;" alt="">
-		</div>
-		<div class="topchan-slider">
-			<img src="../assets/img/objects/object1.png" class="topchan-slider-img" alt="">
-			<img src="../assets/img/objects/object1.png" class="topchan-slider-img" alt="">
-			<img src="../assets/img/objects/object1.png" class="topchan-slider-img" style="margin-right: 0;" alt="">
-		</div>
-		<div class="clear"></div>
-		<button @click="$refs.timeBooking.showModal = true" class="hotel-body-content-button">ЗАБРОНИРОВАТЬ</button>
-		<button @click="$refs.timeBooking.showModal = true" class="topchan-button">Бронировать</button>
-	</div>
-
-	<div class="room">
-		<div class="topchan-body">
-			<img class="topchan-body-img" src="../assets/img/objects/object3.png" alt="">
-			<div class="topchan-body-content">
-				<h3>Номер стандарт</h3>
-				<p class="topchan-body-content-text">Зона: </p>
-				<p class="topchan-body-content-text">Цена: </p>
-				<p class="topchan-body-content-text">Вместимость: </p>
-				<p class="topchan-body-content-text">Доп услуги: </p>
-			</div>
-		</div>
-
-		<div class="room-slider">
-			<img src="../assets/img/objects/object1.png" class="room-slider-img" alt="">
-			<img src="../assets/img/objects/object1.png" class="room-slider-img" alt="">
-			<img src="../assets/img/objects/object1.png" class="room-slider-img" alt="">
-			<img src="../assets/img/objects/object1.png" class="room-slider-img" style="margin-right: 0;" alt="">
-		</div>
-		<div class="topchan-slider">
-			<img src="../assets/img/objects/object1.png" class="topchan-slider-img" alt="">
-			<img src="../assets/img/objects/object1.png" class="topchan-slider-img" alt="">
-			<img src="../assets/img/objects/object1.png" class="topchan-slider-img" style="margin-right: 0;" alt="">
-		</div>
-		<div class="clear"></div>
-		<button class="hotel-body-content-button">ЗАБРОНИРОВАТЬ</button>
-		<button class="topchan-button">Бронировать</button>
-	</div>
 
     <footer class="green">
 		<div class="container">
@@ -172,11 +116,14 @@
 <script>
 import DateRangeBooking from '../components/DateRangeBooking.vue'
 import TimeBookingObject from '../components/TimeBookingObject.vue'
+import axios from 'axios';
+
 
 export default {
 	data(){
 		return{
-			hotelId: null
+			hotelId: null,
+			hotel: null
 		}
 	},
 	components:{
@@ -184,6 +131,14 @@ export default {
 	},
 	created() {
 		this.hotelId = this.$route.params.id;
+		axios
+		.get('http://localhost:8083/hotel/get/' + this.hotelId)
+		.then(response => {(this.hotel = response.data.value);
+		console.log(response.data)})
+		.catch(error => {
+			console.log(error);
+			this.errored = true;
+		});
 	}
 	      
 }
