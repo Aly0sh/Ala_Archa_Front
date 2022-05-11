@@ -35,7 +35,7 @@ export default {
   },
   mounted(){
     axios
-      .get("http://localhost:8083/object/get-all")
+      .get("http://localhost:8083/object/get-for-list")
       .then(response => {(this.objects = response.data.value);
       console.log(response.data)})
       .catch(error => {

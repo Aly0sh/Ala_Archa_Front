@@ -14,12 +14,12 @@
                     <th class="delete">Удаление</th>
                 </tr>
                 <tr v-for="(hotelHall, i) in hotelHalls" :key="i">
-                    <td>{{ hotelHalls.id }}</td>
-                    <td>{{ hotelHalls.name }}</td>
-                    <td>{{ hotelHalls.price }}</td>
-                    <td>{{ hotelHalls.priceForNextHours }}</td>
-                    <td>{{ hotelHalls.numberOfSeats }}</td>
-                    <td>{{ hotelHalls.hotelName }}</td>
+                    <td>{{ hotelHall.id }}</td>
+                    <td>{{ hotelHall.name }}</td>
+                    <td>{{ hotelHall.price }}</td>
+                    <td>{{ hotelHall.priceForNextHours }}</td>
+                    <td>{{ hotelHall.numberOfSeats }}</td>
+                    <td>{{ hotelHall.hotelName }}</td>
                     <td class="edit"><a href="">Редактировать</a></td>
                     <td class="delete"><a @click="delete(hotelHall.id)">Удалить</a></td>
                 </tr>
@@ -39,7 +39,7 @@ export default {
   },
   mounted(){
     axios
-      .get("http://localhost:8083/hotelHall/get-all")
+      .get("http://localhost:8083/hotelHall/get-for-list")
       .then(response => {(this.hotelHalls = response.data.value);
       console.log(response.data)})
       .catch(error => {
