@@ -74,6 +74,11 @@ const routes = [
     component: CreateArea
   },
   {
+    path: "/super-admin/create-area",
+    name: "create-area",
+    component: CreateArea
+  },
+  {
     path: "/super-admin/create-hotel",
     name: "create-hotel",
     component: () =>
@@ -192,6 +197,48 @@ const routes = [
     name: "show-objects",
     component: () =>
       import("../views/super-admin/ShowObjects.vue"),
+  },
+  {
+    path: "/admin/show-admin-menu",
+    name: "show-admin-menu",
+    component: () =>
+      import("../views/admin/ShowAdminMenu.vue"),
+  },
+  {
+    path: "/admin/book-room",
+    name: "book-room",
+    component: () =>
+      import("../views/admin/BookRoom.vue"),
+  },
+  {
+    path: "/admin/book-hall",
+    name: "book-hall",
+    component: () =>
+      import("../views/admin/BookHall.vue"),
+  },
+  {
+    path: "/admin/book-object",
+    name: "book-object",
+    component: () =>
+      import("../views/admin/BookObject.vue"),
+  },
+  {
+    path: "/admin/show-history-book-room",
+    name: "show-history-book-room",
+    component: () =>
+      import("../views/admin/ShowHistoryBookRoom.vue"),
+  },
+  {
+    path: "/admin/show-history-book-hall",
+    name: "show-history-book-hall",
+    component: () =>
+      import("../views/admin/ShowHistoryBookHall.vue"),
+  },
+  {
+    path: "/admin/show-history-book-object",
+    name: "show-history-book-object",
+    component: () =>
+      import("../views/admin/ShowHistoryBookObject.vue"),
   },
 ];
 

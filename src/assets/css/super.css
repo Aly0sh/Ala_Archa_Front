@@ -276,25 +276,30 @@
     text-align: start;
 }
 
-.super-admin .column .item{
+.super-admin .column .item,
+.super-admin .back{
     background: #c8e0cb;
     border-radius: 10px;
     width: 60%;
     padding: 0.1% 0;
     margin: 3% 0;
     border: #c8e0cb solid 3px;
+    text-align: center;
 }
 
-.super-admin .column .item:hover{
+.super-admin .column .item:hover,
+.super-admin .back:hover{
     background-color:#f4f9f4;
     color:#75a47b
 }
 
-.super-admin .column .item:hover p{
+.super-admin .column .item:hover p,
+.super-admin .back:hover p{
     cursor: pointer;
 }
 
-.super-admin .column .item p{
+.super-admin .column .item p,
+.super-admin .back p{
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
@@ -328,12 +333,37 @@
     font-weight: bolder;
 }
 
-.super-admin td.delete{
+.super-admin td.accept{
+    background-color: rgb(144, 231, 161);
+    font-weight: bolder;
+}
+
+.super-admin td.delete,
+.super-admin td.deny{
     background-color: rgb(235, 121, 127);
     font-weight: bolder;
 }
 
 .super-admin td.edit a:hover,
-.super-admin td.delete a:hover{
+.super-admin td.delete a:hover,
+.super-admin td.accept a:hover,
+.super-admin td.deny a:hover{
     text-decoration: underline;
 }
+
+.super-admin .back{
+    width: 20%;
+    padding: 0.001% 0;
+    border: #c8e0cb 2.5px solid;
+}
+.super-admin .back p{
+    font-size: calc(0.05em + 1vw);
+    line-height: 100%;
+}
+
+.super-admin th.accept,
+.super-admin th.deny,
+.super-admin th.status{
+    width: 10%;
+}
+
