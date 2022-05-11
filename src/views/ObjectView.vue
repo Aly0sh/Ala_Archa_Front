@@ -46,6 +46,8 @@
 				<p>10 чел, 4 часа</p>
 				<div class="clear"></div>
 			</div>
+
+			
 		</div>
 	</div>
 
