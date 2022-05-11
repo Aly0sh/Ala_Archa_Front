@@ -35,7 +35,7 @@ export default {
   },
   mounted(){
     axios
-      .get("http://localhost:8083/room/get-all")
+      .get("http://localhost:8083/room/get-for-list")
       .then(response => {(this.rooms = response.data.value);
       console.log(response.data)})
       .catch(error => {

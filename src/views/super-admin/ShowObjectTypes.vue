@@ -7,6 +7,7 @@
                     <th>ID</th>
                     <th>Название</th>
                     <th>Цена</th>
+                    <th>Цена за последующие часы</th>
                     <th>Зона</th>
                     <th>Время или дата</th>
                     <th>Мин. время</th>
@@ -17,6 +18,7 @@
                     <td>{{ objectType.id }}</td>
                     <td>{{ objectType.name }}</td>
                     <td>{{ objectType.price }}</td>
+                    <td>{{ objectType.pricePerHour }}</td>
                     <td>{{ objectType.areaName }}</td>
                     <td>{{ objectType.timeType == 'DATE'?'По дате':'По времени' }}</td>
                     <td>{{ objectType.minTime }}</td>
@@ -39,7 +41,7 @@ export default {
   },
   mounted(){
     axios
-      .get("http://localhost:8083/object/type/get-all")
+      .get("http://localhost:8083/object/type/get-for-list")
       .then(response => {(this.objectTypes = response.data.value);
       console.log(response.data)})
       .catch(error => {
