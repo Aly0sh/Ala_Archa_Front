@@ -13,23 +13,11 @@
 				Гостиницы
 		</div>
 		<div class="hotels">
-			<div class="services-card">
-				<img src="../assets/img/services/services.png" alt="">
-				<h3>Гостиница "Ала-Арча"</h3>
-				<p>от 2500 с</p>
-				<button class="services-learn-more">Узнать подробнее</button>
-			</div>
-			<div class="services-card">
-				<img src="../assets/img/services/services.png" alt="">
-				<h3>Гостиница "Ала-Арча"</h3>
-				<p>от 2500 с</p>
-				<button class="services-learn-more">Узнать подробнее</button>
-			</div>
-			<div class="services-card">
-				<img src="../assets/img/services/services.png" alt="">
-				<h3>Гостиница "Ала-Арча"</h3>
-				<p>от 2500 с</p>
-				<button class="services-learn-more">Узнать подробнее</button>
+			<div v-for="(hotel, i) in hotels" :key="i" class="services-card">
+				<img :src="hotel.imgUrl" alt="">
+				<h3>{{ hotel.hotelName }}</h3>
+				<p>от 2500 сом</p>
+				<button @click="goToHotel(hotel.id)" class="services-learn-more">Узнать подробнее</button>
 			</div>
 		</div>
 
@@ -37,59 +25,11 @@
 			Рекомендуем посетить
 		</div>
 		<div class="hotels">
-			<div class="services-card">
-				<img src="../assets/img/services/services.png" alt="">
-				<h3>Гостиница "Ала-Арча"</h3>
+			<div class="services-card" v-for="(object, i) in objects" :key="i">
+				<img :src="object.imgUrl" alt="">
+				<h3>{{ object.name }}</h3>
 				<p>от 2500 с</p>
-				<button class="services-learn-more">Узнать подробнее</button>
-			</div>
-			<div class="services-card">
-				<img src="../assets/img/services/services.png" alt="">
-				<h3>Гостиница "Ала-Арча"</h3>
-				<p>от 2500 с</p>
-				<button class="services-learn-more">Узнать подробнее</button>
-			</div>
-			<div class="services-card">
-				<img src="../assets/img/services/services.png" alt="">
-				<h3>Гостиница "Ала-Арча"</h3>
-				<p>от 2500 с</p>
-				<button class="services-learn-more">Узнать подробнее</button>
-			</div>
-			<div class="services-card">
-				<img src="../assets/img/services/services.png" alt="">
-				<h3>Гостиница "Ала-Арча"</h3>
-				<p>от 2500 с</p>
-				<button class="services-learn-more">Узнать подробнее</button>
-			</div>
-			<div class="services-card">
-				<img src="../assets/img/services/services.png" alt="">
-				<h3>Гостиница "Ала-Арча"</h3>
-				<p>от 2500 с</p>
-				<button class="services-learn-more">Узнать подробнее</button>
-			</div>
-			<div class="services-card">
-				<img src="../assets/img/services/services.png" alt="">
-				<h3>Гостиница "Ала-Арча"</h3>
-				<p>от 2500 с</p>
-				<button class="services-learn-more">Узнать подробнее</button>
-			</div>
-			<div class="services-card">
-				<img src="../assets/img/services/services.png" alt="">
-				<h3>Гостиница "Ала-Арча"</h3>
-				<p>от 2500 с</p>
-				<button class="services-learn-more">Узнать подробнее</button>
-			</div>
-			<div class="services-card">
-				<img src="../assets/img/services/services.png" alt="">
-				<h3>Гостиница "Ала-Арча"</h3>
-				<p>от 2500 с</p>
-				<button class="services-learn-more">Узнать подробнее</button>
-			</div>
-			<div class="services-card">
-				<img src="../assets/img/services/services.png" alt="">
-				<h3>Гостиница "Ала-Арча"</h3>
-				<p>от 2500 с</p>
-				<button class="services-learn-more">Узнать подробнее</button>
+				<button class="services-learn-more" @click="goToObject(object.id)">Узнать подробнее</button>
 			</div>
 		</div>
 	</div>
@@ -150,6 +90,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
 	data(){
 		return{
@@ -159,7 +101,9 @@ export default {
 				'services-2',
 				'services-3',
 				'services-4'
-			]
+			],
+			hotels: [],
+			objects: []
 		}
 	},
 	methods: {
@@ -170,8 +114,34 @@ export default {
 		clickToHead(image, number){
 			this.slidesHead[number] = this.currentServicesSlide;
 			this.currentServicesSlide = image;
+		},
+
+		goToHotel(id){
+			this.$router.push('/hotel/' + id);
+		},
+
+		goToObject(id){
+			this.$router.push('/object/' + id);
 		}
-	}
+	},
+	mounted(){
+    axios
+      .get("http://localhost:8083/hotel/get-all")
+      .then(response => {(this.hotels = response.data.value);
+      console.log(response.data)})
+      .catch(error => {
+        console.log(error);
+        this.errored = true;
+      });
+    axios
+      .get("http://localhost:8083/object/type/get-all")
+      .then(response => {(this.objects = response.data.value);
+      console.log(response.data)})
+      .catch(error => {
+        console.log(error);
+        this.errored = true;
+      });
+    },
 }
 </script>
 

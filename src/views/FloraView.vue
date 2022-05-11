@@ -28,13 +28,13 @@
 
 		<div class="content">
 			<div class="grid">
-				<div class="card effect blue" v-for="(nature, i) in natures" :key="i">
-					<img src="../assets/img/flora/pihta.png" alt="img12" />
+				<div class="card effect blue" v-for="(nature, i) in natures.natureModels" :key="i">
+					<img :src="nature.img" alt="img12" />
 					<div class="card_caption">
 						<div>
-							<h3><span>Семёновские</span> Пихты</h3>
-							<p> Произрастает в горах Средней Азии по теневым склонам в ущельях. В горы поднимается на
-								1350 до 2800 м над уровнем моря.
+							<h3>{{ nature.name }}</h3>
+							<p>
+								{{ nature.description }}
 							</p>
 						</div>
 					</div>
@@ -111,7 +111,7 @@ export default {
 	},
 	mounted(){
     axios
-      .get("http://localhost:8083/nature/get-all")
+      .get("http://localhost:8083/nature/type/get/1")
       .then(response => {(this.natures = response.data.value);
       console.log(response.data)})
       .catch(error => {

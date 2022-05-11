@@ -2,10 +2,10 @@
 	<br>
 	<div class="container">
 		<div class="topchan-head">
-			<h2 class="topchan-head-title">Топчаны</h2>
+			<h2 class="topchan-head-title" style="width: 30%">{{ objectType.name }}</h2>
 			<div class="clear"></div>
-			<img src="../assets/img/objects/object1.png" class="topchan-head-img1" alt="">
-			<img src="../assets/img/objects/object2.png" class="topchan-head-img2" alt="">
+			<img :src="objectType.objectTypeImgModels[1].img" class="topchan-head-img1" alt="">
+			<img :src="objectType.objectTypeImgModels[0].img" class="topchan-head-img2" alt="">
 		</div>
 
 		<h1 class="mobile-obj-title">Топчаны</h1>
@@ -14,87 +14,38 @@
 
 
 		<div class="topchan-body">
-			<img class="topchan-body-img" src="../assets/img/objects/object3.png" alt="">
+			<img class="topchan-body-img" :src="objectType.objectTypeImgModels[0].img" alt="">
 			<div class="topchan-body-content">
-				<p class="topchan-body-content-text">Местоположение: </p>
-				<p class="topchan-body-content-text">Цена: </p>
-				<p class="topchan-body-content-text">Вместимость: </p>
-				<p class="topchan-body-content-text">Доп услуги: </p>
+				<p class="topchan-body-content-text">Зона: {{ objectType.areaName }}</p>
+				<p class="topchan-body-content-text">Цена: {{ objectType.price }} сом</p>
+				<p class="topchan-body-content-text">Цена за след час: {{ objectType.pricePerHour }} сом</p>
+				<!-- <p class="topchan-body-content-text">Вместимость: {{ objectType.numberOfSeats }}</p> -->
 				<button @click="$refs.objectModal.showModal = true" class="topchan-body-content-button">ЗАБРОНИРОВАТЬ</button>
 			</div>
 		</div>
 
 
 		<div class="topchan-slider">
-			<img src="../assets/img/objects/object1.png" class="topchan-slider-img" alt="">
-			<img src="../assets/img/objects/object1.png" class="topchan-slider-img" alt="">
-			<img src="../assets/img/objects/object1.png" class="topchan-slider-img" style="margin-right: 0;" alt="">
+			<!-- <img :src="objectType.objectTypeImgModels[3].img" class="topchan-slider-img" alt="">
+			<img :src="objectType.objectTypeImgModels[4].img" class="topchan-slider-img" alt="">
+			<img :src="objectType.objectTypeImgModels[5].img" class="topchan-slider-img" style="margin-right: 0;" alt=""> -->
 		</div>
 		<div class="clear"></div>
 		<button @click="$refs.objectModal.showModal = true" class="topchan-button">Бронировать</button>
 	</div>
 
-	<h3 class="object-menu-head">Меню услуг</h3>
+	<h3 class="object-menu-head" v-show="objectType.menuSectionModels">Меню услуг</h3>
 
-	<div class="object-menu">
-		<h5>Представление посуды и тд</h5>
-		<div>
-			<h6>Посуда и столовые приборы</h6>
-			<span>200c</span>
-			<div class="clear"></div>
-			<p>10 чел, 4 часа</p>
-			<div class="clear"></div>
-		</div>
-		<div>
-			<h6>Казан</h6>
-			<span>200c</span>
-			<div class="clear"></div>
-			<p>1 шт, 4 часа</p>
-			<div class="clear"></div>
-		</div>
-		<div>
-			<h6>Мангал</h6>
-			<span>200c</span>
-			<div class="clear"></div>
-			<p>1 шт, 4 часа</p>
-			<div class="clear"></div>
-		</div>
-
-		<h5>Предоставление места</h5>
-		<div>
-			<h6>Кухня</h6>
-			<span>200c</span>
-			<div class="clear"></div>
-			<p>10 чел, 4 часа</p>
-			<div class="clear"></div>
-		</div>
-		<div>
-			<h6>Услуги готовки</h6>
-			<span>200c</span>
-			<div class="clear"></div>
-			<p>1 порция</p>
-			<div class="clear"></div>
-		</div>
-		<div>
-			<h6>Очаг с казаном</h6>
-			<span>200c</span>
-			<div class="clear"></div>
-			<p>1 место, 1 час</p>
-			<div class="clear"></div>
-		</div>
-		<div>
-			<h6>Камера хранения</h6>
-			<span>200c</span>
-			<div class="clear"></div>
-			<p>1 шт, 1 сутки</p>
-			<div class="clear"></div>
-		</div>
-		<div>
-			<h6>Услуги туалета</h6>
-			<span>200c</span>
-			<div class="clear"></div>
-			<p>1 шт, 1 сутки</p>
-			<div class="clear"></div>
+	<div class="object-menu" v-show="objectType.menuSectionModels">
+		<div v-for="(menuSection, i) in objectType.menuSectionModels" :key="i">
+			<h5>{{ menuSection.name }}</h5>
+			<div >
+				<h6>Посуда и столовые приборы</h6>
+				<span>200c</span>
+				<div class="clear"></div>
+				<p>10 чел, 4 часа</p>
+				<div class="clear"></div>
+			</div>
 		</div>
 	</div>
 
@@ -155,12 +106,15 @@
 </template>
 
 <script>
-import DateRangeBookingObject from "../components/DateRangeBookingObject.vue"
+import DateRangeBookingObject from "../components/DateRangeBookingObject.vue";
+import axios from 'axios';
+
 
 export default {
 	data(){
 		return{
-			objectId: null
+			objectId: null,
+			objectType: null,
 		}
 	},
 	components: {
@@ -168,6 +122,15 @@ export default {
 	},
 	created() {
 		this.objectId = this.$route.params.id;
+		axios
+		.get('http://localhost:8083/object/type/get/' + this.objectId)
+		.then(response => {(this.objectType = response.data.value);
+		console.log(response.data)})
+		.catch(error => {
+			console.log(error);
+			this.errored = true;
+		});
+
 	}
 }
 </script>

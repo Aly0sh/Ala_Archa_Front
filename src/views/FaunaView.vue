@@ -22,7 +22,7 @@
 
 		<div class="content">
 			<div class="grid">
-				<div class="card effect blue" v-for="(nature, i) in natures" :key="i">
+				<div class="card effect blue" v-for="(nature, i) in natures.natureModels" :key="i">
 					<img :src="nature.img" alt="img12" />
 					<div class="card_caption">
 						<div>
@@ -104,7 +104,7 @@ export default {
 	},
 	mounted(){
     axios
-      .get("http://localhost:8083/nature/get-all")
+      .get("http://localhost:8083/nature/type/get/2")
       .then(response => {(this.natures = response.data.value);
       console.log(response.data)})
       .catch(error => {

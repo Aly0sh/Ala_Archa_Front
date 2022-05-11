@@ -4,6 +4,8 @@
 		<h1 class="hotel-name">Гостиница Ала Арча</h1>
 	</div>
 
+	<DateRangeBooking ref="dateRange"></DateRangeBooking>
+
 	<!-- <div class="room-types">
 		<h3 class="select-room-text">Выберите подходящий номер для себя:</h3>
 		<div class="room-types-items">
@@ -27,9 +29,6 @@
 	</div> -->
 
 	<div class="room">
-
-		<DateRangeBooking ref="dateRange"></DateRangeBooking>
-
 		<div class="topchan-body">
 			<img class="topchan-body-img" src="../assets/img/objects/object3.png" alt="">
 			<div class="topchan-body-content">

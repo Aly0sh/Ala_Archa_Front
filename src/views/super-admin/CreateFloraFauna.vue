@@ -36,7 +36,7 @@
             </form>
         </div>
         <br>
-        <div v-if="florauna.photo" class="getImage">
+        <div v-if="florauna.img" class="getImage">
           <img class="uploaded-image" :src="florauna.img" alt="aa">
         </div>
         
