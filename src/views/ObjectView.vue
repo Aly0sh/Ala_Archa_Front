@@ -26,9 +26,9 @@
 
 
 		<div class="topchan-slider">
-			<!-- <img :src="objectType.objectTypeImgModels[3].img" class="topchan-slider-img" alt="">
-			<img :src="objectType.objectTypeImgModels[4].img" class="topchan-slider-img" alt="">
-			<img :src="objectType.objectTypeImgModels[5].img" class="topchan-slider-img" style="margin-right: 0;" alt=""> -->
+			<img :src="objectType.objectTypeImgModels[2].img" class="topchan-slider-img" alt="">
+			<img :src="objectType.objectTypeImgModels[3].img" class="topchan-slider-img" alt="">
+			<img :src="objectType.objectTypeImgModels[4].img" class="topchan-slider-img" style="margin-right: 0;" alt="">
 		</div>
 		<div class="clear"></div>
 		<button @click="$refs.objectModal.showModal = true" class="topchan-button">Бронировать</button>
@@ -39,11 +39,11 @@
 	<div class="object-menu" v-show="objectType.menuSectionModels">
 		<div v-for="(menuSection, i) in objectType.menuSectionModels" :key="i">
 			<h5>{{ menuSection.name }}</h5>
-			<div >
-				<h6>Посуда и столовые приборы</h6>
-				<span>200c</span>
+			<div v-for="(menu, i) in menuSection.menuModels" :key="i">
+				<h6>{{ menu.name }}</h6>
+				<span>{{ menu.price }}c</span>
 				<div class="clear"></div>
-				<p>10 чел, 4 часа</p>
+				<p>{{ menu.description }}</p>
 				<div class="clear"></div>
 			</div>
 		</div>

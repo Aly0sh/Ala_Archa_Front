@@ -24,6 +24,10 @@
               <br>
               <input v-model="objectType.pricePerHour" type="number" step="any" min=0 style="width:100%" id="priceper" placeholder="Введите цену за последующие часы:"><br> 
 
+              <label for="priceper">Введите вместимость:</label>
+              <br>
+              <input v-model="objectType.numberOfSeats" type="number" step="any" min=0 style="width:100%" id="priceper" placeholder="Введите вместимость:"><br> 
+
               <label for="selecttype">Выберите тип времени:</label>
                 <div class="type">
                     <select v-model="objectType.timeType" id="selecttype">
@@ -67,7 +71,8 @@ export default {
             pricePerHour: null,
             objectTypeImgModels: [],
             areaId: '',
-            timeType: ''
+            timeType: '',
+            numberOfSeats: null
         },
         areas: [],
       }
