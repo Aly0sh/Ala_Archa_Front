@@ -2,9 +2,10 @@
 	<div class="container">
 		<div class="cart-row">
 			<div class="trash">
-			<h1 style="text-align: start;">Корзина</h1>
+			<h1>Корзина</h1>
 			<hr>
 			<div class="trash-row">
+				<div class="left">
 				<div class="trash-picture">
 					<img src="../assets/img/objects/object1.png">
 				</div>
@@ -15,14 +16,16 @@
 					<br>
 
 					<p>Количество суток:</p>
-					<input type="number" value="1" min="1" max="90">
+					<input type="number" value="1" min="1" max="90" disabled>
 
 					<h3>Номер комнаты: 2</h3>
 				</div>
+				</div>
+				<div class="right">
 				<div class="trash-status">
 					<h5>2500 сом</h5>
-					<br><br><br><br><br>
 					<span>Принято</span>
+				</div>
 				</div>
 				
 			</div>
@@ -40,7 +43,7 @@
 					<br>
 
 					<p>Количество суток:</p>
-					<input type="number" value="1" min="1" max="90">
+					<input type="number" value="1" min="1" max="90" disabled>
 
 					<h3>Номер комнаты: 2</h3>
 				</div>
@@ -53,17 +56,14 @@
 			</div>
 			</div>
 			<div class="payment">
-				<form action="">
 				<h1>Покупка онлайн</h1>
 				<h4>Номер карты</h4>
-				<span>Введите 16-значный номер с Вашей карты</span>
-				<input id="ccn" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="19" placeholder="xxxx xxxx xxxx xxxx">
+				<span>Переведите средства на данную карту</span>
+				<h3>4444 - 4444 - 4444 - 4444</h3>
 				<div class="cards">
 					<img src="../assets/img/icons/visa.png" alt="" class="card">
 					<img src="../assets/img/icons/mastercard.png" alt="" class="card">
 				</div>
-				<input type="submit" class="button" value="Оплатить">
-				</form>
 			</div>
 		</div>
 
