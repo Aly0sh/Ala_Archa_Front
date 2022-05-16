@@ -68,12 +68,24 @@
 					<img src="../assets/img/icons/visa.png" alt="" class="card">
 					<img src="../assets/img/icons/mastercard.png" alt="" class="card">
 				</div>
+				<br>
+				<!-- <div v-if="cart.img" class="getImage">
+					<img class="uploaded-image" :src="cart.img" alt="aa">
+				</div> -->
+				<br>
+
+				<div class="photo-upload">
+					<form>
+						<input @change="handleImage" type="file" id="img" name="img" accept="image/*" hidden>
+						<label for="img">Оплатить</label>
+					</form>
+				</div>
 			</div>
 		</div>
 
 	</div>
 
-    <footer class="green">
+	<footer class="green">
 		<div class="container">
 			<div class="row">
 				<div class="logo">
@@ -137,15 +149,17 @@ export default {
 	components: {
 		Datepicker
 	},
-    data() {
-        return {
+	data() {
+		return {
 			date: '',
 
-        }
-    },        
+		}
+	},
 }
 
 </script>
+
+
 
 
 <style src="../assets/css/all.css"/>
