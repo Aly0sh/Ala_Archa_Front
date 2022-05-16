@@ -27,6 +27,18 @@
 							<br><br><br><br><br>
 							<span>Принято</span>
 						</div>
+						<div class="row">
+							<div class="photo-upload">
+								<form>
+									<input @change="handleImage" type="file" id="img" name="img" accept="image/*"
+										hidden>
+									<label for="img">Оплатить</label>
+								</form>
+							</div>
+							<!-- <div v-if="cart.img" class="getImage">
+								<img class="uploaded-image" :src="cart.img" alt="aa">
+							</div> -->
+						</div>
 					</div>
 
 				</div>
@@ -55,6 +67,18 @@
 							<br><br><br><br><br>
 							<span style="color: red;">Отклонено</span>
 						</div>
+						<div class="row">
+							<div class="photo-upload">
+								<form>
+									<input @change="handleImage" type="file" id="img" name="img" accept="image/*"
+										hidden>
+									<label for="img">Оплатить</label>
+								</form>
+							</div>
+							<!-- <div v-if="cart.img" class="getImage">
+								<img class="uploaded-image" :src="cart.img" alt="aa">
+							</div> -->
+						</div>
 					</div>
 
 				</div>
@@ -69,17 +93,6 @@
 					<img src="../assets/img/icons/mastercard.png" alt="" class="card">
 				</div>
 				<br>
-				<!-- <div v-if="cart.img" class="getImage">
-					<img class="uploaded-image" :src="cart.img" alt="aa">
-				</div> -->
-				<br>
-
-				<div class="photo-upload">
-					<form>
-						<input @change="handleImage" type="file" id="img" name="img" accept="image/*" hidden>
-						<label for="img">Оплатить</label>
-					</form>
-				</div>
 			</div>
 		</div>
 
@@ -158,6 +171,9 @@ export default {
 }
 
 </script>
+
+
+
 
 
 

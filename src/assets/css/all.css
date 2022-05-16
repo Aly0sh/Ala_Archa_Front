@@ -2882,18 +2882,18 @@ html {
     color: #4A8251;
 }
 
-.payment .photo-upload input[type=file]::-webkit-file-upload-button
+.trash .photo-upload input[type=file]::-webkit-file-upload-button
 {
     padding: .2em .4em;
     border-radius: .2em;
     transition: 1s;
 }
 
-.payment .photo-upload label
+.trash .photo-upload label
 {
     background-color: #7EB685;
     color: white;
-    padding: 2% 5%;
+    padding: 10% 10%;
     font-family: sans-serif;
     border-radius: 0.3rem;
     cursor: pointer;
@@ -2964,9 +2964,16 @@ html {
        float: left;
        padding: 5.6% 0 0;
    }
-   .payment .photo-upload label{
+   .trash .right .row{
+       justify-content: end;
+   }
+   .trash .photo-upload{
+       margin: 2% 5%;
+   }
+   .trash .photo-upload label{
        font-size: calc(12px + 1vw);
    }
+
 }
 
 @media screen and (min-width: 768px) {
@@ -2978,7 +2985,8 @@ html {
         display: flex;
     }
     .trash .trash-row .left .trash-text h3{
-        margin: 10vw 0 0 ;
+        margin: 50% 0 0 ;
+        font-size: calc(0.1em + 1vw);
     }
     .trash .trash-row .left .trash-picture{
         width: 20vw;
@@ -2988,7 +2996,12 @@ html {
         margin: 0;
     }
     .trash .trash-row .trash-status h5{
-        margin-bottom: 13vw;
+        margin-bottom: 140%;
+        margin-top: 5%;
+        font-size: calc(0.4em + 1vw);
+    }
+    .trash .trash-row .trash-status span{
+        font-size: calc(0.3em + 1vw);
     }
     .trash h1,
     .payment h1{
@@ -2997,7 +3010,24 @@ html {
     .payment h3 {
         font-size: calc(0.5em + 1vw);
     }
+    .trash .trash-status{
+        width: 10vw;
+    }
+    .trash .right .row{
+        display: block;
+    }
+    .trash .photo-upload{
+        margin: 10% 0 0;
+    }
+    .trash .photo-upload label{
+        font-size: calc(0.2em + 1vw);
+        padding: 5% 10%;
+    }
 }
+@media screen and (min-width: 992px){
+
+    
+}   
 
 
 /* =========== */
