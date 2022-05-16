@@ -2,58 +2,62 @@
 	<div class="container">
 		<div class="cart-row">
 			<div class="trash">
-			<h1>Корзина</h1>
-			<hr>
-			<div class="trash-row">
-				<div class="left">
-				<div class="trash-picture">
-					<img src="../assets/img/objects/object1.png">
-				</div>
-				<div class="trash-text">
-					<h4>Стандарт</h4>
-					<span>2500сом</span>
+				<h1>Корзина</h1>
+				<hr>
+				<div class="trash-row">
+					<div class="left">
+						<div class="trash-picture">
+							<img src="img/trash/1.png">
+						</div>
+						<div class="trash-text">
+							<h4>Стандарт</h4>
+							<span>2500сом</span>
 
-					<br>
+							<br>
 
-					<p>Количество суток:</p>
-					<input type="number" value="1" min="1" max="90" disabled>
+							<p>Количество суток:</p>
+							<input type="number" value="1" min="1" max="90" disabled>
 
-					<h3>Номер комнаты: 2</h3>
-				</div>
-				</div>
-				<div class="right">
-				<div class="trash-status">
-					<h5>2500 сом</h5>
-					<span>Принято</span>
-				</div>
-				</div>
-				
-			</div>
+							<h3>Номер комнаты: 2</h3>
+						</div>
+					</div>
+					<div class="right">
+						<div class="trash-status">
+							<h5>2500 сом</h5>
+							<br><br><br><br><br>
+							<span>Принято</span>
+						</div>
+					</div>
 
-			<hr>
-
-			<div class="trash-row">
-				<div class="trash-picture">
-					<img src="../assets/img/objects/object1.png">
 				</div>
-				<div class="trash-text">
-					<h4>Стандарт</h4>
-					<span>2500сом</span>
 
-					<br>
+				<hr>
+				<div class="trash-row">
+					<div class="left">
+						<div class="trash-picture">
+							<img src="img/trash/1.png">
+						</div>
+						<div class="trash-text">
+							<h4>Стандарт</h4>
+							<span>2500сом</span>
 
-					<p>Количество суток:</p>
-					<input type="number" value="1" min="1" max="90" disabled>
+							<br>
 
-					<h3>Номер комнаты: 2</h3>
+							<p>Количество суток:</p>
+							<input type="number" value="1" min="1" max="90" disabled>
+
+							<h3>Номер комнаты: 2</h3>
+						</div>
+					</div>
+					<div class="right">
+						<div class="trash-status">
+							<h5>2500 сом</h5>
+							<br><br><br><br><br>
+							<span style="color: red;">Отклонено</span>
+						</div>
+					</div>
+
 				</div>
-				<div class="trash-status">
-					<h5>2500 сом</h5>
-					<br><br><br><br><br>
-					<span style="color: red;">Отклонено</span>
-				</div>
-				
-			</div>
 			</div>
 			<div class="payment">
 				<h1>Покупка онлайн</h1>

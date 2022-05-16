@@ -2752,11 +2752,10 @@ html {
     margin: 2% 0 2% 0;
 }
 
-.trash .trash-picture {
-    width: 43%;
-}
-
-.trash .trash-picture img {
+.trash .trash-row .left .trash-picture img{
+    object-fit: cover;
+    border-radius: 10px;
+    height: 100%;
     width: 100%;
 }
 
@@ -2884,7 +2883,7 @@ html {
 }
 
 
-@media only screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
    .cart-row{
        display: block;
    } 
@@ -2893,7 +2892,8 @@ html {
        margin: 5% 0 0;
        float: none;
    }
-   .trash h1{
+   .trash h1,
+   .payment h1{
        font-size: calc(1.2em + 1vw);
    }
    .trash .trash-row{
@@ -2903,11 +2903,13 @@ html {
        display: flex;
        justify-content: space-between;
    }
-   .trash .trash-row .left .trash-text h4{
+   .trash .trash-row .left .trash-text h4,
+   .payment h4{
         font-size: calc(1em + 1vw);
    }
    .trash .trash-row .left .trash-text span,
-   .trash .trash-row .left .trash-text p{
+   .trash .trash-row .left .trash-text p,
+   .payment span{
         font-size: calc(0.5em + 1vw);
     }
     .trash .trash-row .left .trash-text input
@@ -2919,9 +2921,12 @@ html {
         margin: 5% 0;
     }
     
-   .trash .trash-row .trash-picture,
    .trash .trash-row .trash-text{
        width: 50%;  
+   }
+   .trash .trash-row .trash-picture{
+       height: 40vw;
+       width: 40vw;
    }
    .trash .trash-row .trash-status{
        display: flex;
@@ -2932,12 +2937,46 @@ html {
    }
    .trash .trash-row .trash-status h5{
        float: right;
+       margin-bottom: 0;
    }
    .trash .trash-row .trash-status span{
        float: left;
+       padding: 5.6% 0 0;
    }
 
 }
+
+@media screen and (min-width: 768px) {
+    .trash .trash-row{
+        display: flex;
+    }
+    .trash .trash-row .left{
+        width: 85%;
+        display: flex;
+    }
+    .trash .trash-row .left .trash-text h3{
+        margin: 10vw 0 0 ;
+    }
+    .trash .trash-row .left .trash-picture{
+        width: 20vw;
+        height: 20vw;
+    }
+    .trash .trash-row .right .trash-status{
+        margin: 0;
+    }
+    .trash .trash-row .trash-status h5{
+        margin-bottom: 13vw;
+    }
+    .trash h1,
+    .payment h1{
+        font-size: calc(0.7em + 1vw);
+    }
+    .payment h3 {
+        font-size: calc(0.5em + 1vw);
+    }
+}
+
+
 
 
 /* =========== */
