@@ -125,13 +125,17 @@ export default {
 	},
 	methods:{
 		openModalBooking(timeType, objects){
-			if(timeType == 'TIME'){
-				this.$refs.objectModalTime.showModal = true; 
-				this.$refs.objectModalTime.objects = objects;
-			}
-			else if(timeType == 'DATE'){
-				this.$refs.objectModal.showModal = true; 
-				this.$refs.objectModal.objects = objects;
+			if (true){
+				if(timeType == 'TIME'){
+					this.$refs.objectModalTime.showModal = true; 
+					this.$refs.objectModalTime.objects = objects;
+				}
+				else if(timeType == 'DATE'){
+					this.$refs.objectModal.showModal = true; 
+					this.$refs.objectModal.objects = objects;
+				}
+			} else {
+				alert('Для бронирования нужно для начала авторизоваться!');
 			}
 		}
 	},

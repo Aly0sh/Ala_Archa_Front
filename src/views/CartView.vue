@@ -3,84 +3,54 @@
 		<div class="cart-row">
 			<div class="trash">
 				<h1>Корзина</h1>
-				<hr>
-				<div class="trash-row">
-					<div class="left">
-						<div class="trash-picture">
-							<img src="img/trash/1.png">
-						</div>
-						<div class="trash-text">
-							<h4>Стандарт</h4>
-							<span>2500сом</span>
-
-							<br>
-
-							<p>Количество суток:</p>
-							<input type="number" value="1" min="1" max="90" disabled>
-
-							<h3>Номер комнаты: 2</h3>
-						</div>
-					</div>
-					<div class="right">
-						<div class="trash-status">
-							<h5>2500 сом</h5>
-							<br><br><br><br><br>
-							<span>Принято</span>
-						</div>
-						<div class="row">
-							<div class="photo-upload">
-								<form>
-									<input @change="handleImage" type="file" id="img" name="img" accept="image/*"
-										hidden>
-									<label for="img">Оплатить</label>
-								</form>
+				<div v-for="(item, index) in cartItems" :key="index">
+					<hr>
+					<div class="trash-row">
+						<div class="left">
+							<div class="trash-picture">
+								<img :src="item.img">
 							</div>
-							<!-- <div v-if="cart.img" class="getImage">
-								<img class="uploaded-image" :src="cart.img" alt="aa">
-							</div> -->
-						</div>
-					</div>
+							<div class="trash-text">
+								<h4 v-if="item.roomType">{{ item.roomType }}</h4>
+								<h4 v-if="item.objectType">{{ item.objectType }}</h4>
+								<h4 v-if="item.hotelHallName">{{ item.hotelHallName }}</h4>
+								<span>{{ item.price }} сом</span>
 
-				</div>
+								<br>
 
-				<hr>
-				<div class="trash-row">
-					<div class="left">
-						<div class="trash-picture">
-							<img src="img/trash/1.png">
-						</div>
-						<div class="trash-text">
-							<h4>Стандарт</h4>
-							<span>2500сом</span>
+								<p v-if="item.days">Количество суток:</p>
+								<input v-if="item.days" type="number" :value="item.days" min="1" max="90" disabled>
+								
+								<p v-if="item.hours">Количество часов:</p>
+								<input v-if="item.hours" type="number" :value="item.hours" min="1" max="90" disabled>
 
-							<br>
-
-							<p>Количество суток:</p>
-							<input type="number" value="1" min="1" max="90" disabled>
-
-							<h3>Номер комнаты: 2</h3>
-						</div>
-					</div>
-					<div class="right">
-						<div class="trash-status">
-							<h5>2500 сом</h5>
-							<br><br><br><br><br>
-							<span style="color: red;">Отклонено</span>
-						</div>
-						<div class="row">
-							<div class="photo-upload">
-								<form>
-									<input @change="handleImage" type="file" id="img" name="img" accept="image/*"
-										hidden>
-									<label for="img">Оплатить</label>
-								</form>
+								<h3 v-if="item.roomNumber">Номер комнаты: {{ item.roomNumber }}</h3>
+								<h3 v-if="item.name">{{ item.name }}</h3>
 							</div>
-							<!-- <div v-if="cart.img" class="getImage">
-								<img class="uploaded-image" :src="cart.img" alt="aa">
-							</div> -->
 						</div>
-					</div>
+						<div class="right">
+							<div class="trash-status">
+								<h5>{{ item.totalPrice }} сом</h5>
+								<br><br><br><br><br>
+								<span v-if="item.orderStatus == 'CONFIRMED'">Принято</span>
+								<span v-else-if="item.orderStatus == 'DECLINED'" style="color: red;">Отклонено</span>
+								<span v-else>Оплачено</span>
+							</div>
+							<div class="row">
+								<div class="photo-upload">
+									<form>
+										<input @change="handleImage" type="file" id="img" name="img" accept="image/*"
+											hidden>
+										<label for="img">Оплатить</label>
+									</form>
+								</div>
+								<!-- <div v-if="cart.img" class="getImage">
+									<img class="uploaded-image" :src="cart.img" alt="aa">
+								</div> -->
+							</div>
+						</div>
 
+					</div>
 				</div>
 			</div>
 			<div class="payment">
@@ -155,19 +125,33 @@
 </template>
 
 <script>
-import Datepicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css'
+import axios from 'axios';
 
-export default {
-	components: {
-		Datepicker
-	},
+export default {	
 	data() {
 		return {
-			date: '',
-
+			trash: [],
+			cartItems: []
 		}
 	},
+	mounted() {
+		axios
+			.get('http://localhost:8083/user/get/my-orders/' + this.$store.getters.getId)
+			.then(response => {(this.trash = response.data.value);
+				console.log(response.data)
+				for (let i in this.trash){
+					this.cartItems = this.cartItems.concat(this.trash[i])
+				}
+				this.cartItems = this.cartItems.splice(1);
+				})
+			.catch(error => {
+				console.log(error);
+				this.errored = true;
+			});
+	},
+	watch: {
+		
+	}
 }
 
 </script>

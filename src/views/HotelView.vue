@@ -182,13 +182,21 @@ export default {
 	},
 	methods: {
 		openDateRangeBooking(roomType){
-			this.$refs.dateRange.showModal = true;
-			this.$refs.dateRange.roomType = roomType;
+			if (true){
+				this.$refs.dateRange.showModal = true;
+				this.$refs.dateRange.roomType = roomType;
+			} else{
+				alert('Для бронирования нужно для начала авторизоваться!');
+			}
 		},
 
 		hotelHotelHallModal(hotelHall){
-			this.$refs.timeBooking.showModal = true;
-			this.$refs.timeBooking.hotelHall = hotelHall;
+			if (true) {
+				this.$refs.timeBooking.showModal = true;
+				this.$refs.timeBooking.hotelHall = hotelHall;
+			} else{
+				alert('Для бронирования нужно для начала авторизоваться!');
+			}
 		}
 	}
 	      

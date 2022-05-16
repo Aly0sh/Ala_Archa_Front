@@ -223,6 +223,12 @@ const routes = [
     component: () =>
       import("../views/admin/ShowHistoryBookObject.vue"),
   },
+  {
+    path: "/admin/show-paid",
+    name: "show-paid",
+    component: () =>
+      import("../views/admin/ShowPaid.vue"),
+  },
 ];
 
 const router = createRouter({
