@@ -367,3 +367,18 @@
     width: 10%;
 }
 
+.super-admin-add-button{
+    margin: 0 auto 40px auto;
+    display: block;
+    background-color: #7EB685;
+    border: none;
+    padding: 10px 20px;
+    font-size: calc(6px + 0.6vw);
+    border-radius: 5px;
+    color: #000000;
+}
+
+.super-admin-add-button:hover{
+    background-color: #75a47b;
+    color: #ffffff;
+}

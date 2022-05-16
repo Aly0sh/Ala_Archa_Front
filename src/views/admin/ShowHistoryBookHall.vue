@@ -4,22 +4,29 @@
             <h2>История брони залов</h2>
             <table>
                 <tr>
-                    <th>user</th>
-                    <th>Название</th>
+                    <th>User Id</th>
+                    <th>Имя пользователя</th>
+                    <th>Номер телефона</th>
+                    <th>Название отеля</th>
                     <th>Название зала</th>
                     <th>Дата</th>
                     <th>Время начала</th>
                     <th>Время конца</th>
+                    <!-- <th>Цена брони</th> -->
                     <th class="status">Статус</th>
                 </tr>
                 <tr v-for="(hall_book, i) in hall_books" :key="i">
-                    <td>{{ hall_book.user }}</td>
-                    <td>{{ hall_book.name }}</td>
-                    <td>{{ hall_book.hallName }}</td>
-                    <td>{{ hall_book.date }}</td>
+                    <td>{{ hall_book.userId }}</td>
+                    <td>{{ hall_book.userFullName }}</td>
+                    <td>{{ hall_book.userPhone }}</td>
+                    <td>{{ hall_book.hotelName }}</td>
+                    <td>{{ hall_book.hotelHallName }}</td>
+                    <td>{{ converterDate(hall_book.startDate) }}</td>
                     <td>{{ hall_book.startTime }}</td>
-                    <td>{{ hall_book.endTime}}</td>
-                    <td class="accept deny">Принято/Отклонено</td>
+                    <td>{{ hall_book.endTime }}</td>
+                    <!-- <td>{{ hall_book.totalPrice }}</td> -->
+                    <td v-if="hall_book.orderStatus == 'CONFIRMED'" class="accept">Принято</td>
+                    <td v-else class="deny">Отклонено</td>
                 </tr>
             </table>
             <a href="/admin/show-admin-menu"><div class="back">
@@ -34,13 +41,13 @@ import axios from 'axios';
 export default {
     data(){
     return{
-      hotels: []
+      hall_books: []
     }
   },
   mounted(){
     axios
-      .get("http://localhost:8083/hotel/get-for-list")
-      .then(response => {(this.hotels = response.data.value);
+      .get("http://localhost:8083/hotelHall/order/get-confirmed-or-declined")
+      .then(response => {(this.hall_books = response.data.value);
       console.log(response.data)})
       .catch(error => {
         console.log(error);
@@ -48,33 +55,18 @@ export default {
       });
     },
   methods: {
-      delete(id){
-        axios
-            .delete(('http://localhost:8083/hotel/delete/' + id), 
-              {
-                headers:{
-                  Authorization:this.$store.getters.getToken,
-                }
-              })
-            .then((resp) => {
-                if (resp.status == 200) {
-                // this.$router.push("/");
-                }
-                console.log(this.$store.state);
-            })
-            .catch((error) => {
-                if (!error.response) {
-                this.$router.push("/error");
-                this.$store.commit("setError", error);
-                } else if (error.response.data.details === undefined) {
-                this.$router.push("/error");
-                this.$store.commit("setError", error);
-                } else {
-                this.signInErrorFlag = true;
-                this.signInErrorMessage = error.response.data.details;
-                console.log(error.response.data);
-                }
-            });
+      converterDate(dateString){
+        let date = new Date(dateString.split('T')[0]);
+        let day = date.getDate();
+        let month = date.getMonth();
+        let year = date.getFullYear();
+        if(day <= 9){
+          day = '0' + day;
+        }
+        if(month <= 9){
+          month = '0' + month;
+        }
+        return (day + '.' + month + '.' + year)
       }
   }
 }

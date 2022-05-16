@@ -20,6 +20,8 @@
             </table>
         </div>
     </div>
+
+    <button @click="$router.push('/super-admin/create-flora-fauna')" class="super-admin-add-button">Добавить</button>
 </template>
 
 <script>

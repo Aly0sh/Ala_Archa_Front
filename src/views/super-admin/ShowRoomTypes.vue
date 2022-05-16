@@ -22,6 +22,7 @@
             </table>
         </div>
     </div>
+    <button @click="$router.push('/super-admin/create-room-type')" class="super-admin-add-button">Добавить</button>
 </template>
 
 <script>

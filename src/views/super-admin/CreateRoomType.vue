@@ -94,7 +94,7 @@ export default {
               })
             .then((resp) => {
                 if (resp.status == 200) {
-                // this.$router.push("/");
+                this.$router.push("/super-admin/show-room-types");
                 }
                 console.log(this.$store.state);
             })
