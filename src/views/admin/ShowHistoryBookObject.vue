@@ -13,6 +13,7 @@
                     <th>Дата выезда</th>
                     <th>Время начала</th>
                     <th>Время конца</th>
+                    <th>Цена заказа</th>
                     <th class="status">Статус</th>
                 </tr>
                 <tr v-for="(object_book, i) in object_books" :key="i">
@@ -24,7 +25,8 @@
                     <td>{{ converterDate(object_book.startDate) }}</td>
                     <td>{{ converterDate(object_book.endDate) }}</td>
                     <td>{{ object_book.startTime }}</td>
-                    <td>{{ object_book.endTime}}</td>
+                    <td>{{ object_book.endTime }}</td>
+                    <td>{{ object_book.totalPrice }}</td>
                     <td v-if="object_book.orderStatus == 'CONFIRMED'" class="accept">Принято</td>
                     <td v-else class="deny">Отклонено</td>
                 </tr>

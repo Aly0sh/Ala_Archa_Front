@@ -62,11 +62,6 @@ const routes = [
     component: CreateArea
   },
   {
-    path: "/super-admin/create-area",
-    name: "create-area",
-    component: CreateArea
-  },
-  {
     path: "/super-admin/create-hotel",
     name: "create-hotel",
     component: () =>

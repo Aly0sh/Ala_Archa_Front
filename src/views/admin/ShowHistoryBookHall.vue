@@ -12,7 +12,7 @@
                     <th>Дата</th>
                     <th>Время начала</th>
                     <th>Время конца</th>
-                    <!-- <th>Цена брони</th> -->
+                    <th>Цена брони</th>
                     <th class="status">Статус</th>
                 </tr>
                 <tr v-for="(hall_book, i) in hall_books" :key="i">
@@ -24,7 +24,7 @@
                     <td>{{ converterDate(hall_book.startDate) }}</td>
                     <td>{{ hall_book.startTime }}</td>
                     <td>{{ hall_book.endTime }}</td>
-                    <!-- <td>{{ hall_book.totalPrice }}</td> -->
+                    <td>{{ hall_book.totalPrice }}</td>
                     <td v-if="hall_book.orderStatus == 'CONFIRMED'" class="accept">Принято</td>
                     <td v-else class="deny">Отклонено</td>
                 </tr>

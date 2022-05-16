@@ -12,6 +12,7 @@
                     <th>Номер комнаты</th>
                     <th>Дата прибытия</th>
                     <th>Дата отъезда</th>
+                    <th>Цена заказа</th>
                     <th class="status">Статус</th>
                 </tr>
                 <tr v-for="(room_book, i) in room_books" :key="i">
@@ -23,6 +24,7 @@
                     <td>{{ room_book.roomNumber }}</td>
                     <td>{{ converterDate(room_book.startDate) }}</td>
                     <td>{{ converterDate(room_book.endDate) }}</td>
+                    <td>{{ room_book.totalPrice }}</td>
                     <td v-if="room_book.orderStatus == 'CONFIRMED'" class="accept">Принято</td>
                     <td v-else class="deny">Отклонено</td>
                 </tr>
