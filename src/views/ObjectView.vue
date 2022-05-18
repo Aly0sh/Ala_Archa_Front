@@ -11,6 +11,7 @@
 		<h1 class="mobile-obj-title">Топчаны</h1>
 
 		<DateRangeBookingObject ref="objectModal"></DateRangeBookingObject>
+		<TimeBookingObject ref="objectModalTime"></TimeBookingObject>
 
 
 		<div class="topchan-body">
@@ -20,7 +21,7 @@
 				<p class="topchan-body-content-text">Цена: {{ objectType.price }} сом</p>
 				<p class="topchan-body-content-text">Цена за след час: {{ objectType.pricePerHour }} сом</p>
 				<!-- <p class="topchan-body-content-text">Вместимость: {{ objectType.numberOfSeats }}</p> -->
-				<button @click="$refs.objectModal.showModal = true" class="topchan-body-content-button">ЗАБРОНИРОВАТЬ</button>
+				<button @click="openModalBooking(objectType.timeType, objectType.objectModels)" class="topchan-body-content-button">ЗАБРОНИРОВАТЬ</button>
 			</div>
 		</div>
 
@@ -31,7 +32,7 @@
 			<img :src="objectType.objectTypeImgModels[4].img" class="topchan-slider-img" style="margin-right: 0;" alt="">
 		</div>
 		<div class="clear"></div>
-		<button @click="$refs.objectModal.showModal = true" class="topchan-button">Бронировать</button>
+		<button @click="openModalBooking(objectType.timeType, objectType.objectModels)" class="topchan-button">Бронировать</button>
 	</div>
 
 	<h3 class="object-menu-head" v-show="objectType.menuSectionModels">Меню услуг</h3>
@@ -110,6 +111,7 @@
 <script>
 import DateRangeBookingObject from "../components/DateRangeBookingObject.vue";
 import axios from 'axios';
+import TimeBookingObject from "../components/TimeBookingObject.vue";
 
 
 export default {
@@ -120,7 +122,24 @@ export default {
 		}
 	},
 	components: {
-		DateRangeBookingObject
+    DateRangeBookingObject,
+    TimeBookingObject
+	},
+	methods:{
+		openModalBooking(timeType, objects){
+			if (true){
+				if(timeType == 'TIME'){
+					this.$refs.objectModalTime.showModal = true; 
+					this.$refs.objectModalTime.objects = objects;
+				}
+				else if(timeType == 'DATE'){
+					this.$refs.objectModal.showModal = true; 
+					this.$refs.objectModal.objects = objects;
+				}
+			} else {
+				alert('Для бронирования нужно для начала авторизоваться!');
+			}
+		}
 	},
 	created() {
 		this.objectId = this.$route.params.id;

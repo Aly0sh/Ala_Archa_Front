@@ -15,13 +15,11 @@
 				>
 			</Datepicker>
 		</div>
-		<select id="selector">
-			<option value="">Тапчан 1</option>
-			<option value="">Тапчан 2</option>
-			<option value="">Тапчан 3</option>
+		<select v-model="objectId" id="selector">
+			<option v-for="(object, i) in objects" :key="i" :value="object.id">{{ object.name }} ({{object.numberOfSeats}} чел)</option>
 		</select>
-		<span style="display: block; margin-bottom: 1vw;" class="validation">Дата 14.05.2022 занята</span>
-		<button class="datepicker-book">Забронировать</button>
+		<span style="display: block; margin-bottom: 1vw;" class="validation"><span v-if="details">{{ details }}</span></span>
+		<button class="datepicker-book" @click="booking(objectId, date[0], date[1])">Забронировать</button>
 	</div>
   </div>
 </template>
@@ -29,6 +27,7 @@
 <script>
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
+import axios from 'axios';
 
 
 export default {
@@ -38,13 +37,48 @@ export default {
     data() {
         return {
 			date: '',
-			showModal: false
+			showModal: false,
+			objects: [],
+			objectId: null,
+			details: null
         }
     },
     methods: {
         closeBooking(){
             this.showModal = false;
-        }
+        },
+
+		booking(objectId, startDate, endDate){
+			let userId = this.$store.getters.getId;
+			axios
+			.post("http://localhost:8083/object/order",
+			{objectId, startDate, endDate, userId},
+			{
+				headers:{
+					Authorization:this.$store.getters.getToken,
+				}
+			})
+			.then((resp) => {
+				if (resp.status == 200) {
+					alert("Ваш заказ принят подождите пока его обработают. После обработки заказа к вам на электронную почту придет уведомление.");
+                    this.showModal = false;
+				}
+				console.log(this.$store.state);	
+			})
+			.catch((error) => {
+				if (!error.response) {
+					this.$router.push("/error");
+					this.$store.commit("setError", error);
+				} else if (error.response.data.details === undefined) {
+					this.$router.push("/error");
+					this.$store.commit("setError", error);
+				} else {
+					this.signInErrorFlag = true;
+					this.details = error.response.data.details;
+					console.log(error.response.data);
+				}
+			});
+		},
     }        
 }
 </script>

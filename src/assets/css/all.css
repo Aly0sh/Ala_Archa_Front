@@ -2728,26 +2728,34 @@ html {
 }
 
 .trash hr {
+    margin: 3%;
     border: 2px solid rgba(126, 182, 133, 0.5);
 }
 
 .trash h1,
 .payment h1 {
     text-align: start;
-    margin-left: 2%;
+    margin: 5% 0 0 3%;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
     font-size: 28px;
-    line-height: 58px;
+    line-height: 110%;
     color: #4A8251;
 }
 
-.trash .trash-picture {
-    width: 43%;
+.trash h1{
+    margin: 5% 0 4% 3%;
 }
 
-.trash .trash-picture img {
+.payment h1{
+    margin: 2% 0 2% 0;
+}
+
+.trash .trash-row .left .trash-picture img{
+    object-fit: cover;
+    border-radius: 10px;
+    height: 100%;
     width: 100%;
 }
 
@@ -2757,7 +2765,7 @@ html {
     font-style: normal;
     font-weight: 600;
     font-size: calc(10px + 0.4vw);
-    line-height: 29px;
+    line-height: 110%;
     margin: 0;
 }
 
@@ -2767,7 +2775,7 @@ html {
     font-style: normal;
     font-weight: 600;
     font-size: calc(6px + 0.4vw);
-    line-height: 24px;
+    line-height: 110%;
     color: gray;
 }
 
@@ -2776,7 +2784,7 @@ html {
     font-style: normal;
     font-weight: 400;
     font-size: calc(6px + 0.4vw);
-    line-height: 21px;
+    line-height: 110%;
 }
 
 .trash .trash-text h3 {
@@ -2784,7 +2792,7 @@ html {
     font-style: normal;
     font-weight: 600;
     font-size: calc(10px + 0.2vw);
-    line-height: 24px;
+    line-height: 110%;
     margin-top: 80px;
 }
 
@@ -2793,7 +2801,7 @@ html {
     font-style: normal;
     font-weight: 600;
     font-size: calc(12px + 0.4vw);
-    line-height: 29px;
+    line-height: 110%;
 }
 
 .trash .trash-status span {
@@ -2801,13 +2809,13 @@ html {
     font-style: normal;
     font-weight: 600;
     font-size: calc(12px + 0.4vw);
-    line-height: 29px;
+    line-height: 110%;
     color: #4A8251;
 }
 
 .trash .trash-row {
     display: flex;
-    padding: 10px;
+    padding: 2%;
 }
 
 .trash .trash-row .trash-picture,
@@ -2829,6 +2837,10 @@ html {
     float: right;
     padding: 2% 3%;
     height: fit-content;
+}
+
+.payment h3 {
+    font-size: calc(0.8em + 1vw);
 }
 
 .payment input {
@@ -2865,11 +2877,160 @@ html {
     margin: 10% auto 5%;
 }
 
-.payment .button:hover{
+.payment .button:hover {
     background: inherit;
     color: #4A8251;
 }
 
+.trash .photo-upload input[type=file]::-webkit-file-upload-button
+{
+    padding: .2em .4em;
+    border-radius: .2em;
+    transition: 1s;
+}
+
+.trash .photo-upload label
+{
+    background-color: #7EB685;
+    color: white;
+    padding: 10% 10%;
+    font-family: sans-serif;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+
+@media screen and (max-width: 768px) {
+   .cart-row{
+       display: block;
+   } 
+   .trash, .payment{
+       width: 100%;
+       margin: 5% 0 0;
+       float: none;
+   }
+   .payment{
+       padding-bottom: 5%;
+   }
+   .trash h1,
+   .payment h1{
+       font-size: calc(1.2em + 1vw);
+   }
+   .trash .trash-row{
+       display: block;
+   }
+   .trash .trash-row .left{
+       display: flex;
+       justify-content: space-between;
+   }
+   .trash .trash-row .left .trash-text h4,
+   .payment h4{
+        font-size: calc(1em + 1vw);
+   }
+   .trash .trash-row .left .trash-text span,
+   .trash .trash-row .left .trash-text p,
+   .payment span{
+        font-size: calc(0.5em + 1vw);
+    }
+    .trash .trash-row .left .trash-text input
+    {
+        font-size: calc(0.8em + 1vw);
+    }
+    .trash .trash-row .left .trash-text h3{
+        font-size: calc(0.5em + 1vw);
+        margin: 5% 0;
+    }
+    
+   .trash .trash-row .trash-text{
+       width: 50%;  
+   }
+   .trash .trash-row .trash-picture{
+       height: 40vw;
+       width: 40vw;
+   }
+   .trash .trash-row .trash-status{
+       display: flex;
+       width: 100%;
+       justify-content: space-between;
+       padding: 2%;
+       margin: 0;
+   }
+   .trash .trash-row .trash-status h5{
+       float: right;
+       margin-bottom: 0;
+   }
+   .trash .trash-row .trash-status span{
+       float: left;
+       padding: 5.6% 0 0;
+   }
+   .trash .right .row{
+       justify-content: end;
+   }
+   .trash .photo-upload{
+       margin: 2% 5%;
+   }
+   .trash .photo-upload label{
+       font-size: calc(12px + 1vw);
+   }
+
+}
+
+@media screen and (min-width: 768px) {
+    .trash .trash-row{
+        display: flex;
+    }
+    .trash .trash-row .left{
+        width: 85%;
+        display: flex;
+    }
+    .trash .trash-row .left .trash-text h3{
+        margin: 50% 0 0 ;
+        font-size: calc(0.1em + 1vw);
+    }
+    .trash .trash-row .left .trash-picture{
+        width: 20vw;
+        height: 20vw;
+    }
+    .trash .trash-row .right .trash-status{
+        margin: 0;
+    }
+    .trash .trash-row .trash-status h5{
+        margin-bottom: 140%;
+        margin-top: 5%;
+        font-size: calc(0.4em + 1vw);
+    }
+    .trash .trash-row .trash-status span{
+        font-size: calc(0.3em + 1vw);
+    }
+    .trash h1,
+    .payment h1{
+        font-size: calc(0.7em + 1vw);
+    }
+    .payment h3 {
+        font-size: calc(0.5em + 1vw);
+    }
+    .trash .trash-status{
+        width: 10vw;
+    }
+    .trash .right .row{
+        display: block;
+    }
+    .trash .photo-upload{
+        margin: 10% 0 0;
+    }
+    .trash .photo-upload label{
+        font-size: calc(0.2em + 1vw);
+        padding: 5% 10%;
+    }
+}
+@media screen and (min-width: 992px){
+
+    
+}   
+
+
+/* =========== */
 
 .modal-shad {
     position: fixed;
@@ -2904,7 +3065,7 @@ html {
 }
 
 
-.modal-shad{
+.modal-shad {
     position: fixed;
     top: 0;
     left: 0;
@@ -2914,7 +3075,7 @@ html {
     background: rgba(0, 0, 0, 0.39);
 }
 
-.book-window{
+.book-window {
     width: 40%;
     background-color: #ffffff;
     position: absolute;
@@ -2929,18 +3090,18 @@ html {
 
 
 
-.book-window h2{
+.book-window h2 {
     font-size: calc(10px + 2vw);
 }
 
-.book-window h3{
+.book-window h3 {
     font-size: calc(10px + 1vw);
     margin: 1.5vw 0;
 }
 
 @media only screen and (max-width: 750px) {
 
-    .book-window{
+    .book-window {
         width: 60%;
     }
 
@@ -2948,7 +3109,7 @@ html {
 
 @media only screen and (max-width: 500px) {
 
-    .book-window{
+    .book-window {
         width: 80%;
     }
 
@@ -2956,7 +3117,7 @@ html {
 
 @media only screen and (max-width: 450px) {
 
-    .book-window{
+    .book-window {
         width: 90%;
     }
 
@@ -2964,23 +3125,23 @@ html {
 
 @media only screen and (max-width: 350px) {
 
-    .book-window{
+    .book-window {
         width: 95%;
     }
 }
 
-.date-picker{
+.date-picker {
     max-width: 260px;
     margin: 0 auto;
 }
 
-select#selector{
+select#selector {
     width: 260px;
     margin: 1.5vw 0;
     font-size: calc(0.4vw + 10px);
 }
 
-.datepicker-book{
+.datepicker-book {
     width: 30%;
     height: 3vw;
     min-height: 28px;
@@ -2992,7 +3153,7 @@ select#selector{
 }
 
 
-.datepicker-book:hover{
+.datepicker-book:hover {
     color: #ffffff;
     background-color: #5fb06a;
 }
@@ -3000,7 +3161,7 @@ select#selector{
 
 
 
-.book-window-time{
+.book-window-time {
     width: 70%;
     background-color: #ffffff;
     position: absolute;
@@ -3012,16 +3173,16 @@ select#selector{
     text-align: center;
 }
 
-.book-window-time h2{
+.book-window-time h2 {
     font-size: calc(10px + 2vw);
 }
 
-.book-window-time h3{
+.book-window-time h3 {
     font-size: calc(10px + 1vw);
     margin: 1.5vw 0;
 }
 
-.datePickerTime{
+.datePickerTime {
     display: grid;
     grid-template-columns: 50% 40% 10%;
 }
@@ -3031,7 +3192,7 @@ select#selector{
     color: #ffffff;
 }
 
-.time-picker{
+.time-picker {
     display: grid;
     grid-template-columns: 67% 3% 30%;
     grid-template-rows: 60px;
@@ -3040,66 +3201,66 @@ select#selector{
     margin-top: 2vw;
 }
 
-.time-picker label{
+.time-picker label {
     text-align: left;
     font-size: calc(0.6vw + 10px);
     line-height: 14px;
 }
 
-.time-picker select{
+.time-picker select {
     height: 48px;
 }
 
 
-select#selector1{
+select#selector1 {
     width: 150%;
     margin: 1.5vw 0;
     font-size: calc(0.4vw + 10px);
 }
 
 @media only screen and (max-width: 900px) {
-    .datePickerTime{
+    .datePickerTime {
         display: grid;
         grid-template-columns: 60% 35%;
     }
 
-    .time-picker{
+    .time-picker {
         grid-template-columns: 60% 3% 37%;
         grid-template-rows: 60px;
     }
 }
 
 @media only screen and (max-width: 830px) {
-    .datePickerTime{
+    .datePickerTime {
         display: grid;
         grid-template-columns: 65% 30%;
     }
 
-    .time-picker{
+    .time-picker {
         grid-template-columns: 50% 3% 47%;
         grid-template-rows: 80px;
     }
 }
 
 @media only screen and (max-width: 730px) {
-    .datePickerTime{
+    .datePickerTime {
         display: grid;
         grid-template-columns: 100%;
     }
 
-    .time-picker{
+    .time-picker {
         grid-template-columns: 70% 3% 27%;
         grid-template-rows: 20%;
         width: 80%;
         margin: 3vw auto 0 auto;
     }
 
-    .time-picker select{
+    .time-picker select {
         height: 5vw;
     }
 
-        
-    select#selector1{
+
+    select#selector1 {
         width: 260px;
         margin: 1.5vw auto;
         font-size: calc(0.4vw + 10px);
@@ -3108,29 +3269,28 @@ select#selector1{
 }
 
 @media only screen and (max-width: 500px) {
-    .book-window-time{
+    .book-window-time {
         width: 85%;
-    }   
+    }
 
-    .time-picker{
+    .time-picker {
         margin: 25px auto 0 auto;
     }
 
-    .time-picker select{
+    .time-picker select {
         height: 25px;
     }
 }
 
 @media only screen and (max-width: 370px) {
-    .time-picker{
+    .time-picker {
         grid-template-columns: 60% 3% 37%;
         width: 90%;
     }
 }
 
 @media only screen and (max-width: 340px) {
-    .book-window-time{
+    .book-window-time {
         width: 95%;
-    } 
+    }
 }
-

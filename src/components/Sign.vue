@@ -143,7 +143,7 @@
                             email: resp.data.value.email,
                             token: 'Bearer ' + resp.data.value.token,
                             signInFlag: true,
-                            id: resp.data.value.id
+                            id: resp.data.value.userId
                             });
 
                             this.$router.push("/");
@@ -151,7 +151,7 @@
                             sessionStorage.setItem("email", resp.data.value.email);
                             sessionStorage.setItem("token", 'Bearer ' + resp.data.value.token);
                             sessionStorage.setItem("signInFlag", true);
-                            sessionStorage.setItem("id", resp.data.value.id)
+                            sessionStorage.setItem("id", resp.data.value.userId)
                             this.show = false;
                             this.authProblem = false;
                         }

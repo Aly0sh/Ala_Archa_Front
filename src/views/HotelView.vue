@@ -5,6 +5,7 @@
 	</div>
 
 	<DateRangeBooking ref="dateRange"></DateRangeBooking>
+	<TimeBooking ref="timeBooking"></TimeBooking>
 
 	<!-- <div class="room-types">
 		<h3 class="select-room-text">Выберите подходящий номер для себя:</h3>
@@ -28,34 +29,70 @@
 		</div>
 	</div> -->
 
+	<div class="hotels-title" style="margin: 7vw 0 0 7.5%">
+		Комнаты
+	</div>
+
 	<div class="room" v-for="(roomType, i) in hotel.roomTypeModels" :key="i">
 		<div class="topchan-body">
-			<img class="topchan-body-img" src="../assets/img/objects/object3.png" alt="">
+			<img class="topchan-body-img" :src="roomType.roomTypeImageModels[0].img" alt="">
 			<div class="topchan-body-content">
 				<h3>{{ roomType.type }}</h3>
 				<p class="topchan-body-content-text">Зона: {{hotel.areaName}}</p>
 				<p class="topchan-body-content-text">Цена: {{roomType.price}} сом</p>
+				<p class="topchan-body-content-text">Количество номеров: {{roomType.roomModels.length}}</p>
 				<!-- <p class="topchan-body-content-text">Вместимость: </p>
 				<p class="topchan-body-content-text">Доп услуги: </p> -->
 			</div>
 		</div>
 
 		<div class="room-slider">
-			<img src="../assets/img/objects/object1.png" class="room-slider-img" alt="">
-			<img src="../assets/img/objects/object1.png" class="room-slider-img" alt="">
-			<img src="../assets/img/objects/object1.png" class="room-slider-img" alt="">
-			<img src="../assets/img/objects/object1.png" class="room-slider-img" style="margin-right: 0;" alt="">
+			<img :src="roomType.roomTypeImageModels[1].img" class="room-slider-img" alt="">
+			<img :src="roomType.roomTypeImageModels[2].img" class="room-slider-img" alt="">
+			<img :src="roomType.roomTypeImageModels[3].img" class="room-slider-img" alt="">
+			<img :src="roomType.roomTypeImageModels[4].img" class="room-slider-img" style="margin-right: 0;" alt="">
 		</div>
 		<div class="topchan-slider">
-			<img src="../assets/img/objects/object1.png" class="topchan-slider-img" alt="">
-			<img src="../assets/img/objects/object1.png" class="topchan-slider-img" alt="">
-			<img src="../assets/img/objects/object1.png" class="topchan-slider-img" style="margin-right: 0;" alt="">
+			<img :src="roomType.roomTypeImageModels[1].img" class="topchan-slider-img" alt="">
+			<img :src="roomType.roomTypeImageModels[2].img" class="topchan-slider-img" alt="">
+			<img :src="roomType.roomTypeImageModels[3].img" class="topchan-slider-img" style="margin-right: 0;" alt="">
 		</div>
 		<div class="clear"></div>
-		<button @click="$refs.dateRange.showModal = true" class="hotel-body-content-button">ЗАБРОНИРОВАТЬ</button>
-		<button @click="$refs.dateRange.showModal = true" class="topchan-button">Бронировать</button>
+		<button @click="openDateRangeBooking(roomType)" class="hotel-body-content-button">ЗАБРОНИРОВАТЬ</button>
+		<button @click="openDateRangeBooking(roomType)" class="topchan-button">Бронировать</button>
 	</div>
 
+	<div v-if="hotel.hotelHallModels.length != 0" class="hotels-title" style="margin: 7vw 0 0 7.5%; width: 40%">
+		Дополнительные комнаты
+	</div>
+
+	<div class="room" v-for="(hotelHall, i) in hotel.hotelHallModels" :key="i">
+		<div class="topchan-body">
+			<img class="topchan-body-img" :src="hotelHall.hotelHall_imgModels[0].img" alt="">
+			<div class="topchan-body-content">
+				<h3>{{ hotelHall.name }}</h3>
+				<p class="topchan-body-content-text">Зона: {{ hotel.areaName }}</p>
+				<p class="topchan-body-content-text">Цена: {{ hotelHall.price }} сом</p>
+				<p class="topchan-body-content-text">Цена за след час: {{ hotelHall.priceForNextHours }} сом</p>
+				<p class="topchan-body-content-text">Вместимость: {{ hotelHall.numberOfSeats }}</p>
+			</div>
+		</div>
+
+		<div class="room-slider">
+			<img :src="hotelHall.hotelHall_imgModels[1].img" class="room-slider-img" alt="">
+			<img :src="hotelHall.hotelHall_imgModels[2].img" class="room-slider-img" alt="">
+			<img :src="hotelHall.hotelHall_imgModels[3].img" class="room-slider-img" alt="">
+			<img :src="hotelHall.hotelHall_imgModels[4].img" class="room-slider-img" style="margin-right: 0;" alt="">
+		</div>
+		<div class="topchan-slider">
+			<img :src="hotelHall.hotelHall_imgModels[1].img" class="topchan-slider-img" alt="">
+			<img :src="hotelHall.hotelHall_imgModels[2].img" class="topchan-slider-img" alt="">
+			<img :src="hotelHall.hotelHall_imgModels[3].img" class="topchan-slider-img" style="margin-right: 0;" alt="">
+		</div>
+		<div class="clear"></div>
+		<button @click="hotelHotelHallModal(hotelHall)"  class="hotel-body-content-button">ЗАБРОНИРОВАТЬ</button>
+		<button @click="hotelHotelHallModal(hotelHall)" class="topchan-button">Бронировать</button>
+	</div>
 
     <footer class="green">
 		<div class="container">
@@ -117,6 +154,7 @@
 import DateRangeBooking from '../components/DateRangeBooking.vue'
 import TimeBookingObject from '../components/TimeBookingObject.vue'
 import axios from 'axios';
+import TimeBooking from '@/components/TimeBooking.vue';
 
 
 export default {
@@ -127,8 +165,10 @@ export default {
 		}
 	},
 	components:{
-    	DateRangeBooking, TimeBookingObject
-	},
+    DateRangeBooking,
+    TimeBookingObject,
+    TimeBooking
+},
 	created() {
 		this.hotelId = this.$route.params.id;
 		axios
@@ -139,6 +179,25 @@ export default {
 			console.log(error);
 			this.errored = true;
 		});
+	},
+	methods: {
+		openDateRangeBooking(roomType){
+			if (true){
+				this.$refs.dateRange.showModal = true;
+				this.$refs.dateRange.roomType = roomType;
+			} else{
+				alert('Для бронирования нужно для начала авторизоваться!');
+			}
+		},
+
+		hotelHotelHallModal(hotelHall){
+			if (true) {
+				this.$refs.timeBooking.showModal = true;
+				this.$refs.timeBooking.hotelHall = hotelHall;
+			} else{
+				alert('Для бронирования нужно для начала авторизоваться!');
+			}
+		}
 	}
 	      
 }

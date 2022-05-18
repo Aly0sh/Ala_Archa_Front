@@ -84,7 +84,7 @@ export default {
               })
             .then((resp) => {
                 if (resp.status == 200) {
-                // this.$router.push("/");
+                 this.$router.push("/super-admin/show-hotels");
                 }
                 console.log(this.$store.state);
             })

@@ -24,6 +24,9 @@
                 <a href="/admin/show-history-book-object"><div class="item">
                     <p>История брони топчанов</p>
                 </div></a>
+                <a href="/admin/show-paid"><div class="item">
+                    <p>Показать оплаченные</p>
+                </div></a>
             </div>
         </div>
     </div>

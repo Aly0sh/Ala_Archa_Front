@@ -28,6 +28,8 @@
             </table>
         </div>
     </div>
+    <button @click="$router.push('/super-admin/create-object-type')" class="super-admin-add-button">Добавить</button>
+
 </template>
 
 <script>

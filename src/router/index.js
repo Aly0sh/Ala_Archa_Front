@@ -1,7 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import SignIn from "../views/SignIn.vue";
-import SignUp from "../views/SignUp.vue";
 import CreateArea from "../views/super-admin/CreateArea.vue"
 
 const routes = [
@@ -9,16 +7,6 @@ const routes = [
     path: "/",
     name: "home",
     component: HomeView,
-  },
-  {
-    path: "/sign-in",
-    name: "sign-in",
-    component: SignIn
-  },
-  {
-    path: "/sign-up",
-    name: "sign-up",
-    component: SignUp
   },
   {
     path: "/services",
@@ -67,11 +55,6 @@ const routes = [
     name: "cart",
     component: () =>
       import("../views/CartView.vue"),
-  },
-  {
-    path: "/super-admin/create-area",
-    name: "create-area",
-    component: CreateArea
   },
   {
     path: "/super-admin/create-area",
@@ -239,6 +222,12 @@ const routes = [
     name: "show-history-book-object",
     component: () =>
       import("../views/admin/ShowHistoryBookObject.vue"),
+  },
+  {
+    path: "/admin/show-paid",
+    name: "show-paid",
+    component: () =>
+      import("../views/admin/ShowPaid.vue"),
   },
 ];
 

@@ -22,6 +22,8 @@
             </table>
         </div>
     </div>
+    <button @click="$router.push('/super-admin/create-menu')" class="super-admin-add-button">Добавить</button>
+
 </template>
 
 <script>
