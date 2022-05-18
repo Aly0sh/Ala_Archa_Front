@@ -13,7 +13,7 @@
                     <p>Бронь зала</p>
                 </div></a>
                 <a href="/admin/book-object"><div class="item">
-                    <p>Бронь топчана</p>
+                    <p>Бронь объектов</p>
                 </div></a>
                 <a href="/admin/show-history-book-room"><div class="item">
                     <p>История брони комнат</p>
@@ -24,8 +24,14 @@
                 <a href="/admin/show-history-book-object"><div class="item">
                     <p>История брони топчанов</p>
                 </div></a>
-                <a href="/admin/show-paid"><div class="item">
-                    <p>Показать оплаченные</p>
+                <a href="/admin/show-paid-room"><div class="item">
+                    <p>Показать оплаченные комнаты</p>
+                </div></a>
+                <a href="/admin/show-paid-hotel-hall"><div class="item">
+                    <p>Показать оплаченные залы</p>
+                </div></a>
+                <a href="/admin/show-paid-object"><div class="item">
+                    <p>Показать оплаченные объекты</p>
                 </div></a>
             </div>
         </div>

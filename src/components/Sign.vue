@@ -143,7 +143,8 @@
                             email: resp.data.value.email,
                             token: 'Bearer ' + resp.data.value.token,
                             signInFlag: true,
-                            id: resp.data.value.userId
+                            id: resp.data.value.userId,
+                            role: resp.data.value.role
                             });
 
                             this.$router.push("/");
@@ -151,7 +152,8 @@
                             sessionStorage.setItem("email", resp.data.value.email);
                             sessionStorage.setItem("token", 'Bearer ' + resp.data.value.token);
                             sessionStorage.setItem("signInFlag", true);
-                            sessionStorage.setItem("id", resp.data.value.userId)
+                            sessionStorage.setItem("id", resp.data.value.userId);
+                            sessionStorage.setItem("role", resp.data.value.role);
                             this.show = false;
                             this.authProblem = false;
                         }
@@ -160,10 +162,8 @@
                         })
                         .catch((error) => {
                         if (!error.response) {
-                            this.$router.push("/error");
                             this.$store.commit("setError", error);
                         } else if (error.response.data.details === undefined) {
-                            this.$router.push("/error");
                             this.$store.commit("setError", error);
                         } else {
                             this.signInErrorFlag = true;
@@ -201,10 +201,8 @@
                     })
                     .catch((error) => {
                         if (!error.response) {
-                        this.$router.push("/error");
                         this.$store.commit("setError", error);
                         } else if (error.response.data.details === undefined) {
-                        this.$router.push("/error");
                         this.$store.commit("setError", error);
                         } else {
                         this.signInErrorFlag = true;

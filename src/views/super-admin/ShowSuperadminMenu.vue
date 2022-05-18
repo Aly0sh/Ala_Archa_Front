@@ -36,6 +36,9 @@
                 <a href="/super-admin/show-menu"><div class="item">
                     <p>Список меню</p>
                 </div></a>
+                <a href="/super-admin/show-feedback-messages"><div class="item">
+                    <p>Список сообщений для обратной связи</p>
+                </div></a>
             </div>
         </div>
     </div>

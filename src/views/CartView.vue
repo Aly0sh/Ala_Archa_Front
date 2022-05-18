@@ -34,14 +34,16 @@
 								<br><br><br><br><br>
 								<span v-if="item.orderStatus == 'CONFIRMED'">Принято</span>
 								<span v-else-if="item.orderStatus == 'DECLINED'" style="color: red;">Отклонено</span>
+								<span v-else-if="item.orderStatus == 'IN_PROCESS'" style="color: #FFBD00;">Ожидает проверки</span>
+								<span v-else-if="item.orderStatus == 'CHECK_CHECK'" style="color: #FFBD00;">Проверка чека</span>
 								<span v-else>Оплачено</span>
 							</div>
 							<div class="row">
 								<div class="photo-upload">
-									<form>
+									<form v-if="item.orderStatus == 'CONFIRMED'">
 										<input @change="handleImage" type="file" id="img" name="img" accept="image/*"
 											hidden>
-										<label for="img">Оплатить</label>
+										<label for="img" @click="typeDepender(item.id, item.roomType, item.objectType, item.hotelHallName)">Оплатить</label>
 									</form>
 								</div>
 								<!-- <div v-if="cart.img" class="getImage">
@@ -131,7 +133,21 @@ export default {
 	data() {
 		return {
 			trash: [],
-			cartItems: []
+			cartItems: [],
+			checkPhoto: '',
+			room: {
+				roomOrderId: null,
+				img: ''
+			},
+			object: {
+				objectOrderId: null,
+				img: ''
+			},
+			hotelHall: {
+				hotelHallOrderId: null,
+				img: ''
+			},
+			type: ''
 		}
 	},
 	mounted() {
@@ -143,6 +159,7 @@ export default {
 					this.cartItems = this.cartItems.concat(this.trash[i])
 				}
 				this.cartItems = this.cartItems.splice(1);
+				this.cartItems = this.cartItems.sort((prev, curr) => Date.parse(prev.createdDate) - Date.parse(curr.createdDate));
 				})
 			.catch(error => {
 				console.log(error);
@@ -150,7 +167,128 @@ export default {
 			});
 	},
 	watch: {
-		
+		checkPhoto(img){
+			if (this.type == 'roomType'){
+				this.room.img = img
+				axios
+					.post("http://localhost:8083/room/order/pay",
+					this.room, 
+					{
+						headers:{
+							Authorization:this.$store.getters.getToken,
+						}
+					})
+					.then((resp) => {
+						if (resp.status == 200) {
+							alert('Проверка чека! После проверки чека к вам придет уведомление на электронную почту');
+							location.reload();
+						}
+						console.log(this.$store.state);
+					})
+					.catch((error) => {
+						if (!error.response) {
+						this.$router.push("/error");
+						this.$store.commit("setError", error);
+						} else if (error.response.data.details === undefined) {
+						this.$router.push("/error");
+						this.$store.commit("setError", error);
+						} else {
+						this.signInErrorFlag = true;
+						this.signInErrorMessage = error.response.data.details;
+						console.log(error.response.data);
+						}
+					});
+			} else if (this.type == 'objectType'){
+				this.object.img = img
+				axios
+					.post("http://localhost:8083/object/order/pay",
+					this.object, 
+					{
+						headers:{
+							Authorization:this.$store.getters.getToken,
+						}
+					})
+					.then((resp) => {
+						if (resp.status == 200) {
+							alert('Проверка чека! После проверки чека к вам придет уведомление на электронную почту');
+							location.reload();
+						}
+						console.log(this.$store.state);
+					})
+					.catch((error) => {
+						if (!error.response) {
+						this.$router.push("/error");
+						this.$store.commit("setError", error);
+						} else if (error.response.data.details === undefined) {
+						this.$router.push("/error");
+						this.$store.commit("setError", error);
+						} else {
+						this.signInErrorFlag = true;
+						this.signInErrorMessage = error.response.data.details;
+						console.log(error.response.data);
+						}
+					});
+			} else if(this.type == 'hotelHall'){
+				this.hotelHall.img = img
+				axios
+					.post("http://localhost:8083/hotelHall/order/pay",
+					this.hotelHall, 
+					{
+						headers:{
+							Authorization:this.$store.getters.getToken,
+						}
+					})
+					.then((resp) => {
+						if (resp.status == 200) {
+							alert('Проверка чека! После проверки чека к вам придет уведомление на электронную почту');
+							location.reload();
+						}
+						console.log(this.$store.state);
+					})
+					.catch((error) => {
+						if (!error.response) {
+						this.$router.push("/error");
+						this.$store.commit("setError", error);
+						} else if (error.response.data.details === undefined) {
+						this.$router.push("/error");
+						this.$store.commit("setError", error);
+						} else {
+						this.signInErrorFlag = true;
+						this.signInErrorMessage = error.response.data.details;
+						console.log(error.response.data);
+						}
+					});
+			}
+		}
+	},
+	methods: {
+		handleImage(e){
+          const selectedImage = e.target.files[0];
+          this.createBase64Image(selectedImage);
+		},
+
+		createBase64Image(fileObject){
+			const reader = new FileReader();
+			reader.onload = (e) => {
+			this.checkPhoto = e.target.result;    
+			};
+
+			reader.readAsDataURL(fileObject);
+		},
+		typeDepender(id, roomType, objectType, hotelHall){
+			if (roomType != null){
+				this.room.roomOrderId = id;
+				this.type = 'roomType';
+			}
+			else if (objectType != null){
+				this.object.objectOrderId = id;
+				this.type = 'objectType'
+			}
+			else if (hotelHall != null){
+				this.hotelHall.hotelHallOrderId = id;
+				this.type = 'hotelHall'
+			}
+		}
 	}
 }
 

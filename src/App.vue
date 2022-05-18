@@ -8,7 +8,10 @@
         <router-link class="sub-about-mob" v-show="dropdown" @click="burger = !burger" to="/fauna">Фауна</router-link> <br/>
         <router-link class="sub-about-mob" v-show="dropdown" @click="burger = !burger" to="/about-us">История</router-link> <br/>
         <router-link @click="burger = !burger" to="/services">Услуги</router-link> <br/>
-        <router-link @click="burger = !burger" to="/entry">Въезд</router-link>
+        <router-link @click="burger = !burger" to="/entry">Въезд</router-link> <br v-if="$store.state.credentials.role == 'CLIENT'"/>
+        <router-link v-if="$store.state.credentials.role == 'CLIENT'" @click="burger = !burger" to="/cart">Корзина</router-link> <br v-if="$store.state.credentials.role == 'ADMIN'"/>
+        <router-link v-if="$store.state.credentials.role == 'ADMIN'" @click="burger = !burger" to="/admin/show-admin-menu">Интерфейс админа</router-link> <br v-if="$store.state.credentials.role == 'SUPER_ADMIN'"/>
+        <router-link v-if="$store.state.credentials.role == 'SUPER_ADMIN'" @click="burger = !burger" to="/super-admin/show-superadmin-menu">Интерфейс супер админа</router-link>
         <br class="ultra-br">
         <a v-if="!this.$store.getters.getSignInFlag" class="auth-mob" @click="showModal(); burger = !burger;">Авторизация</a>
         <a v-if="this.$store.getters.getSignInFlag" class="auth-mob" @click="signOut(); burger = !burger;">Выйти</a>
@@ -46,6 +49,9 @@
             </div></a></li>
             <li><router-link to="/services">Услуги</router-link></li>
             <li><router-link to="/entry">Въезд</router-link></li>
+            <li v-if="$store.state.credentials.role == 'CLIENT'"><router-link to="/cart">Корзина</router-link></li>
+            <li v-if="$store.state.credentials.role == 'ADMIN'"><router-link to="/admin/show-admin-menu">Интерфейс админа</router-link></li>
+            <li v-if="$store.state.credentials.role == 'SUPER_ADMIN'"><router-link to="/super-admin/show-superadmin-menu">Интерфейс супер админа</router-link></li>
         </ul>
         <a v-if="!this.$store.getters.getSignInFlag" class="green authorize font" @click="showModal">Авторизация</a>
         <a v-if="this.$store.getters.getSignInFlag" class="green authorize font" @click="signOut();">Выйти</a>
