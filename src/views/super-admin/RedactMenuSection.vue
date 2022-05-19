@@ -1,7 +1,7 @@
 <template>
   <div class="super">
     <div class="form-fauna-flora">
-        <h1 style="text-align: center;">Добавление Секции Меню</h1>
+        <h1 style="text-align: center;">Редактирование Секции Меню</h1>
         <div class="formbox">
             <form>
     
@@ -20,7 +20,7 @@
         </div>
         
         <div class="wrapper" style="margin: 0;">
-            <button id="wrapper" @click="create">Добавить</button>
+            <button id="wrapper" @click="update()">Редактировать</button>
         </div>
     </div>
   </div>
@@ -32,6 +32,7 @@ export default {
     data(){
       return{
         menuSection: {
+            id: null,
             name: '',
             objectTypeId: null
         },
@@ -39,9 +40,9 @@ export default {
       }
     },
     methods: {
-      create(){
+      update(){
             axios
-            .post("http://localhost:8083/menu/section/create",
+            .put("http://localhost:8083/menu/section/update",
               this.menuSection, 
               {
                 headers:{
@@ -78,6 +79,20 @@ export default {
                 }
               })
         .then(response => {(this.objects = response.data.value);
+        console.log(response.data)})
+        .catch(error => {
+          console.log(error);
+          this.errored = true;
+        });
+
+      axios
+        .get("http://localhost:8083/menu/section/get/" + this.$route.params.id, 
+              {
+                headers:{
+                  Authorization:this.$store.getters.getToken,
+                }
+              })
+        .then(response => {(this.menuSection = response.data.value);
         console.log(response.data)})
         .catch(error => {
           console.log(error);

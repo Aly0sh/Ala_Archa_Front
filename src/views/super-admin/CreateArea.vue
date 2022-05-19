@@ -8,7 +8,7 @@
     
               <label for="name">Введите название зоны:</label>
               <br>
-              <input v-model="area.areaName" type="text" id="name" placeholder="Введите номер комнаты:"><br>
+              <input v-model="area.areaName" type="text" id="name"><br>
     
               <br>
 
@@ -46,7 +46,12 @@ export default {
     },
     mounted(){
     axios
-      .get("http://localhost:8083/user/get-admins")
+      .get("http://localhost:8083/user/get-admins", 
+              {
+                headers:{
+                  Authorization:this.$store.getters.getToken,
+                }
+              })
       .then(response => {(this.users = response.data.value);
       console.log(response.data)})
       .catch(error => {

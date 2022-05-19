@@ -182,7 +182,7 @@ export default {
 	},
 	methods: {
 		openDateRangeBooking(roomType){
-			if (true){
+			if (this.$store.state.credentials.role == 'CLIENT' || this.$store.state.credentials.role == 'ADMIN' || this.$store.state.credentials.role == 'SUPER_ADMIN'){
 				this.$refs.dateRange.showModal = true;
 				this.$refs.dateRange.roomType = roomType;
 			} else{
@@ -191,7 +191,7 @@ export default {
 		},
 
 		hotelHotelHallModal(hotelHall){
-			if (true) {
+			if (this.$store.state.credentials.role == 'CLIENT' || this.$store.state.credentials.role == 'ADMIN' || this.$store.state.credentials.role == 'SUPER_ADMIN') {
 				this.$refs.timeBooking.showModal = true;
 				this.$refs.timeBooking.hotelHall = hotelHall;
 			} else{

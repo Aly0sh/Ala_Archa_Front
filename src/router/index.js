@@ -129,6 +129,76 @@ const routes = [
       beforeEnter: () => routeGuardFunc(SUPER_ADMIN),
   },
   {
+    path: "/super-admin/redact-area/:id",
+    name: "redact-area",
+    component: () =>
+      import("../views/super-admin/RedactArea.vue"),
+    beforeEnter: () => routeGuardFunc(SUPER_ADMIN),
+  },
+  {
+    path: "/super-admin/redact-hotel/:id",
+    name: "redact-hotel",
+    component: () =>
+      import("../views/super-admin/RedactHotel.vue"),
+    beforeEnter: () => routeGuardFunc(SUPER_ADMIN),
+  },
+  {
+    path: "/super-admin/redact-menu/:id",
+    name: "redact-menu",
+    component: () =>
+      import("../views/super-admin/RedactMenu.vue"),
+      beforeEnter: () => routeGuardFunc(SUPER_ADMIN),
+  },
+  {
+    path: "/super-admin/redact-object-type/:id",
+    name: "redact-object-type",
+    component: () =>
+      import("../views/super-admin/RedactObjectType.vue"),
+      beforeEnter: () => routeGuardFunc(SUPER_ADMIN),
+  },
+  {
+    path: "/super-admin/redact-object/:id",
+    name: "redact-object",
+    component: () =>
+      import("../views/super-admin/RedactObject.vue"),
+      beforeEnter: () => routeGuardFunc(SUPER_ADMIN),
+  },
+  {
+    path: "/super-admin/redact-flora-fauna/:id",
+    name: "redact-flora-fauna",
+    component: () =>
+      import("../views/super-admin/RedactFloraFauna.vue"),
+      beforeEnter: () => routeGuardFunc(SUPER_ADMIN),
+  },
+  {
+    path: "/super-admin/redact-room-type/:id",
+    name: "redact-room-type",
+    component: () =>
+      import("../views/super-admin/RedactRoomType.vue"),
+      beforeEnter: () => routeGuardFunc(SUPER_ADMIN),
+  },
+  {
+    path: "/super-admin/redact-room/:id",
+    name: "redact-room",
+    component: () =>
+      import("../views/super-admin/RedactRoom.vue"),
+      beforeEnter: () => routeGuardFunc(SUPER_ADMIN),
+  },
+  {
+    path: "/super-admin/redact-menu-section/:id",
+    name: "redact-menu-section",
+    component: () =>
+      import("../views/super-admin/RedactMenuSection.vue"),
+      beforeEnter: () => routeGuardFunc(SUPER_ADMIN),
+  },
+  {
+    path: "/super-admin/redact-hotel-halls/:id",
+    name: "redact-hotel-halls",
+    component: () =>
+      import("../views/super-admin/RedactHotelHalls.vue"),
+      beforeEnter: () => routeGuardFunc(SUPER_ADMIN),
+  },
+  {
     path: "/super-admin/show-superadmin-menu",
     name: "show-superadmin-menu",
     component: () =>

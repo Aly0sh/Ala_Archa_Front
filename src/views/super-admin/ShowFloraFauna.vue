@@ -14,8 +14,8 @@
                     <td>{{ nature.id }}</td>
                     <td>{{ nature.name }}</td>
                     <td>{{ nature.type }}</td>
-                    <td class="edit"><a href="">Редактировать</a></td>
-                    <td class="delete"><a @click="delete(nature.id)">Удалить</a></td>
+                    <td class="edit" @click="edit(nature.id)"><a>Редактировать</a></td>
+                    <td class="delete" @click="delet(nature.id)"><a>Удалить</a></td>
                 </tr>
             </table>
         </div>
@@ -36,7 +36,12 @@ export default {
   },
   mounted(){
     axios
-      .get("http://localhost:8083/nature/get-for-list")
+      .get("http://localhost:8083/nature/get-for-list", 
+              {
+                headers:{
+                  Authorization:this.$store.getters.getToken,
+                }
+              })
       .then(response => {(this.nature = response.data.value);
       console.log(response.data)})
       .catch(error => {
@@ -45,7 +50,11 @@ export default {
       });
     },
   methods: {
-      delete(id){
+      edit(id){
+        this.$router.push('/super-admin/redact-flora-fauna/' + id)
+      },
+      delet(id){
+        console.log('deliting')
         axios
             .delete(('http://localhost:8083/nature/delete/' + id), 
               {
@@ -56,6 +65,7 @@ export default {
             .then((resp) => {
                 if (resp.status == 200) {
                 // this.$router.push("/");
+                location.reload()
                 }
                 console.log(this.$store.state);
             })

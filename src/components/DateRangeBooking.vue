@@ -46,6 +46,7 @@ export default {
     methods: {
         closeBooking(){
             this.showModal = false;
+			this.details = null;
         },
 
 		booking(roomId, startDate, endDate){

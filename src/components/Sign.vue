@@ -40,7 +40,7 @@
                         <input v-model="user.firstName" placeholder="Имя">
                         <input v-model="user.lastName" placeholder="Фамилию">
                         <input v-model="user.email" type="email" placeholder="Электронную почту">
-                        <input v-model="user.phone" placeholder="Телефон">
+                        <input v-model="userPhone" type="tel" placeholder="Телефон">
                         <input v-model="user.password" type="password" placeholder="Пароль">
                         <input v-model="repeatPassword" type="password" placeholder="Повторите пароль">
                         <br><br>
@@ -81,6 +81,7 @@
                     phone: '',
                     password: ''
                 },
+                userPhone: '+996 ',
                 repeatPassword: '',
                 authProblem: false
             }
@@ -118,6 +119,17 @@
                     console.log('aaaa');
                 }
                 return errors;
+            }
+        },
+        watch: {
+            userPhone(newVal, oldVal){
+                let phone = newVal;
+                if (!phone.startsWith('+996 ')){
+                    this.userPhone = '+996 ';
+                }
+                if(phone.length > 14){
+                    this.userPhone = oldVal;
+                }
             }
         },
         methods: {
@@ -175,6 +187,7 @@
                 }
             },
             signup() {
+                this.user.phone = this.userPhone;
                 this.v$.user.$touch();
                 if(this.v$.user.firstName.$error){
                     alert('Введите имя!');

@@ -116,6 +116,7 @@ export default {
 
         closeBooking(){
             this.showModal = false;
+            this.error = false;
         },
 
         booking(startTime, endTime, startDate){

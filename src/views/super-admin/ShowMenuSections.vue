@@ -12,8 +12,8 @@
                 <tr v-for="(menuSection, i) in menuSections" :key="i">
                     <td>{{ menuSection.id }}</td>
                     <td>{{ menuSection.name }}</td>
-                    <td class="edit"><a href="">Редактировать</a></td>
-                    <td class="delete"><a @click="delete(menuSection.id)">Удалить</a></td>
+                    <td class="edit" @click="edit(menuSection.id)"><a>Редактировать</a></td>
+                    <td class="delete" @click="delet(menuSection.id)"><a>Удалить</a></td>
                 </tr>
             </table>
         </div>
@@ -32,7 +32,12 @@ export default {
   },
   mounted(){
     axios
-      .get("http://localhost:8083/menu/section/get-for-list")
+      .get("http://localhost:8083/menu/section/get-for-list", 
+              {
+                headers:{
+                  Authorization:this.$store.getters.getToken,
+                }
+              })
       .then(response => {(this.menuSections = response.data.value);
       console.log(response.data)})
       .catch(error => {
@@ -41,7 +46,10 @@ export default {
       });
     },
   methods: {
-      delete(id){
+      edit(id){
+        this.$router.push('/super-admin/redact-menu-section/' + id)
+      },
+      delet(id){
         axios
             .delete(('http://localhost:8083/menu/section/delete/' + id), 
               {
@@ -51,7 +59,8 @@ export default {
               })
             .then((resp) => {
                 if (resp.status == 200) {
-                // this.$router.push("/");
+                  // this.$router.push("/");
+                  location.reload();
                 }
                 console.log(this.$store.state);
             })

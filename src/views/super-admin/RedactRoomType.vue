@@ -1,7 +1,7 @@
 <template>
   <div class="super">
         <div class="form-fauna-flora">
-        <h1 style="text-align: center;">Добавление типа комнат</h1>
+        <h1 style="text-align: center;">Редактирование типа комнат</h1>
 
         <div class="formbox">
             <form>
@@ -42,7 +42,7 @@
         <br>
         
         <div class="wrapper" style="margin: 0;">
-            <button id="wrapper" @click="create">Добавить</button>
+            <button id="wrapper" @click="update()">Редактировать</button>
         </div>
     </div>
   </div>
@@ -54,6 +54,7 @@ export default {
     data(){
       return{
         roomType: {
+            id: null,
             type: '',
             price: 0,
             hotelId: null,
@@ -82,10 +83,9 @@ export default {
 
         reader.readAsDataURL(fileObject);
       },
-
-      create(){
+      update(){
             axios
-            .post("http://localhost:8083/room/type/create",
+            .put("http://localhost:8083/room/type/update",
               this.roomType, 
               {
                 headers:{
@@ -124,6 +124,21 @@ export default {
               })
         .then(response => {(this.hotels = response.data.value);
         console.log(response.data)})
+        .catch(error => {
+        console.log(error);
+        this.errored = true;
+        });
+
+      axios
+        .get("http://localhost:8083/room/type/get/" + this.$route.params.id, 
+              {
+                headers:{
+                  Authorization:this.$store.getters.getToken,
+                }
+              })
+        .then(response => {(this.roomType = response.data.value);
+        console.log(response.data)
+        this.roomType.roomTypeImageModels = []})
         .catch(error => {
         console.log(error);
         this.errored = true;

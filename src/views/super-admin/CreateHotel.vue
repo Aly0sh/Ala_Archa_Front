@@ -16,7 +16,7 @@
               <br>
               <label for="name">Введите название Гостиницы:</label>
               <br>
-              <input v-model="hotel.hotelName" type="text" id="name" name="hotel" placeholder="Введите название Гостиницы:"><br> 
+              <input v-model="hotel.hotelName" type="text" id="name" name="hotel"><br> 
 
             </form>
         </div>
@@ -107,7 +107,12 @@ export default {
 
   mounted(){
     axios
-      .get("http://localhost:8083/area/get-for-select")
+      .get("http://localhost:8083/area/get-for-select", 
+              {
+                headers:{
+                  Authorization:this.$store.getters.getToken,
+                }
+              })
       .then(response => {(this.areas = response.data.value);
       console.log(response.data)})
       .catch(error => {

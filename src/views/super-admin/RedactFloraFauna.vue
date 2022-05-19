@@ -1,49 +1,50 @@
 <template>
   <div class="super">
         <div class="form-fauna-flora">
-        <h1 style="text-align: center;">Добавление типа комнат</h1>
+        <h1 style="text-align: center;">Редактирование Растения/Животного</h1>
 
         <div class="formbox">
             <form>
-
-              <label for="name">Введите название типа комнаты:</label>
+              <label for="name">Введите название:</label>
               <br>
-              <input v-model="roomType.type" type="text" id="name" name="name"><br>
+              <input v-model="florauna.name" type="text" id="name"><br>
     
               <br>
 
-              <label for="price">Введите цену:</label>
+              <label for="desc">Введите описание:</label>
               <br>
-              <input v-model="roomType.price" style="width: 100%" type="number" id="price" name="type"><br>
-
-              <label for="select">Выберите отель:</label>
-              <div class="type">
-                  <select id="select" v-model="roomType.hotelId">
-                      <option v-for="(i, index) in hotels" :key="index" :value="i.id"> {{ i.hotelName }} </option>
-                  </select>
-              </div><br>
+              <textarea v-model="florauna.description" id="desc"></textarea>
+        
             </form>
         </div>
-    
-        <br>
-        <br>
-        <div class="getImagesGrid">
-            <img v-for="(i, index) in roomType.roomTypeImageModels" :key="index" :src="i.img" alt="aa">
-        </div>
-        <br>
         
+        
+        <label for="select">Выберите тип:</label>
+              <div class="type">
+                  <select id="select" v-model="florauna.natureTypeId">
+                      <option v-for="(natureType, index) in natureTypes" :key="index" :value="natureType.id"> {{ natureType.type }} </option>
+                  </select>
+              </div><br>
+
+        <br>
+        <br>
+
         <div class="photo-upload">
             <form>
-                <input @change="handleImage" type="file" id="img" name="img" accept="image/*" hidden>
+                <input type="file" @change="handleImage" id="img" name="img" accept="image/*" hidden>
                 <label for="img">Прикрепить фотографию:</label>
             </form>
         </div>
-
         <br>
+        <div v-if="florauna.img" class="getImage">
+          <img class="uploaded-image" :src="florauna.img" alt="aa">
+        </div>
         
         <div class="wrapper" style="margin: 0;">
-            <button id="wrapper" @click="create">Добавить</button>
+            <button id="wrapper" @click="update()">Редактировать</button>
         </div>
+        <br>
+        <br>
     </div>
   </div>
 </template>
@@ -53,16 +54,16 @@ import axios from 'axios';
 export default {
     data(){
       return{
-        roomType: {
-            type: '',
-            price: 0,
-            hotelId: null,
-            roomTypeImageModels: []
+        florauna: {
+            id: null,
+            name: '',
+            description: '',
+            img: '',
+            natureTypeId: ''
         },
-        hotels: []
+        natureTypes: [],
       }
     },
-
     methods: {
       handleImage(e){
           const selectedImage = e.target.files[0];
@@ -71,22 +72,16 @@ export default {
 
       createBase64Image(fileObject){
           const reader = new FileReader();
-
           reader.onload = (e) => {
-              this.roomType.roomTypeImageModels.push(
-                {
-                  img : e.target.result
-                }
-              );
+          this.florauna.img = e.target.result;    
           };
 
         reader.readAsDataURL(fileObject);
       },
-
-      create(){
+      update(){
             axios
-            .post("http://localhost:8083/room/type/create",
-              this.roomType, 
+            .put("http://localhost:8083/nature/update",
+              this.florauna, 
               {
                 headers:{
                   Authorization:this.$store.getters.getToken,
@@ -94,7 +89,7 @@ export default {
               })
             .then((resp) => {
                 if (resp.status == 200) {
-                this.$router.push("/super-admin/show-room-types");
+                 this.$router.push("/super-admin/show-flora-fauna");
                 }
                 console.log(this.$store.state);
             })
@@ -111,24 +106,38 @@ export default {
                 console.log(error.response.data);
                 }
             });
-      },
-  },
-  
-  mounted(){
-      axios
-        .get("http://localhost:8083/hotel/get-for-select", 
+      }
+    },
+
+    mounted(){
+    axios
+      .get("http://localhost:8083/nature/type/get-for-select", 
               {
                 headers:{
                   Authorization:this.$store.getters.getToken,
                 }
               })
-        .then(response => {(this.hotels = response.data.value);
-        console.log(response.data)})
-        .catch(error => {
+      .then(response => {(this.natureTypes = response.data.value);
+      console.log(response.data)})
+      .catch(error => {
         console.log(error);
         this.errored = true;
-        });
-    },
+      });
+
+    axios
+      .get("http://localhost:8083/nature/get/" + this.$route.params.id, 
+              {
+                headers:{
+                  Authorization:this.$store.getters.getToken,
+                }
+              })
+      .then(response => {(this.florauna = response.data.value);
+      console.log(response.data)})
+      .catch(error => {
+        console.log(error);
+        this.errored = true;
+      });
+    }
 }
 </script>
 

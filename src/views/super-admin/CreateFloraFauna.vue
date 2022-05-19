@@ -7,13 +7,13 @@
             <form>
               <label for="name">Введите название:</label>
               <br>
-              <input v-model="florauna.name" type="text" id="name" placeholder="Введите название:"><br>
+              <input v-model="florauna.name" type="text" id="name"><br>
     
               <br>
 
               <label for="desc">Введите описание:</label>
               <br>
-              <textarea v-model="florauna.description" id="desc" placeholder="Введите описание.."></textarea>
+              <textarea v-model="florauna.description" id="desc"></textarea>
         
             </form>
         </div>
@@ -110,7 +110,12 @@ export default {
 
     mounted(){
     axios
-      .get("http://localhost:8083/nature/type/get-for-select")
+      .get("http://localhost:8083/nature/type/get-for-select", 
+              {
+                headers:{
+                  Authorization:this.$store.getters.getToken,
+                }
+              })
       .then(response => {(this.natureTypes = response.data.value);
       console.log(response.data)})
       .catch(error => {

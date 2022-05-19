@@ -125,7 +125,7 @@ export default {
 	},
 	methods:{
 		openModalBooking(timeType, objects){
-			if (true){
+			if (this.$store.state.credentials.role == 'CLIENT' || this.$store.state.credentials.role == 'ADMIN' || this.$store.state.credentials.role == 'SUPER_ADMIN'){
 				if(timeType == 'TIME'){
 					this.$refs.objectModalTime.showModal = true; 
 					this.$refs.objectModalTime.objects = objects;

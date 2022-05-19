@@ -75,6 +75,11 @@ export default {
     let page = this.currentPage -1;
     axios
       .get("http://localhost:8083/hotelHall/order/get-confirmed-or-declined", 
+              {
+                headers:{
+                  Authorization:this.$store.getters.getToken,
+                }
+              }, 
       {
         params: {page}
       }
@@ -106,6 +111,11 @@ export default {
         this.currentPage = page + 1;
         axios
           .get("http://localhost:8083/hotelHall/order/get-confirmed-or-declined", 
+              {
+                headers:{
+                  Authorization:this.$store.getters.getToken,
+                }
+              }, 
           {
             params: {page}
           }

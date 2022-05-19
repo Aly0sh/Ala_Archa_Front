@@ -1,37 +1,31 @@
 <template>
   <div class="super">
-        <div class="form-fauna-flora">
-        <h1 style="text-align: center;">Добавление типа комнат</h1>
+    <div class="form-fauna-flora">
+        <h1 style="text-align: center;">Редактирование Гостиницы</h1>
 
         <div class="formbox">
             <form>
-
-              <label for="name">Введите название типа комнаты:</label>
-              <br>
-              <input v-model="roomType.type" type="text" id="name" name="name"><br>
     
-              <br>
-
-              <label for="price">Введите цену:</label>
-              <br>
-              <input v-model="roomType.price" style="width: 100%" type="number" id="price" name="type"><br>
-
-              <label for="select">Выберите отель:</label>
+              <label for="select">Выберите зону</label>
               <div class="type">
-                  <select id="select" v-model="roomType.hotelId">
-                      <option v-for="(i, index) in hotels" :key="index" :value="i.id"> {{ i.hotelName }} </option>
+                  <select id="select" v-model="hotel.areaId">
+                      <option v-for="(i, index) in areas" :key="index" :value="i.id"> {{ i.areaName }} </option>
                   </select>
               </div><br>
+              <br>
+              <br>
+              <label for="name">Введите название Гостиницы:</label>
+              <br>
+              <input v-model="hotel.hotelName" type="text" id="name" name="hotel"><br> 
+
             </form>
         </div>
     
         <br>
-        <br>
         <div class="getImagesGrid">
-            <img v-for="(i, index) in roomType.roomTypeImageModels" :key="index" :src="i.img" alt="aa">
+            <img v-for="(i, index) in hotel.hotelImgModels" :key="index" :src="i.img" alt="aa">
         </div>
         <br>
-        
         <div class="photo-upload">
             <form>
                 <input @change="handleImage" type="file" id="img" name="img" accept="image/*" hidden>
@@ -40,12 +34,13 @@
         </div>
 
         <br>
+        <br>
         
-        <div class="wrapper" style="margin: 0;">
-            <button id="wrapper" @click="create">Добавить</button>
+        <div class="wrapper">
+            <button id="wrapper" @click="update()">Редактировать</button>
         </div>
     </div>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -53,13 +48,13 @@ import axios from 'axios';
 export default {
     data(){
       return{
-        roomType: {
-            type: '',
-            price: 0,
-            hotelId: null,
-            roomTypeImageModels: []
+        hotel: {
+            id: null,
+            hotelName: '',
+            areaId: '',
+            hotelImgModels: []
         },
-        hotels: []
+        areas: [],
       }
     },
 
@@ -71,22 +66,18 @@ export default {
 
       createBase64Image(fileObject){
           const reader = new FileReader();
-
           reader.onload = (e) => {
-              this.roomType.roomTypeImageModels.push(
-                {
-                  img : e.target.result
-                }
-              );
+          this.hotel.hotelImgModels.push(
+            {img : e.target.result});    
           };
 
         reader.readAsDataURL(fileObject);
       },
 
-      create(){
+      update(){
             axios
-            .post("http://localhost:8083/room/type/create",
-              this.roomType, 
+            .put("http://localhost:8083/hotel/update",
+              this.hotel, 
               {
                 headers:{
                   Authorization:this.$store.getters.getToken,
@@ -94,7 +85,7 @@ export default {
               })
             .then((resp) => {
                 if (resp.status == 200) {
-                this.$router.push("/super-admin/show-room-types");
+                 this.$router.push("/super-admin/show-hotels");
                 }
                 console.log(this.$store.state);
             })
@@ -111,24 +102,41 @@ export default {
                 console.log(error.response.data);
                 }
             });
-      },
+      }
   },
-  
+
+
   mounted(){
-      axios
-        .get("http://localhost:8083/hotel/get-for-select", 
+    axios
+      .get("http://localhost:8083/area/get-for-select", 
               {
                 headers:{
                   Authorization:this.$store.getters.getToken,
                 }
               })
-        .then(response => {(this.hotels = response.data.value);
-        console.log(response.data)})
-        .catch(error => {
+      .then(response => {(this.areas = response.data.value);
+      console.log(response.data)})
+      .catch(error => {
         console.log(error);
         this.errored = true;
-        });
-    },
+      });
+
+    axios
+      .get("http://localhost:8083/hotel/get/" + this.$route.params.id, 
+              {
+                headers:{
+                  Authorization:this.$store.getters.getToken,
+                }
+              })
+      .then(response => {(this.hotel = response.data.value);
+      console.log(response.data)
+      this.hotel.hotelImgModels = []
+      })
+      .catch(error => {
+        console.log(error);
+        this.errored = true;
+      });
+    }
 }
 </script>
 

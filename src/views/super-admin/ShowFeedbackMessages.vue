@@ -79,7 +79,12 @@ export default {
   },
   mounted(){
     axios
-      .get("http://localhost:8083/feedback/get-all")
+      .get("http://localhost:8083/feedback/get-all", 
+              {
+                headers:{
+                  Authorization:this.$store.getters.getToken,
+                }
+              })
       .then(response => {(this.objectTypes = response.data.value);
       console.log(response.data)})
       .catch(error => {

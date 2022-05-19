@@ -14,8 +14,8 @@
                     <td>{{ hotel.id }}</td>
                     <td>{{ hotel.hotelName }}</td>
                     <td>{{ hotel.areaName }}</td>
-                    <td class="edit"><a href="">Редактировать</a></td>
-                    <td class="delete"><a @click="delete(hotel.id)">Удалить</a></td>
+                    <td class="edit" @click="edit(hotel.id)"><a>Редактировать</a></td>
+                    <td class="delete" @click="delet(hotel.id)"><a>Удалить</a></td>
                 </tr>
             </table>
         </div>
@@ -34,7 +34,12 @@ export default {
   },
   mounted(){
     axios
-      .get("http://localhost:8083/hotel/get-for-list")
+      .get("http://localhost:8083/hotel/get-for-list", 
+              {
+                headers:{
+                  Authorization:this.$store.getters.getToken,
+                }
+              })
       .then(response => {(this.hotels = response.data.value);
       console.log(response.data)})
       .catch(error => {
@@ -43,33 +48,37 @@ export default {
       });
     },
   methods: {
-      delete(id){
-        axios
-            .delete(('http://localhost:8083/hotel/delete/' + id), 
-              {
-                headers:{
-                  Authorization:this.$store.getters.getToken,
-                }
-              })
-            .then((resp) => {
-                if (resp.status == 200) {
-                // this.$router.push("/");
-                }
-                console.log(this.$store.state);
-            })
-            .catch((error) => {
-                if (!error.response) {
-                this.$router.push("/error");
-                this.$store.commit("setError", error);
-                } else if (error.response.data.details === undefined) {
-                this.$router.push("/error");
-                this.$store.commit("setError", error);
-                } else {
-                this.signInErrorFlag = true;
-                this.signInErrorMessage = error.response.data.details;
-                console.log(error.response.data);
-                }
-            });
+    edit(id){
+      this.$router.push('/super-admin/redact-hotel/' + id)
+    },
+    delet(id){
+      axios
+        .delete(('http://localhost:8083/hotel/delete/' + id), 
+          {
+            headers:{
+            Authorization:this.$store.getters.getToken,
+          }
+          })
+        .then((resp) => {
+          if (resp.status == 200) {
+            // this.$router.push("/");
+            location.reload()
+          }
+        console.log(this.$store.state);
+        })
+        .catch((error) => {
+          if (!error.response) {
+            this.$router.push("/error");
+            this.$store.commit("setError", error);
+          } else if (error.response.data.details === undefined) {
+            this.$router.push("/error");
+            this.$store.commit("setError", error);
+          } else {
+            this.signInErrorFlag = true;
+            this.signInErrorMessage = error.response.data.details;
+            console.log(error.response.data);
+            }
+        });
       }
   }
 }
