@@ -22,7 +22,7 @@
                     <p>История брони залов</p>
                 </div></a>
                 <a href="/admin/show-history-book-object"><div class="item">
-                    <p>История брони топчанов</p>
+                    <p>История брони объектов</p>
                 </div></a>
                 <a href="/admin/show-paid-room"><div class="item">
                     <p>Показать оплаченные комнаты</p>

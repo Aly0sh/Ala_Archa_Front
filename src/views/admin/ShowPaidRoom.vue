@@ -21,6 +21,26 @@
                     <td class="deny"><a @click="decline(item.id)">Отклонить</a></td>
                 </tr>
             </table>
+            <div v-if="pageCount > 1" class="pagination" :class="more ? 'pagination-more':(pageCount>=7)?'pagination-9':('pagination-' + pageCount)">
+              <div v-if="!more && currentPage > 1" @click="clickPage(currentPage - 2)">&lt;&lt;</div>
+              <div v-if="(currentPage >= 4) && !more" @click="clickPage(0)">1</div>
+              <div v-if="(currentPage >= 5) && !more" @click="more = true">...</div>
+              <div 
+                v-for="pageNumber in pageCount" 
+                :key="pageNumber" 
+                v-show="currentPage == pageNumber || 
+                  (currentPage + 1) == pageNumber || 
+                  (currentPage + 2) == pageNumber || 
+                  (currentPage - 1) == pageNumber || 
+                  (currentPage - 2) == pageNumber ||
+                  more"
+                  @click="clickPage(pageNumber - 1)" :style="(currentPage == pageNumber? 'color: #62db72;':'')">
+                  {{ pageNumber }}
+              </div>
+              <div v-if="(currentPage <= pageCount-4) && !more" @click="more = true">...</div>
+              <div v-if="(currentPage <= pageCount-3) && !more" @click="clickPage(pageCount - 1)">{{ pageCount }}</div>
+              <div v-if="!more && currentPage < pageCount" @click="clickPage(currentPage)">>></div>
+            </div>
             <a href="/admin/show-admin-menu"><div class="back">
                     <p>Назад</p>
                 </div></a>
@@ -39,7 +59,10 @@ export default {
     data(){
         return{
             showModal: false,
-            roomOrders: []
+            roomOrders: [],
+            pageCount: 6,
+            currentPage: 1,
+            more: false,
         }
     },
     methods: {
@@ -108,12 +131,35 @@ export default {
             });
 
       },
+      clickPage(page){
+        this.currentPage = page + 1;
+        axios
+          .get('http://localhost:8083/room/order/get-in-pay-check', 
+          {
+            params: {page}
+          }
+          )
+          .then(response => {(this.roomOrders = response.data.value);
+            console.log(response.data)
+            this.pageCount = this.roomOrders.pop().totalPage
+          })
+          .catch(error => {
+            console.log(error);
+            this.errored = true;
+          });
+      }
     },
     mounted() {
+        let page = this.currentPage -1;
 		axios
-			.get('http://localhost:8083/room/order/get-in-pay-check')
+			.get('http://localhost:8083/room/order/get-in-pay-check', 
+            {
+                params: {page}
+            }
+            )
 			.then(response => {(this.roomOrders = response.data.value);
 				console.log(response.data)
+                this.pageCount = this.roomOrders.pop().totalPage
 				})
 			.catch(error => {
 				console.log(error);
