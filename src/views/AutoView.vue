@@ -81,17 +81,17 @@
         </div><!--
 -------><div class="formbox inline">
             <h5 class="notes-title-text">Обратная связь:</h5>
-            <form class="mb-form">
+            <div class="mb-form">
     
               <label for="fname" class="notes-text-label">Имя</label>
-              <input type="text" id="fname" name="firstname" class="input-text-auto" placeholder="Имя">
+              <input type="text" v-model="messageToSend.name" id="fname" name="firstname" class="input-text-auto" placeholder="Имя">
               <label for="email" class="notes-text-label">Почта</label>
-              <input type="text" id="email" name="email" class="input-text-auto" placeholder="Почта">
+              <input type="text" v-model="messageToSend.email" id="email" name="email" class="input-text-auto" placeholder="Почта">
               <label for="subject" class="notes-text-label">Введите ваше сообщение</label>
-              <textarea id="subject" name="subject" class="input-text-auto" placeholder="Напишите ваше сообщение.." style="height:calc(12vw + 10px)"></textarea>
-              <input type="submit"  value="Отправить" class="input-text-auto">
+              <textarea id="subject" v-model="messageToSend.message"  name="subject" class="input-text-auto" placeholder="Напишите ваше сообщение.." style="height:calc(12vw + 10px)"></textarea>
+              <input type="submit" @click="sendMessage()" value="Отправить" class="input-text-auto">
               <img src="../assets/img/icons/flower.png" width="30%" alt="">
-            </form>
+            </div>
         </div>
     </div>
 </div>
@@ -153,7 +153,71 @@
 </template>
 
 <script>
+import axios from "axios";
+import useVuelidate from '@vuelidate/core';
+import { required, email, minLength, numeric } from '@vuelidate/validators';
+
 export default {
+    setup () {
+        return { v$: useVuelidate() }
+    },
+    data(){
+        return{
+            messageToSend: {
+                email: '',
+                name: '',
+                message: ''
+            }
+        }
+    },
+    validations: {
+        messageToSend: {
+            email: {
+                email, required
+            },
+            name: {
+                required
+            },
+            message: {
+                required
+            }
+        }
+    },
+    methods: {
+        sendMessage(){
+            this.v$.messageToSend.$touch();
+                if(this.v$.messageToSend.email.$error){
+                    alert('Введите адрес электронной почты корректно!');
+                } else if(this.v$.messageToSend.name.$error){
+                    alert('Введите имя!');
+                } else if(this.v$.messageToSend.message.$error){
+                    alert('Введите ваше сообщение!');
+                }
+                else {                
+                    axios
+                    .post("http://localhost:8083/feedback/create", this.messageToSend)
+                    .then((resp) => {
+                        if (resp.status == 200) {
+                            alert('Сообщение отправлено, в скором времени вам ответят на электронную почту.')
+                            location.reload()
+                    }
+                    })
+                    .catch((error) => {
+                        if (!error.response) {
+                        this.$router.push("/error");
+                        this.$store.commit("setError", error);
+                        } else if (error.response.data.details === undefined) {
+                        this.$router.push("/error");
+                        this.$store.commit("setError", error);
+                        } else {
+                        this.signInErrorFlag = true;
+                        this.signInErrorMessage = error.response.data.details;
+                        console.log(error.response.data);
+                        }
+                    });
+                }
+        }
+    }
 
 }
 </script>

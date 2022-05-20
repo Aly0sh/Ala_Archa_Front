@@ -16,8 +16,8 @@
                     <td>{{ menuItem.name }}</td>
                     <td>{{ menuItem.description }}</td>
                     <td>{{ menuItem.price }}</td>
-                    <td class="edit"><a href="">Редактировать</a></td>
-                    <td class="delete"><a @click="delete(menuItem.id)">Удалить</a></td>
+                    <td class="edit" @click="edit(menuItem.id)"><a>Редактировать</a></td>
+                    <td class="delete" @click="delet(menuItem.id)"><a>Удалить</a></td>
                 </tr>
             </table>
         </div>
@@ -37,7 +37,12 @@ export default {
   },
   mounted(){
     axios
-      .get("http://localhost:8083/menu/get-all")
+      .get("http://localhost:8083/menu/get-all", 
+              {
+                headers:{
+                  Authorization:this.$store.getters.getToken,
+                }
+              })
       .then(response => {(this.menuItems = response.data.value);
       console.log(response.data)})
       .catch(error => {
@@ -46,7 +51,10 @@ export default {
       });
     },
   methods: {
-      delete(id){
+      edit(id){
+        this.$router.push('/super-admin/redact-menu/' + id)
+      },
+      delet(id){
         axios
             .delete(('http://localhost:8083/menu/delete/' + id), 
               {
@@ -57,6 +65,7 @@ export default {
             .then((resp) => {
                 if (resp.status == 200) {
                 // this.$router.push("/");
+                location.reload();
                 }
                 console.log(this.$store.state);
             })

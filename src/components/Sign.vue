@@ -40,7 +40,7 @@
                         <input v-model="user.firstName" placeholder="Имя">
                         <input v-model="user.lastName" placeholder="Фамилию">
                         <input v-model="user.email" type="email" placeholder="Электронную почту">
-                        <input v-model="user.phone" placeholder="Телефон">
+                        <input v-model="userPhone" type="tel" placeholder="Телефон">
                         <input v-model="user.password" type="password" placeholder="Пароль">
                         <input v-model="repeatPassword" type="password" placeholder="Повторите пароль">
                         <br><br>
@@ -81,6 +81,7 @@
                     phone: '',
                     password: ''
                 },
+                userPhone: '+996 ',
                 repeatPassword: '',
                 authProblem: false
             }
@@ -120,6 +121,17 @@
                 return errors;
             }
         },
+        watch: {
+            userPhone(newVal, oldVal){
+                let phone = newVal;
+                if (!phone.startsWith('+996 ')){
+                    this.userPhone = '+996 ';
+                }
+                if(phone.length > 14){
+                    this.userPhone = oldVal;
+                }
+            }
+        },
         methods: {
             closeModal: function () {
                 this.show = false;
@@ -143,7 +155,8 @@
                             email: resp.data.value.email,
                             token: 'Bearer ' + resp.data.value.token,
                             signInFlag: true,
-                            id: resp.data.value.userId
+                            id: resp.data.value.userId,
+                            role: resp.data.value.role
                             });
 
                             this.$router.push("/");
@@ -151,7 +164,8 @@
                             sessionStorage.setItem("email", resp.data.value.email);
                             sessionStorage.setItem("token", 'Bearer ' + resp.data.value.token);
                             sessionStorage.setItem("signInFlag", true);
-                            sessionStorage.setItem("id", resp.data.value.userId)
+                            sessionStorage.setItem("id", resp.data.value.userId);
+                            sessionStorage.setItem("role", resp.data.value.role);
                             this.show = false;
                             this.authProblem = false;
                         }
@@ -160,10 +174,8 @@
                         })
                         .catch((error) => {
                         if (!error.response) {
-                            this.$router.push("/error");
                             this.$store.commit("setError", error);
                         } else if (error.response.data.details === undefined) {
-                            this.$router.push("/error");
                             this.$store.commit("setError", error);
                         } else {
                             this.signInErrorFlag = true;
@@ -175,6 +187,7 @@
                 }
             },
             signup() {
+                this.user.phone = this.userPhone;
                 this.v$.user.$touch();
                 if(this.v$.user.firstName.$error){
                     alert('Введите имя!');
@@ -201,10 +214,8 @@
                     })
                     .catch((error) => {
                         if (!error.response) {
-                        this.$router.push("/error");
                         this.$store.commit("setError", error);
                         } else if (error.response.data.details === undefined) {
-                        this.$router.push("/error");
                         this.$store.commit("setError", error);
                         } else {
                         this.signInErrorFlag = true;

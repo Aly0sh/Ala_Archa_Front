@@ -1,32 +1,27 @@
 <template>
   <div class="super">
         <div class="form-fauna-flora">
-        <h1 style="text-align: center;">Добавление зоны</h1>
+        <h1 style="text-align: center;">Обратная связь</h1>
 
         <div class="formbox">
             <form>
     
-              <label for="name">Введите название зоны:</label>
+              <label for="name">Введите оглавление:</label>
               <br>
               <input v-model="area.areaName" type="text" id="name"><br>
     
               <br>
 
-              <label for="select">Выберите админа:</label>
-              <div class="type">
-                  <select id="select" v-model="area.email">
-                      <option v-for="(i, index) in users" :key="index" :value="i.email"> {{i.lastName + ' ' + i.firstName}} </option>
-                  </select>
-              </div><br>
-
-              
+              <label for="mess">Введите сообщение:</label>
+              <br>
+              <input v-model="area.areaName" type="text" id="mess"><br>
             </form>
         </div>
         <br>
         <br>
         
         <div class="wrapper" style="margin: 0;">
-            <button id="wrapper" @click="create">Добавить</button>
+            <button id="wrapper" @click="reply">Отправить</button>
         </div>
     </div>
   </div>
@@ -34,36 +29,22 @@
 
 <script>
 import axios from 'axios';
+
 export default {
     data(){
       return{
-        area: {
-            areaName: '',
-            email: ''
+        message: {
+            userFeedBackId: null,
+            subject: '',
+            body: ''
         },
-        users: []
       }
     },
-    mounted(){
-    axios
-      .get("http://localhost:8083/user/get-admins", 
-              {
-                headers:{
-                  Authorization:this.$store.getters.getToken,
-                }
-              })
-      .then(response => {(this.users = response.data.value);
-      console.log(response.data)})
-      .catch(error => {
-        console.log(error);
-        this.errored = true;
-      });
-    },
     methods: {
-      create(){
+      reply(){
             axios
-            .post("http://localhost:8083/area/create",
-              this.area, 
+            .post("http://localhost:8083/feedback/reply",
+              this.message, 
               {
                 headers:{
                   Authorization:this.$store.getters.getToken,

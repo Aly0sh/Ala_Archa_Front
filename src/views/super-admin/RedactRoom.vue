@@ -1,7 +1,7 @@
 <template>
   <div class="super">
         <div class="form-fauna-flora">
-        <h1 style="text-align: center;">Добавление комнаты</h1>
+        <h1 style="text-align: center;">Редактирование комнаты</h1>
 
         <div class="formbox">
             <form>
@@ -14,24 +14,14 @@
 
               <label for="numberOfSeats">Введите количество мест:</label>
               <br>
-              <input v-model="room.bedNumber" style="width: 100%;" type="number" id="numberOfSeats"><br>
-
-              <br>
-              <label for="select">Выберите тип комнаты:</label>
-              <div class="type">
-                  <select id="select" v-model="room.roomTypeId">
-                      <option v-for="(i, index) in roomTypes" :key="index" :value="i.id"> {{ i.type }} </option>
-                  </select>
-              </div><br>
-
-              
+              <input v-model="room.bedNumber" style="width: 100%;" type="number" id="numberOfSeats"><br> <br>              
             </form>
         </div>
         <br>
         <br>
         
         <div class="wrapper" style="margin: 0;">
-            <button id="wrapper" @click="create">Добавить</button>
+            <button id="wrapper" @click="update()">Редактировать</button>
         </div>
     </div>
   </div>
@@ -43,6 +33,7 @@ export default {
     data(){
       return{
         room: {
+            id: null,
             roomNumber: null,
             bedNumber: null,
             roomTypeId: null
@@ -64,11 +55,25 @@ export default {
           console.log(error);
           this.errored = true;
         });
+        
+      axios
+        .get("http://localhost:8083/room/get/" + this.$route.params.id, 
+              {
+                headers:{
+                  Authorization:this.$store.getters.getToken,
+                }
+              })
+        .then(response => {(this.room = response.data.value);
+        console.log(response.data)})
+        .catch(error => {
+          console.log(error);
+          this.errored = true;
+        });
     },
     methods: {
-      create(){
+      update(){
             axios
-            .post("http://localhost:8083/room/create",
+            .put("http://localhost:8083/room/update",
               this.room, 
               {
                 headers:{

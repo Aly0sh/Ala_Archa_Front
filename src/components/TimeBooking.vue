@@ -116,6 +116,7 @@ export default {
 
         closeBooking(){
             this.showModal = false;
+            this.error = false;
         },
 
         booking(startTime, endTime, startDate){
@@ -141,10 +142,8 @@ export default {
 			.catch((error) => {
                 this.error = true;
 				if (!error.response) {
-					this.$router.push("/error");
 					this.$store.commit("setError", error);
 				} else if (error.response.data.details === undefined) {
-					this.$router.push("/error");
 					this.$store.commit("setError", error);
 				} else {
 					this.signInErrorFlag = true;

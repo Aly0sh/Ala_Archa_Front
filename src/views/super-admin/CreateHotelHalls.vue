@@ -8,21 +8,21 @@
 
               <label for="name">Введите название:</label>
               <br>
-              <input v-model="hotelHall.name" type="text" id="name" name="name" placeholder="Введите название типа комнаты:"><br>
+              <input v-model="hotelHall.name" type="text" id="name" name="name"><br>
     
               <br>
 
               <label for="price">Введите цену:</label>
               <br>
-              <input v-model="hotelHall.price" style="width: 100%" type="text" id="price" name="type" placeholder="Введите цену за день:"><br>
+              <input v-model="hotelHall.price" style="width: 100%" type="number" id="price" name="type"><br>
 
               <label for="priceper">Введите цену за последующие часы:</label>
               <br>
-              <input v-model="hotelHall.priceForNextHours" style="width: 100%" type="text" id="priceper" name="type" placeholder="Введите цену за последующие часы:"><br>
+              <input v-model="hotelHall.priceForNextHours" style="width: 100%" type="text" id="priceper" name="number"><br>
 
               <label for="seats">Введите количество мест:</label>
               <br>
-              <input v-model="hotelHall.numberOfSeats" style="width: 100%" type="text" id="seats" name="type" placeholder="Введите количество мест:"><br>
+              <input v-model="hotelHall.numberOfSeats" style="width: 100%" type="text" id="seats" name="number"><br>
 
               <label for="select">Выберите отель:</label>
               <div class="type">
@@ -123,7 +123,12 @@ export default {
   },
   mounted(){
     axios
-      .get("http://localhost:8083/hotel/get-for-select")
+      .get("http://localhost:8083/hotel/get-for-select", 
+              {
+                headers:{
+                  Authorization:this.$store.getters.getToken,
+                }
+              })
       .then(response => {(this.hotels = response.data.value);
         console.log(response.data)})
       .catch(error => {

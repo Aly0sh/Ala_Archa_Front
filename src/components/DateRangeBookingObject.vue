@@ -62,6 +62,7 @@ export default {
 				if (resp.status == 200) {
 					alert("Ваш заказ принят подождите пока его обработают. После обработки заказа к вам на электронную почту придет уведомление.");
                     this.showModal = false;
+					this.details = null;
 				}
 				console.log(this.$store.state);	
 			})

@@ -14,8 +14,8 @@
                     <td>{{ area.id }}</td>
                     <td>{{ area.areaName }}</td>
                     <td>{{ area.email }}</td>
-                    <td class="edit"><a href="">Редактировать</a></td>
-                    <td class="delete"><a @click="delete(area.id)">Удалить</a></td>
+                    <td class="edit" @click="edit(area.id)"><a>Редактировать</a></td>
+                    <td class="delete" @click="delet(area.id)"><a>Удалить</a></td>
                 </tr>
             </table>
         </div>
@@ -34,7 +34,12 @@ export default {
   },
   mounted(){
     axios
-      .get("http://localhost:8083/area/get-all")
+      .get("http://localhost:8083/area/get-all", 
+              {
+                headers:{
+                  Authorization:this.$store.getters.getToken,
+                }
+              })
       .then(response => {(this.areas = response.data.value);
       console.log(response.data)})
       .catch(error => {
@@ -43,7 +48,10 @@ export default {
       });
     },
   methods: {
-      delete(id){
+      edit(id){
+        this.$router.push('/super-admin/redact-area/' + id)
+      },
+      delet(id){
         axios
             .delete(('http://localhost:8083/area/delete/' + id), 
               {
@@ -54,6 +62,7 @@ export default {
             .then((resp) => {
                 if (resp.status == 200) {
                 // this.$router.push("/");
+                location.reload()
                 }
                 console.log(this.$store.state);
             })

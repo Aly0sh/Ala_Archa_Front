@@ -20,8 +20,8 @@
                     <td>{{ hotelHall.priceForNextHours }}</td>
                     <td>{{ hotelHall.numberOfSeats }}</td>
                     <td>{{ hotelHall.hotelName }}</td>
-                    <td class="edit"><a href="">Редактировать</a></td>
-                    <td class="delete"><a @click="delete(hotelHall.id)">Удалить</a></td>
+                    <td class="edit" @click="edit(hotelHall.id)"><a>Редактировать</a></td>
+                    <td class="delete" @click="delet(hotelHall.id)"><a>Удалить</a></td>
                 </tr>
             </table>
         </div>
@@ -40,7 +40,12 @@ export default {
   },
   mounted(){
     axios
-      .get("http://localhost:8083/hotelHall/get-for-list")
+      .get("http://localhost:8083/hotelHall/get-for-list", 
+              {
+                headers:{
+                  Authorization:this.$store.getters.getToken,
+                }
+              })
       .then(response => {(this.hotelHalls = response.data.value);
       console.log(response.data)})
       .catch(error => {
@@ -49,7 +54,10 @@ export default {
       });
     },
   methods: {
-      delete(id){
+      edit(id) {
+        this.$router.push('/super-admin/redact-hotel-halls/' + id);
+      },
+      delet(id){
         axios
             .delete(('http://localhost:8083/hotelHall/delete/' + id), 
               {
@@ -60,6 +68,7 @@ export default {
             .then((resp) => {
                 if (resp.status == 200) {
                 // this.$router.push("/");
+                location.reload();
                 }
                 console.log(this.$store.state);
             })

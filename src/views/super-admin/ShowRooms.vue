@@ -16,8 +16,8 @@
                     <td>{{ room.roomNumber }}</td>
                     <td>{{ room.bedNumber }}</td>
                     <td>{{ room.roomTypeName }}</td>
-                    <td class="edit"><a href="">Редактировать</a></td>
-                    <td class="delete"><a @click="delete(room.id)">Удалить</a></td>
+                    <td class="edit" @click="edit(room.id)"><a>Редактировать</a></td>
+                    <td class="delete" @click="delet(room.id)"><a>Удалить</a></td>
                 </tr>
             </table>
         </div>
@@ -36,7 +36,12 @@ export default {
   },
   mounted(){
     axios
-      .get("http://localhost:8083/room/get-for-list")
+      .get("http://localhost:8083/room/get-for-list", 
+              {
+                headers:{
+                  Authorization:this.$store.getters.getToken,
+                }
+              })
       .then(response => {(this.rooms = response.data.value);
       console.log(response.data)})
       .catch(error => {
@@ -45,7 +50,7 @@ export default {
       });
     },
   methods: {
-      delete(id){
+      delet(id){
         axios
             .delete(('http://localhost:8083/room/delete/' + id), 
               {
@@ -56,6 +61,7 @@ export default {
             .then((resp) => {
                 if (resp.status == 200) {
                 // this.$router.push("/");
+                location.reload();
                 }
                 console.log(this.$store.state);
             })
@@ -72,7 +78,10 @@ export default {
                 console.log(error.response.data);
                 }
             });
-      }
+      },
+    edit(id){
+      this.$router.push('/super-admin/redact-room/' + id)
+    }
   }
 }
 </script>

@@ -7,23 +7,23 @@
     
               <label for="name">Введите название:</label>
               <br>
-              <input v-model="menu.name" type="text" id="name" placeholder="Введите название:"><br>
+              <input v-model="menu.name" type="text" id="name"><br>
     
               <br>
 
               <label for="desc">Введите описание:</label>
               <br>
-              <textarea v-model="menu.description" type="text" id="desc" placeholder="Введите описание:" /><br>
+              <textarea v-model="menu.description" type="text" id="desc" /><br>
     
               <br>
               <label for="price">Введите цену:</label>
               <br>
-              <input style="width: 100%;" v-model="menu.price" type="text" id="price" placeholder="Введите цену:"><br>
+              <input style="width: 100%;" v-model="menu.price" type="number" id="price"><br>
     
             </form>
         </div>
 
-        <label for="select">Введите секцию:</label>
+        <label for="select">Выберите секцию:</label>
         <div class="type">
             <select v-model="menu.menuSectionId" id="select">
                 <option v-for="(i, index) in menuSections" :key="index" :value="i.id"> {{ i.name }} </option>
@@ -86,7 +86,12 @@ export default {
     },
     mounted(){
       axios
-        .get("http://localhost:8083/menu/section/get-for-select")
+        .get("http://localhost:8083/menu/section/get-for-select", 
+              {
+                headers:{
+                  Authorization:this.$store.getters.getToken,
+                }
+              })
         .then(response => {(this.menuSections = response.data.value);
         console.log(response.data)})
         .catch(error => {

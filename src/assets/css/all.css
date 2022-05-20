@@ -858,8 +858,8 @@ textarea {
         display: block;
     }
 
-    .formbox {
-        width: 90%;
+    .info .formbox {
+        min-width: 90%;
         padding: 5%;
         position: relative;
     }

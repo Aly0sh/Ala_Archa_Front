@@ -16,8 +16,8 @@
                     <td>{{ object.name }}</td>
                     <td>{{ object.numberOfSeats }}</td>
                     <td>{{ object.objectTypeName }}</td>
-                    <td class="edit"><a href="">Редактировать</a></td>
-                    <td class="delete"><a @click="delete(object.id)">Удалить</a></td>
+                    <td class="edit" @click="edit(object.id)"><a>Редактировать</a></td>
+                    <td class="delete" @click="delet(object.id)"><a>Удалить</a></td>
                 </tr>
             </table>
         </div>
@@ -36,7 +36,12 @@ export default {
   },
   mounted(){
     axios
-      .get("http://localhost:8083/object/get-for-list")
+      .get("http://localhost:8083/object/get-for-list", 
+              {
+                headers:{
+                  Authorization:this.$store.getters.getToken,
+                }
+              })
       .then(response => {(this.objects = response.data.value);
       console.log(response.data)})
       .catch(error => {
@@ -45,33 +50,37 @@ export default {
       });
     },
   methods: {
-      delete(id){
+      edit(id){
+        this.$router.push('/super-admin/redact-object/' + id)
+      },
+      delet(id){
         axios
-            .delete(('http://localhost:8083/object/delete/' + id), 
-              {
-                headers:{
-                  Authorization:this.$store.getters.getToken,
-                }
-              })
-            .then((resp) => {
-                if (resp.status == 200) {
-                // this.$router.push("/");
-                }
-                console.log(this.$store.state);
+          .delete(('http://localhost:8083/object/delete/' + id), 
+            {
+              headers:{
+              Authorization:this.$store.getters.getToken,
+              }
             })
-            .catch((error) => {
-                if (!error.response) {
-                this.$router.push("/error");
-                this.$store.commit("setError", error);
-                } else if (error.response.data.details === undefined) {
-                this.$router.push("/error");
-                this.$store.commit("setError", error);
-                } else {
-                this.signInErrorFlag = true;
-                this.signInErrorMessage = error.response.data.details;
-                console.log(error.response.data);
-                }
-            });
+          .then((resp) => {
+            if (resp.status == 200) {
+              // this.$router.push("/");
+              location.reload();
+            }
+            console.log(this.$store.state);
+          })
+          .catch((error) => {
+            if (!error.response) {
+              this.$router.push("/error");
+              this.$store.commit("setError", error);
+            } else if (error.response.data.details === undefined) {
+              this.$router.push("/error");
+              this.$store.commit("setError", error);
+            } else {
+              this.signInErrorFlag = true;
+              this.signInErrorMessage = error.response.data.details;
+              console.log(error.response.data);
+            }
+          });
       }
   }
 }

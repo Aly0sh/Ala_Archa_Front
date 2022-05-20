@@ -118,6 +118,7 @@ export default {
     methods: {
         closeBooking(){
             this.showModal = false;
+            this.error = false;
         },
         booking(objectId, startTime, endTime, startDate){
 			let userId = this.$store.getters.getId;
