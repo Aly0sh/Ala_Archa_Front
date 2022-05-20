@@ -62,7 +62,7 @@
 		<button @click="openDateRangeBooking(roomType)" class="topchan-button">Бронировать</button>
 	</div>
 
-	<div v-if="hotel.hotelHallModels.length != 0" class="hotels-title" style="margin: 7vw 0 0 7.5%; width: 40%">
+	<div v-if="hotel.hotelHallModels" class="hotels-title" style="margin: 7vw 0 0 7.5%; width: 40%">
 		Дополнительные комнаты
 	</div>
 

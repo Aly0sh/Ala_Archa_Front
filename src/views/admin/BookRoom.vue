@@ -141,7 +141,7 @@ export default {
       accept(hotelHallId){
         console.log(hotelHallId)
         axios
-        .post('http://localhost:8083/room/order/' + hotelHallId + '/accept',
+        .post(('http://localhost:8083/room/order/' + hotelHallId + '/accept'),
               {
                 headers:{
                   Authorization:this.$store.getters.getToken,
@@ -150,6 +150,7 @@ export default {
             .then((resp) => {
                 if (resp.status == 200) {
                 // this.$router.push("/");
+                location.reload();
                 }
                 console.log(this.$store.state);
             })
@@ -166,7 +167,6 @@ export default {
                 console.log(error.response.data);
                 }
             });
-            location.reload();
       },
 
       decline(hotelHallId){
