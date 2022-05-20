@@ -33,7 +33,8 @@
 		Комнаты
 	</div>
 
-	<div class="room" v-for="(roomType, i) in hotel.roomTypeModels" :key="i">
+	<div v-if="hotel.roomTypeModels != null">
+		<div class="room" v-for="(roomType, i) in hotel.roomTypeModels" :key="i">
 		<div class="topchan-body">
 			<img class="topchan-body-img" :src="roomType.roomTypeImageModels[0].img" alt="">
 			<div class="topchan-body-content">
@@ -45,7 +46,8 @@
 				<p class="topchan-body-content-text">Доп услуги: </p> -->
 			</div>
 		</div>
-
+	</div>
+	
 		<div class="room-slider">
 			<img :src="roomType.roomTypeImageModels[1].img" class="room-slider-img" alt="">
 			<img :src="roomType.roomTypeImageModels[2].img" class="room-slider-img" alt="">

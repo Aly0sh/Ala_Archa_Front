@@ -152,7 +152,12 @@ export default {
 	},
 	mounted() {
 		axios
-			.get('http://localhost:8083/user/get/my-orders/' + this.$store.getters.getId)
+			.get('http://localhost:8083/user/get/my-orders/' + this.$store.getters.getId, {
+				headers:{
+							Authorization:this.$store.getters.getToken,
+						}
+			}
+			)
 			.then(response => {(this.trash = response.data.value);
 				console.log(response.data)
 				for (let i in this.trash){
