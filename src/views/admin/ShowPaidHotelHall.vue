@@ -70,9 +70,9 @@ export default {
             this.$refs.checkPhoto.photo = photo;
             this.$refs.checkPhoto.showModal = true;
         },
-        accept(roomOrderId){
+        accept(hotelHallOrderId){
             axios
-            .post('http://localhost:8083/hotelHall/order/' + roomOrderId + '/accept-pay',
+            .post('http://localhost:8083/hotelHall/order/accept-pay', {id : hotelHallOrderId},
                 {
                     headers:{
                     Authorization:this.$store.getters.getToken,
@@ -100,10 +100,10 @@ export default {
                 });
         },
 
-        decline(hotelHallId){
-        console.log(hotelHallId)
+        decline(hotelHallOrderId){
+        console.log(hotelHallOrderId)
         axios
-        .post('http://localhost:8083/hotelHall/order/' + hotelHallId + '/decline',
+        .post('http://localhost:8083/hotelHall/order/decline', {id : hotelHallOrderId},
               {
                 headers:{
                   Authorization:this.$store.getters.getToken,

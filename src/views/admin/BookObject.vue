@@ -106,10 +106,10 @@ export default {
             this.errored = true;
           });
       },
-      accept(hotelHallId){
-        console.log(hotelHallId)
+      accept(objectOrderId){
+        console.log(objectOrderId)
         axios
-        .post('http://localhost:8083/object/order/' + hotelHallId + '/accept',
+        .post('http://localhost:8083/object/order/accept', {id : objectOrderId},
               {
                 headers:{
                   Authorization:this.$store.getters.getToken,
@@ -137,10 +137,10 @@ export default {
             location.reload();
       },
 
-      decline(hotelHallId){
-        console.log(hotelHallId)
+      decline(objectOrderId){
+        console.log(objectOrderId)
         axios
-        .post('http://localhost:8083/object/order/' + hotelHallId + '/decline',
+        .post('http://localhost:8083/object/order/decline', {id : objectOrderId},
               {
                 headers:{
                   Authorization:this.$store.getters.getToken,

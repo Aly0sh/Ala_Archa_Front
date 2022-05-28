@@ -72,7 +72,7 @@ export default {
         },
         accept(roomOrderId){
             axios
-            .post('http://localhost:8083/room/order/' + roomOrderId + '/accept-pay',
+            .post('http://localhost:8083/room/order/accept-pay', {id : roomOrderId},
                 {
                     headers:{
                     Authorization:this.$store.getters.getToken,
@@ -100,10 +100,10 @@ export default {
                 });
         },
 
-        decline(hotelHallId){
-        console.log(hotelHallId)
+        decline(roomOrderId){
+        console.log(roomOrderId)
         axios
-        .post('http://localhost:8083/room/order/' + hotelHallId + '/decline',
+        .post('http://localhost:8083/room/order/decline', {id : roomOrderId},
               {
                 headers:{
                   Authorization:this.$store.getters.getToken,
