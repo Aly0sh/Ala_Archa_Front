@@ -74,15 +74,12 @@ export default {
   mounted(){
     let page = this.currentPage -1;
     axios
-      .get("http://localhost:8083/hotelHall/order/get-confirmed-or-declined", 
+      .get("http://localhost:8083/hotelHall/order/get-confirmed-or-declined/?page=" + page, 
               {
                 headers:{
                   Authorization:this.$store.getters.getToken,
                 }
-              }, 
-      {
-        params: {page}
-      }
+              },
       )
       .then(response => {(this.hall_books = response.data.value);
         console.log(response.data)
@@ -97,7 +94,7 @@ export default {
       converterDate(dateString){
         let date = new Date(dateString.split('T')[0]);
         let day = date.getDate();
-        let month = date.getMonth();
+        let month = date.getMonth() + 1;
         let year = date.getFullYear();
         if(day <= 9){
           day = '0' + day;
@@ -110,15 +107,12 @@ export default {
       clickPage(page){
         this.currentPage = page + 1;
         axios
-          .get("http://localhost:8083/hotelHall/order/get-confirmed-or-declined", 
+          .get("http://localhost:8083/hotelHall/order/get-confirmed-or-declined/?page=" + page, 
               {
                 headers:{
                   Authorization:this.$store.getters.getToken,
                 }
-              }, 
-          {
-            params: {page}
-          }
+              }
           )
           .then(response => {(this.hall_books = response.data.value);
             console.log(response.data)

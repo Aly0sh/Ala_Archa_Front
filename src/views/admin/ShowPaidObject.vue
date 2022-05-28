@@ -134,15 +134,12 @@ export default {
       clickPage(page){
         this.currentPage = page + 1;
         axios
-          .get('http://localhost:8083/object/order/get-in-pay-check', 
+          .get('http://localhost:8083/object/order/get-in-pay-check/?page=' + page, 
               {
                 headers:{
                   Authorization:this.$store.getters.getToken,
                 }
-              }, 
-          {
-            params: {page}
-          }
+              },
           )
           .then(response => {(this.roomOrders = response.data.value);
             console.log(response.data)
@@ -157,15 +154,13 @@ export default {
     mounted() {
         let page = this.currentPage -1;
 		axios
-			.get('http://localhost:8083/object/order/get-in-pay-check', 
+			.get('http://localhost:8083/object/order/get-in-pay-check/?page=' + page, 
               {
                 headers:{
                   Authorization:this.$store.getters.getToken,
                 }
-              }, 
-                {
-                    params: {page}
-                })
+              },
+              )
 			.then(response => {(this.roomOrders = response.data.value);
 				console.log(response.data)
                 this.pageCount = this.roomOrders.pop().totalPage

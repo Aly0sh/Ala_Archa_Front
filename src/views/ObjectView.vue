@@ -35,9 +35,9 @@
 		<button @click="openModalBooking(objectType.timeType, objectType.objectModels)" class="topchan-button">Бронировать</button>
 	</div>
 
-	<h3 class="object-menu-head" v-show="objectType.menuSectionModels">Меню услуг</h3>
+	<h3 class="object-menu-head" v-show="objectType.menuSectionModels && objectType.menuSectionModels.length != 0">Меню услуг</h3>
 
-	<div class="object-menu" v-show="objectType.menuSectionModels">
+	<div class="object-menu" v-show="objectType.menuSectionModels && objectType.menuSectionModels.length != 0">
 		<div v-for="(menuSection, i) in objectType.menuSectionModels" :key="i">
 			<h5>{{ menuSection.name }}</h5>
 			<div v-for="(menu, i) in menuSection.menuModels" :key="i">

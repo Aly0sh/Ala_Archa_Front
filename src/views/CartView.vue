@@ -54,15 +54,36 @@
 
 					</div>
 				</div>
+				<div v-if="pageCount > 1" class="pagination" :class="more ? 'pagination-more':(pageCount>=7)?'pagination-9':('pagination-' + pageCount)">
+					<div v-if="!more && currentPage > 1" @click="clickPage(currentPage - 2)">&lt;&lt;</div>
+					<div v-if="(currentPage >= 4) && !more" @click="clickPage(0)">1</div>
+					<div v-if="(currentPage >= 5) && !more" @click="more = true">...</div>
+					<div 
+						v-for="pageNumber in pageCount" 
+						:key="pageNumber" 
+						v-show="currentPage == pageNumber || 
+						(currentPage + 1) == pageNumber || 
+						(currentPage + 2) == pageNumber || 
+						(currentPage - 1) == pageNumber || 
+						(currentPage - 2) == pageNumber ||
+						more"
+						@click="clickPage(pageNumber - 1)" :style="(currentPage == pageNumber? 'color: #62db72;':'')">
+						{{ pageNumber }}
+					</div>
+					<div v-if="(currentPage <= pageCount-4) && !more" @click="more = true">...</div>
+					<div v-if="(currentPage <= pageCount-3) && !more" @click="clickPage(pageCount - 1)">{{ pageCount }}</div>
+					<div v-if="!more && currentPage < pageCount" @click="clickPage(currentPage)">>></div>
+					</div>
 			</div>
 			<div class="payment">
 				<h1>Покупка онлайн</h1>
 				<h4>Номер карты</h4>
 				<span>Переведите средства на данную карту</span>
-				<h3>4444 - 4444 - 4444 - 4444</h3>
+				<h3>{{currentCard}}</h3>
 				<div class="cards">
-					<img src="../assets/img/icons/visa.png" alt="" class="card">
-					<img src="../assets/img/icons/mastercard.png" alt="" class="card">
+					<img src="../assets/img/icons/optimablue.png" @click="currentCard = cards.optima" alt="" class="card">
+					<img src="../assets/img/icons/rskbank.jpg" @click="currentCard = cards.rskBank" alt="" class="card">
+					<img src="../assets/img/icons/demirbank.jpg" @click="currentCard = cards.demirBank" alt="" class="card">
 				</div>
 				<br>
 			</div>
@@ -135,6 +156,9 @@ export default {
 			trash: [],
 			cartItems: [],
 			checkPhoto: '',
+	      	pageCount: 1,
+    	  	currentPage: 1,
+      		more: false,
 			room: {
 				roomOrderId: null,
 				img: ''
@@ -147,24 +171,38 @@ export default {
 				hotelHallOrderId: null,
 				img: ''
 			},
-			type: ''
+			type: '',
+			cards: {
+				optima: '4444-4444-4444-4444',
+				oMoney: '5555-5555-5555-5555',
+				rskBank: '6666-6666-6666-6666',
+				demirBank: '7777-7777-7777-7777'
+			},
+			currentCard: '4444-4444-4444-4444'
 		}
 	},
-	mounted() {
+	mounted() {    
+		let page = this.currentPage -1;
 		axios
 			.get('http://localhost:8083/user/get/my-orders/' + this.$store.getters.getId, {
 				headers:{
 							Authorization:this.$store.getters.getToken,
 						}
+			}, 
+			{
+				params: {page}
 			}
 			)
 			.then(response => {(this.trash = response.data.value);
 				console.log(response.data)
-				for (let i in this.trash){
+				this.pageCount = this.trash.totalPage
+				for (let i in this.trash) {
 					this.cartItems = this.cartItems.concat(this.trash[i])
 				}
 				this.cartItems = this.cartItems.splice(1);
 				this.cartItems = this.cartItems.sort((prev, curr) => Date.parse(prev.createdDate) - Date.parse(curr.createdDate));
+				this.cartItems.pop()
+				this.cartItems = this.cartItems.reverse()
 				})
 			.catch(error => {
 				console.log(error);
@@ -271,6 +309,35 @@ export default {
           const selectedImage = e.target.files[0];
           this.createBase64Image(selectedImage);
 		},
+
+		clickPage(page){
+        this.currentPage = page + 1;
+		console.log(this.currentPage)
+        axios
+          .get(('http://localhost:8083/user/get/my-orders/' + this.$store.getters.getId + '/?page=' + page), 
+				{
+					headers:{
+					Authorization:this.$store.getters.getToken,
+					}
+				}
+          )
+			.then(response => {(this.trash = response.data.value);
+				console.log(response.data)
+				this.pageCount = this.trash.totalPage
+				this.cartItems = []
+				for (let i in this.trash) {
+					this.cartItems = this.cartItems.concat(this.trash[i])
+				}
+				this.cartItems = this.cartItems.splice(1);
+				this.cartItems = this.cartItems.sort((prev, curr) => Date.parse(prev.createdDate) - Date.parse(curr.createdDate));
+				this.cartItems.pop()
+				this.cartItems = this.cartItems.reverse()
+				})
+          .catch(error => {
+            console.log(error);
+            this.errored = true;
+          });
+      },
 
 		createBase64Image(fileObject){
 			const reader = new FileReader();

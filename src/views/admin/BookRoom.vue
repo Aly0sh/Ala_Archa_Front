@@ -4,6 +4,7 @@
             <h2>Бронь комнаты</h2>
             <table>
                 <tr>
+                    <th>Id</th>
                     <th>User Id</th>
                     <th>Имя пользователя</th>
                     <th>Название отеля</th>
@@ -15,6 +16,7 @@
                     <th class="deny">Отклонить</th>
                 </tr>
                 <tr v-for="(room_book, i) in room_books" :key="i">
+                    <td>{{ room_book.id }}</td>
                     <td>{{ room_book.userId }}</td>
                     <td>{{ room_book.userFullName }}</td>
                     <td>{{ room_book.hotelName }}</td>
@@ -67,15 +69,12 @@ export default {
   mounted(){
     let page = this.currentPage -1;
     axios
-      .get("http://localhost:8083/room/order/get-in-process", 
+      .get("http://localhost:8083/room/order/get-in-process/?page=" + page, 
               {
                 headers:{
                   Authorization:this.$store.getters.getToken,
                 }
-              }, 
-      {
-        params: {page}
-      }
+              }
       )
       .then(response => {(this.room_books = response.data.value);
       console.log(response.data)
@@ -90,15 +89,12 @@ export default {
     clickPage(page){
         this.currentPage = page + 1;
         axios
-          .get("http://localhost:8083/room/order/get-in-process", 
+          .get("http://localhost:8083/room/order/get-in-process/?page=" + page, 
               {
                 headers:{
                   Authorization:this.$store.getters.getToken,
                 }
-              }, 
-          {
-            params: {page}
-          }
+              }
           )
           .then(response => {(this.room_books = response.data.value);
             console.log(response.data)
@@ -204,7 +200,7 @@ export default {
 		converterDate(dateString){
 			let date = new Date(dateString.split('T')[0]);
 			let day = date.getDate();
-			let month = date.getMonth();
+			let month = date.getMonth() + 1;
 			let year = date.getFullYear();
 			if(day <= 9){
 				day = '0' + day;

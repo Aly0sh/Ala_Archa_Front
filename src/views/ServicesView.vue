@@ -14,7 +14,7 @@
 		</div>
 		<div class="hotels">
 			<div v-for="(hotel, i) in hotels" :key="i" class="services-card">
-				<img :src="hotel.imgUrl" alt="">
+				<img :src="hotel.imgUrl" alt="" @click="goToHotel(hotel.id)">
 				<h3>{{ hotel.hotelName }}</h3>
 				<p>от {{ hotel.minPrice }} сом</p>
 				<button @click="goToHotel(hotel.id)" class="services-learn-more">Узнать подробнее</button>
@@ -26,7 +26,7 @@
 		</div>
 		<div class="hotels">
 			<div class="services-card" v-for="(object, i) in objects" :key="i">
-				<img :src="object.imgUrl" alt="">
+				<img :src="object.imgUrl" alt="" @click="goToObject(object.id)">
 				<h3>{{ object.name }}</h3>
 				<p>{{ object.price }} с</p>
 				<button class="services-learn-more" @click="goToObject(object.id)">Узнать подробнее</button>

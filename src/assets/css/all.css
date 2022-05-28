@@ -2860,7 +2860,7 @@ html {
 }
 
 .payment .cards .card {
-    width: 15%;
+    width: 25%;
     height: fit-content;
     margin-right: 5%;
 }
@@ -3293,4 +3293,72 @@ select#selector1 {
     .book-window-time {
         width: 95%;
     }
+}
+
+
+.pagination {
+    width: 30%;
+    display: grid;
+    margin: 2vw auto;
+    align-items: center;
+}
+
+
+.pagination-2{
+    grid-template-columns: repeat(3, 1fr);
+}
+
+
+.pagination-3{
+    grid-template-columns: repeat(5, 1fr);
+}
+
+
+.pagination-4{
+    grid-template-columns: repeat(6, 1fr);
+}
+
+
+.pagination-5{
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.pagination-6{
+    grid-template-columns: repeat(8, 1fr);
+}
+
+.pagination-7{
+    grid-template-columns: repeat(9, 1fr);
+}
+
+.pagination-8{
+    grid-template-columns: repeat(10, 1fr);
+}
+
+.pagination-9{
+    grid-template-columns: repeat(11, 1fr);
+}
+
+.pagination-more{
+    grid-template-columns: repeat(10, 1fr);
+}
+
+
+.pre-par{
+    width: 100%;
+    position: relative;
+}
+
+.pre-par img{
+    width: 100%;
+}
+
+.pre-par h1{
+    position: absolute;
+    top: 40%;
+    text-align: center;
+    width: 100%;
+    font-size: calc(16px + 8vw);
+    transform: translate(0, -50%);
+    color: #ffffff;
 }

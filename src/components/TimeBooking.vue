@@ -124,33 +124,63 @@ export default {
             let userId = this.$store.getters.getId;
 
 
-            axios
-			.post("http://localhost:8083/hotelHall/order",
-			{hotelHallId, startDate, startTime, endTime, userId},
-			{
-				headers:{
-					Authorization:this.$store.getters.getToken,
-				}
-			})
-			.then((resp) => {
-				if (resp.status == 200) {
-                    alert("Ваш заказ принят подождите пока его обработают. После обработки заказа к вам на электронную почту придет уведомление.");
-                    this.showModal = false;
-				}
-				console.log(this.$store.state);	
-			})
-			.catch((error) => {
-                this.error = true;
-				if (!error.response) {
-					this.$store.commit("setError", error);
-				} else if (error.response.data.details === undefined) {
-					this.$store.commit("setError", error);
-				} else {
-					this.signInErrorFlag = true;
-					this.signInErrorMessage = error.response.data.details;
-					console.log(error.response.data);
-				}
-			});
+            if (this.$store.getters.getRole == 'CLIENT') {
+                axios
+                .post("http://localhost:8083/hotelHall/order",
+                {hotelHallId, startDate, startTime, endTime, userId},
+                {
+                    headers:{
+                        Authorization:this.$store.getters.getToken,
+                    }
+                })
+                .then((resp) => {
+                    if (resp.status == 200) {
+                        alert("Ваш заказ принят подождите пока его обработают. После обработки заказа к вам на электронную почту придет уведомление.");
+                        this.showModal = false;
+                    }
+                    console.log(this.$store.state);	
+                })
+                .catch((error) => {
+                    this.error = true;
+                    if (!error.response) {
+                        this.$store.commit("setError", error);
+                    } else if (error.response.data.details === undefined) {
+                        this.$store.commit("setError", error);
+                    } else {
+                        this.signInErrorFlag = true;
+                        this.signInErrorMessage = error.response.data.details;
+                        console.log(error.response.data);
+                    }
+                });
+            } else if (this.$store.getters.getRole == 'ADMIN') {
+                axios
+                .post("http://localhost:8083/hotelHall/order/admin",
+                {hotelHallId, startDate, startTime, endTime, userId},
+                {
+                    headers:{
+                        Authorization:this.$store.getters.getToken,
+                    }
+                })
+                .then((resp) => {
+                    if (resp.status == 200) {
+                        alert("Ваш заказ принят подождите пока его обработают. После обработки заказа к вам на электронную почту придет уведомление.");
+                        this.showModal = false;
+                    }
+                    console.log(this.$store.state);	
+                })
+                .catch((error) => {
+                    this.error = true;
+                    if (!error.response) {
+                        this.$store.commit("setError", error);
+                    } else if (error.response.data.details === undefined) {
+                        this.$store.commit("setError", error);
+                    } else {
+                        this.signInErrorFlag = true;
+                        this.signInErrorMessage = error.response.data.details;
+                        console.log(error.response.data);
+                    }
+                });
+            }
         }
     },
     watch: {

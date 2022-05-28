@@ -4,6 +4,7 @@
             <h2>Бронь объекта</h2>
             <table>
                 <tr>
+                    <th>Id</th>
                     <th>User Id</th>
                     <th>Имя пользователя</th>
                     <th>Тип объекта</th>
@@ -16,6 +17,7 @@
                     <th class="deny">Отклонить</th>
                 </tr>
                 <tr v-for="(object_book, i) in object_books" :key="i">
+                    <td>{{ object_book.id }}</td>
                     <td>{{ object_book.userId }}</td>
                     <td>{{ object_book.fullName }}</td>
                     <td>{{ object_book.objectTypeName }}</td>
@@ -69,15 +71,12 @@ export default {
   mounted(){
     let page = this.currentPage -1;
     axios
-      .get("http://localhost:8083/object/order/get-in-process", 
+      .get("http://localhost:8083/object/order/get-in-process/?page=" + page, 
               {
                 headers:{
                   Authorization:this.$store.getters.getToken,
                 }
-              }, 
-          {
-            params: {page}
-          }
+              }
           )
       .then(response => {(this.object_books = response.data.value);
       console.log(response.data);
@@ -92,10 +91,12 @@ export default {
     clickPage(page){
         this.currentPage = page + 1;
         axios
-          .get("http://localhost:8083/object/order/get-in-process", 
-          {
-            params: {page}
-          }
+          .get("http://localhost:8083/object/order/get-in-process/?page=" + page, 
+              {
+                headers:{
+                  Authorization:this.$store.getters.getToken,
+                }
+              }
           )
           .then(response => {(this.object_books = response.data.value);
             console.log(response.data)
@@ -170,7 +171,7 @@ export default {
       converterDate(dateString){
         let date = new Date(dateString.split('T')[0]);
         let day = date.getDate();
-        let month = date.getMonth();
+        let month = date.getMonth() + 1;
         let year = date.getFullYear();
         if(day <= 9){
           day = '0' + day;
