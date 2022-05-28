@@ -183,6 +183,7 @@ export default {
                 // this.$router.push("/");
                 }
                 console.log(this.$store.state);
+                location.reload();
             })
             .catch((error) => {
                 if (!error.response) {
@@ -198,7 +199,6 @@ export default {
                 }
             });
 
-              location.reload();
       },
       
 		converterDate(dateString){

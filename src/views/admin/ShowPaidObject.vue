@@ -80,10 +80,10 @@ export default {
                 })
                 .then((resp) => {
                     if (resp.status == 200) {
-                        location.reload();
                     // this.$router.push("/");
                     }
                     console.log(this.$store.state);
+                    location.reload();
                 })
                 .catch((error) => {
                     if (!error.response) {
@@ -112,8 +112,8 @@ export default {
             .then((resp) => {
                 if (resp.status == 200) {
                 // this.$router.push("/");              
-                    location.reload();
                 }
+                location.reload();
                 console.log(this.$store.state);
             })
             .catch((error) => {

@@ -123,6 +123,7 @@ export default {
                 // this.$router.push("/");
                 }
                 console.log(this.$store.state);
+                location.reload();
             })
             .catch((error) => {
                 if (!error.response) {
@@ -137,7 +138,6 @@ export default {
                 console.log(error.response.data);
                 }
             });
-            location.reload();
       },
 
       decline(hotelHallOrderId){
@@ -154,6 +154,7 @@ export default {
                 // this.$router.push("/");
                 }
                 console.log(this.$store.state);
+                location.reload();
             })
             .catch((error) => {
                 if (!error.response) {
@@ -168,7 +169,6 @@ export default {
                 console.log(error.response.data);
                 }
             });
-            location.reload();
       },
       converterDate(dateString){
         let date = new Date(dateString.split('T')[0]);
