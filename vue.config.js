@@ -4,7 +4,12 @@ module.exports = defineConfig({
   lintOnSave: false,
   publicPath: "./",
   devServer: {
-    proxy: 'http://localhost:8083',
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8083',
+        pathRewrite: { '^/api': '' },
+      },
+    },
     static: {
       directory: '../alarcha_backend',
     },
