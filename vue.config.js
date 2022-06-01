@@ -3,10 +3,13 @@ module.exports = defineConfig({
   transpileDependencies: true,
   lintOnSave: false,
   publicPath: "./",
-  proxyTable: {
-    '/api': {
-      target: 'http://localhost:8083',
-      changeOrigin: true,
-    }
-  }
+  devServer: {
+    proxy: 'http://localhost:8083',
+    // static: {
+    //   directory: '',
+    // },
+    compress: true,
+    port: 8080,
+    allowedHosts: 'all',
+  },
 });
