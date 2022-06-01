@@ -5,9 +5,9 @@ module.exports = defineConfig({
   publicPath: "./",
   devServer: {
     proxy: 'http://localhost:8083',
-    // static: {
-    //   directory: '',
-    // },
+    static: {
+      directory: '/var/www/html/alarcha/alarcha_backend',
+    },
     compress: true,
     port: 8080,
     allowedHosts: 'all',
