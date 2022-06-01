@@ -6,7 +6,7 @@ module.exports = defineConfig({
   devServer: {
     proxy: 'http://localhost:8083',
     static: {
-      directory: '/var/www/html/alarcha/alarcha_backend',
+      directory: '../alarcha_backend',
     },
     compress: true,
     port: 8080,
