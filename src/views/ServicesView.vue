@@ -126,7 +126,7 @@ export default {
 	},
 	mounted(){
     axios
-      .get("http://localhost:8083/hotel/get-all")
+      .get("http://192.168.50.26/hotel/get-all")
       .then(response => {(this.hotels = response.data.value);
       console.log(response.data)})
       .catch(error => {
@@ -134,7 +134,7 @@ export default {
         this.errored = true;
       });
     axios
-      .get("http://localhost:8083/object/type/get-all")
+      .get("http://192.168.50.26/object/type/get-all")
       .then(response => {(this.objects = response.data.value);
       console.log(response.data)})
       .catch(error => {
