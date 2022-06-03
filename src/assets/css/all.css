@@ -1217,11 +1217,12 @@ hr {
 
 .topchan-head-title {
     position: absolute;
-    font-size: calc(10px + 4vw);
+    font-size: calc(10px + 3.5vw);
     font-family: 'Inter', sans-serif;
     top: 50%;
     transform: translate(0, -50%);
     font-weight: bold;
+    line-height: normal;
 }
 
 .topchan-head-img1 {

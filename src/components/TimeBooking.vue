@@ -31,7 +31,7 @@
 
             </div>
         </div>
-		<span style="display: block; margin-bottom: 1vw; margin-top: 20px;" class="validation"><span v-if="error">Вы не можете забронировать на это время пожалуйста обновите страницу!</span></span>
+		<span style="display: block; margin-bottom: 1vw; margin-top: 20px;" class="validation"><span v-show="error">Вы не можете забронировать на это время пожалуйста обновите страницу!</span></span>
 		<button class="datepicker-book" @click="booking((firstSelected+':00'), (secondSelected+':00'), date)">Забронировать</button>
 	</div>
   </div>

@@ -8,7 +8,7 @@
 			<img :src="objectType.objectTypeImgModels[0].img" class="topchan-head-img2" alt="">
 		</div>
 
-		<h1 class="mobile-obj-title">Топчаны</h1>
+		<h1 class="mobile-obj-title">{{ objectType.name }}</h1>
 
 		<DateRangeBookingObject ref="objectModal"></DateRangeBookingObject>
 		<TimeBookingObject ref="objectModalTime"></TimeBookingObject>

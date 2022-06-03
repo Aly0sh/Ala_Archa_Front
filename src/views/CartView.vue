@@ -4,8 +4,8 @@
 			<div class="trash">
 				<h1>Корзина</h1>
 				<div v-for="(item, index) in cartItems" :key="index">
-					<hr>
-					<div class="trash-row">
+					<hr v-if="item && item.id">
+					<div v-if="item && item.id" class="trash-row">
 						<div class="left">
 							<div class="trash-picture">
 								<img :src="item.img">
